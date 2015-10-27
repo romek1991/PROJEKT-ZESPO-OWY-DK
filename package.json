@@ -11,6 +11,7 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "jshint": "2.8.0",
+    "jsonwebtoken": "^5.4.0",
     "karma": "0.13.11",
     "karma-jasmine": "~0.1",
     "karma-phantomjs-launcher": "~0.1",
