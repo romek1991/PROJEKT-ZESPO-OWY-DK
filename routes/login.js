@@ -6,6 +6,8 @@ var jwt = require('jsonwebtoken');
 router.post('/', function(req, res, next) {
   console.log('POST /login');
   
+  console.log('USER: ' + req.body.login);
+  console.log('PASS: ' + req.body.password);
   // find the user
   User.findOne({
     login: req.body.login
@@ -17,6 +19,8 @@ router.post('/', function(req, res, next) {
       res.json({ success: false, message: 'Authentication failed. User not found.' });
     } else if (user) {
 
+		console.log('DB USER: ' + user.login);
+		console.log('DB PASS: ' + user.password);
       // check if password matches
       if (user.password != req.body.password) {
         console.log('user.password:' + user.password + ' | req.body.password:' + req.body.password);

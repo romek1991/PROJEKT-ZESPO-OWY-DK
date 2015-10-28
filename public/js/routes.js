@@ -1,4 +1,4 @@
-define(['./app', 'oceny/routes'], function (app) {
+define(['./app'], function (app) {
     'use strict';
     return app.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/view1', {
@@ -10,6 +10,13 @@ define(['./app', 'oceny/routes'], function (app) {
             templateUrl: 'js/partials/partial2.html',
             controller: 'MyCtrl2'
         });
+
+        $routeProvider.when('/login', {
+                templateUrl: 'js/partials/login.html'
+            })
+        $routeProvider.when('/signup', {
+            templateUrl: 'js/partials/signup.html'
+        })
 
         $routeProvider.otherwise({
             redirectTo: '/view1'

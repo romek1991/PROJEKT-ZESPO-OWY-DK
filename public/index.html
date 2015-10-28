@@ -76,21 +76,21 @@
                         <a href="#postModal" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Post</a>
                       </li>-->
 					  <li>
-                        <a href="../index.html"><span class="badge">Start</span></a>
+                        <a href="./index.html"><span class="badge">Start</span></a>
                       </li>
 					  <li>
-                        <a href="../profile.html"><span class="badge">Profil</span></a>
+                        <a href="./profile.html"><span class="badge">Profil</span></a>
                       </li>
 					  <li>
-                        <a href="../trips.html"><span class="badge">Moje Podróże</span></a>
+                        <a href="./trips.html"><span class="badge">Moje Podróże</span></a>
                       </li>
                       <li>
-                        <a href="../signup.html"><span class="badge">Rejestracja</span></a>
+                        <a href="#/signup"><span class="badge">Rejestracja</span></a>
                       </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                       <li>
-                        <a href="#logout"><span class="badge">Zaloguj</span></a>
+                        <a href="#/login"><span class="badge">Zaloguj</span></a>
                       </li>
                      <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i></a>
@@ -112,7 +112,14 @@
                       
                         <!-- content -->                      
                       	<div class="row">
-                       
+
+                            <!-- main column -->
+                            <div class="col-sm-12" ng-view>
+
+
+
+
+                            </div>
                          <!-- main col left --> 
                         <!-- <div class="col-sm-5">
                            
@@ -211,5 +218,6 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/scripts.js"></script>
-	</body>
+        <script type="text/javascript" src="./bower_components/requirejs/require.js" data-main="./js/main.js"></script>
+</div>	</body>
 </html>
