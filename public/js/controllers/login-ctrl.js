@@ -5,6 +5,26 @@
 define(['./module'], function (controllers) {
     'use strict';
 
+    controllers.factory('TokenInterceptor', function ($q, $window, $location, AuthenticationService, $cookies) {
+        return {
+
+            request: function (config) {
+                alert($cookies.get('token'));
+                config.headers = config.headers || {};
+                if ($cookies.get('token')) {
+
+                    config.headers['x-access-token'] = $cookies.get('token');
+                }
+                return config;
+            },
+
+            requestError: function(rejection) {
+                return $q.reject(rejection);
+            },
+
+        };
+    });
+
 
     controllers.factory('AuthenticationService', function() {
         var auth = {
@@ -19,33 +39,42 @@ define(['./module'], function (controllers) {
         }
 
         return {
-            set: set,
-            get: get
+            setIsLogged: set,
+            getIsLogged: get
         }
 
     });
 
+
     controllers.factory('UserService', function($http) {
+        var baseUrl = "http://localhost:3000";
         return {
+
             logIn: function(username, password) {
-                return $http.post("http://localhost:3000" + '/login', {login: username, password: password});
+                return $http.post(baseUrl + '/login', {"login": username, "password": password});
             },
 
             logOut: function() {
 
+            },
+
+            getUsers: function(){
+                return $http.get(baseUrl + '/users');
             }
+
         }
     });
 
 
-/*odnosze sie do zlego scopa
-* osobno tworzony jest kontroler login-ctrl w index.html, a osobno dla partial/login.html
-* */
-
-
     controllers.controller('LoginController', ['$scope', '$location', '$window', 'UserService', 'AuthenticationService',
-        function LoginCtrl($scope, $location, $window, UserService, AuthenticationService){
-        $scope.nazwa = "AAAAA";
+        '$cookies',
+        function LoginCtrl($scope, $location, $window, UserService, AuthenticationService, $cookies){
+
+        $scope.$watch(function () { return AuthenticationService.getIsLogged(); },
+            function (value) {
+                $scope.loggedInFlag = value;
+            }
+        );
 
         $scope.credsOk = true;
         $scope.logIn = function logIn(username, password) {
@@ -53,9 +82,8 @@ define(['./module'], function (controllers) {
 
                 UserService.logIn(username, password).success(function(data) {
                     if(data.success){
-                        //AuthenticationService.isLogged = true;
-                        AuthenticationService.set(true);
-                        $window.sessionStorage.token = data.token;
+                        AuthenticationService.setIsLogged(true);
+                        $cookies.put('token', data.token);
                         $location.path("/");
                     }
                     else{
@@ -71,12 +99,25 @@ define(['./module'], function (controllers) {
 
 
         $scope.logout = function logout() {
-            if (AuthenticationService.get()) {
-                AuthenticationService.set(false);
-                delete $window.sessionStorage.token;
+            $scope.credsOk = true;
+            if (AuthenticationService.getIsLogged()) {
+                AuthenticationService.setIsLogged(false);
+                //alert("Logging out");
+                $cookies.remove('token');
                 $location.path("/");
             }
         }
+
+
+        $scope.getUsers = function logout() {
+            UserService.getUsers().success(function(data){
+                console.log(data);
+
+            });
+
+
+        }
+
 
 
 

@@ -47,7 +47,7 @@
             <!-- /sidebar -->
           
             <!-- main right col -->
-            <div class="column col-sm-10 col-xs-11" id="main">
+            <div ng-controller="LoginController" class="column col-sm-10 col-xs-11" id="main">
                 
                 <!-- top nav -->
               	<div class="navbar navbar-blue navbar-static-top">  
@@ -88,13 +88,22 @@
                         <a href="#/signup"><span class="badge">Rejestracja</span></a>
                       </li>
                     </ul>
-                    <ul ng-controller="LoginStateController" class="nav navbar-nav navbar-right">
-                        {{wtf}}
+                    <ul class="nav navbar-nav navbar-right">
                       <li>
-                        <a href="#/login" ng-show="!loggedInFlag"><span class="badge">Zaloguj</span></a>
-                        <a href="#/login" ng-show="loggedInFlag"><span class="badge">Wyloguj</span></a>
+                        <a href="#/login" ng-show="!loggedInFlag" ng-cloak><span class="badge">Zaloguj</span></a>
+                        <a href="" ng-show="loggedInFlag" ng-click="logout()" ng-cloak><span class="badge">Wyloguj</span></a>
+
 
                       </li>
+
+                      <li>
+                          <!-- do testowania tokenow -->
+                          <a href="" ng-click="getUsers()"><span class="badge">Users</span></a>
+
+                      </li>
+                        </ul>
+
+
                      <!-- <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i></a>
                         <ul class="dropdown-menu">
