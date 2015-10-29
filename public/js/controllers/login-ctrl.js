@@ -9,7 +9,7 @@ define(['./module'], function (controllers) {
         return {
 
             request: function (config) {
-                alert($cookies.get('token'));
+                //alert($cookies.get('token'));
                 config.headers = config.headers || {};
                 if ($cookies.get('token')) {
 

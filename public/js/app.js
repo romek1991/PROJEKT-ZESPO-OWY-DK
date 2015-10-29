@@ -16,8 +16,6 @@ define([
         //'app.filters',
         //'app.directives',
         'ngRoute'
-    ]).config(function ($httpProvider) {
-            $httpProvider.interceptors.push('TokenInterceptor');
-        });
+    ])
 
 });
