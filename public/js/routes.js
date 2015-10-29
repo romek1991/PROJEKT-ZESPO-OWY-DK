@@ -11,15 +11,25 @@ define(['./app'], function (app) {
             controller: 'MyCtrl2'
         });
 
+        $routeProvider.when('/index', {
+            templateUrl: 'js/partials/index.html'
+        });
+
+
         $routeProvider.when('/login', {
-                templateUrl: 'js/partials/login.html'
-            })
+            templateUrl: 'js/partials/login.html',
+            controller: 'LoginController'
+        });
+
         $routeProvider.when('/signup', {
             templateUrl: 'js/partials/signup.html'
-        })
+        });
 
-        $routeProvider.otherwise({
-            redirectTo: '/view1'
+
+
+       $routeProvider.otherwise({
+            redirectTo: 'index.html'
+
         });
     }]);
 });
