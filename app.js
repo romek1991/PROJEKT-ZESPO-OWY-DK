@@ -11,6 +11,7 @@ var config = require('./config');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var trips = require('./routes/trips');
 var signup = require('./routes/signup');
 var login = require('./routes/login');
 
@@ -34,6 +35,7 @@ app.set('superSecret', config.secret);
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/trips', trips);
 app.use('/signup', signup);
 app.use('/login', login);
 

@@ -29,7 +29,7 @@ router.post('/', function(req, res, next) {
         // if user is found and password is right
         // create a token
         var token = jwt.sign({login: user.login}, req.app.get('superSecret'), {
-          expiresIn: 60 // time in seconds
+          expiresIn: 600 // time in seconds
         });
 
         // return the information including token as JSON
