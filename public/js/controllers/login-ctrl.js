@@ -54,6 +54,19 @@ define(['./module'], function (controllers) {
                 return $http.post(baseUrl + '/login', {"login": username, "password": password});
             },
 
+			register: function(login, password, email, firstName, lastName ) {
+                return $http.post(baseUrl + '/signup', {
+					
+					//login, password, email,name ,surname
+					"login": login,	
+					"password": password,
+					"email":email,
+					"firstName":firstName,
+					"lastName":lastName						
+					
+					});
+            },
+			
             logOut: function() {
 
             },

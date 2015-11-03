@@ -1,16 +1,36 @@
-<div class="well">
+<div class="well" ng-controller="RegisterController">
     <center>
         <form class="form">
             <h4>Rejestracja</h4>
             <div class="input-group text-center">
-                <input type="text" class="form-control input-lg" placeholder="Podaj login"><br> </br>
-                <input type="text" class="form-control input-lg" placeholder="Podaj hasło"><br> </br>
-                <input type="text" class="form-control input-lg" placeholder="Podaj Email"><br> </br>
-                <input type="text" class="form-control input-lg" placeholder="Imię"><br> </br>
-                <input type="text" class="form-control input-lg" placeholder="Nazwisko"><br> </br>
+			
+			
+        		
+                <div class="form-group">
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Podaj login" ng-model="login" required="">
+                </div>       
+				
+                <div class="form-group">
+                    <input type="text" name="password" id="password" class="form-control" placeholder="Podaj hasło" ng-model="password" required="">
+                </div>
+				
+				<div class="form-group">
+                    <input type="text" name="email" id="email" class="form-control" placeholder="Podaj email" ng-model="email" required="">
+                </div>
+				
+                <div class="form-group">
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Immię" ng-model="firstName" required="">
+                </div>
+				
+			    <div class="form-group">
+                    <input type="text" name="surname" id="surname" class="form-control" placeholder="Nazwisko" ng-model="lastName" required="">
+                </div>
 
-                <span class="badge">Zarejestruj</span></a>
+			 </div>
+                            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" ng-click="register(login, password, email,firstName ,lastName )">Zarejestruj</button>
             </div>
+            
         </form>
     </center>
 </div>
