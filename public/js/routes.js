@@ -1,27 +1,27 @@
 define(['./app'], function (app) {
     'use strict';
     return app.config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/view1', {
-            templateUrl: 'js/partials/partial1.html',
-            controller: 'MyCtrl1'
-        });
+        //$routeProvider.when('/view1', {
+        //    templateUrl: 'js/partials/partial1.html',
+        //    controller: 'MyCtrl1'
+        //});
+        //
+        //$routeProvider.when('/view2', {
+        //    templateUrl: 'js/partials/partial2.html',
+        //    controller: 'MyCtrl2'
+        //});
 
-        $routeProvider.when('/view2', {
-            templateUrl: 'js/partials/partial2.html',
-            controller: 'MyCtrl2'
-        });
-
-        $routeProvider.when('/index', {
-            templateUrl: 'js/partials/index.html'
-        });
+        //$routeProvider.when('/index', {
+        //    templateUrl: 'js/partials/index.html'
+        //});
 
 
         $routeProvider.when('/login', {
-            templateUrl: 'js/partials/login.html'
+            templateUrl: 'modules/user/login.html'
         });
 
         $routeProvider.when('/signup', {
-            templateUrl: 'js/partials/signup.html'
+            templateUrl: 'modules/user/signup.html'
         });
 
 

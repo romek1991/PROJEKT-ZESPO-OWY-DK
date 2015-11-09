@@ -1,4 +1,4 @@
-define(['./module'], function (controllers) {
+define(['./../../modules/module'], function (controllers) {
     'use strict';
     controllers.controller('MyCtrl1', ['$scope', '$location', function ($scope, $location) {
 

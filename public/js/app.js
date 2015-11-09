@@ -2,7 +2,7 @@ define([
     'angular',
     'ngRoute',
     'ngCookies',
-    './controllers/index'
+    './../modules/index'
     //'./directives/index',
     //'./filters/index',
     //'./services/index'

@@ -2,7 +2,7 @@
  * Created by Pawel on 2015-10-28.
  */
 
-define(['./module'], function (controllers) {
+define(['./../module'], function (controllers) {
     'use strict';
 
     // controllers.factory('TokenInterceptor', function ($q, $window, $location, AuthenticationService, $cookies) {
