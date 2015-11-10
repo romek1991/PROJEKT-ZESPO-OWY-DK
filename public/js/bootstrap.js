@@ -2,7 +2,7 @@ define([
     'require',
     'angular',
     'app',
-    'routes'
+    '../modules/routes'
 ], function (require, ng, app) {
     'use strict';
     require(['domReady!'], function (document) {
