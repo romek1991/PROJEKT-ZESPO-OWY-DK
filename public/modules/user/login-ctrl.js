@@ -83,14 +83,16 @@ define(['./../module'], function (controllers) {
         '$cookies',
         function LoginCtrl($scope, $location, $window, UserService, AuthenticationService, $cookies){
 
+        var vm = this;
+
         $scope.$watch(function () { return AuthenticationService.getIsLogged(); },
             function (value) {
-                $scope.loggedInFlag = value;
+                vm.loggedInFlag = value;
             }
         );
 
-        $scope.credsOk = true;
-        $scope.logIn = function logIn(username, password) {
+        vm.credsOk = true;
+        vm.logIn = function logIn(username, password) {
             if (username !== undefined && password !== undefined) {
 
                 UserService.logIn(username, password).success(function(data) {
@@ -100,7 +102,7 @@ define(['./../module'], function (controllers) {
                         $location.path("/");
                     }
                     else{
-                        $scope.credsOk = false;
+                        vm.credsOk = false;
                     }
                     console.log(data);
                 }).error(function(status, data) {
@@ -108,10 +110,10 @@ define(['./../module'], function (controllers) {
                     console.log(data);
                 });
             }
-        }
+        };
 
 
-        $scope.logout = function logout() {
+        vm.logout = function logout() {
             $scope.credsOk = true;
             if (AuthenticationService.getIsLogged()) {
                 AuthenticationService.setIsLogged(false);
@@ -119,20 +121,15 @@ define(['./../module'], function (controllers) {
                 $cookies.remove('token');
                 $location.path("/");
             }
-        }
+        };
 
 
-        $scope.getUsers = function logout() {
+        vm.getUsers = function logout() {
             UserService.getUsers().success(function(data){
                 console.log(data);
 
-            });
-
+        });
 
         }
-
-
-
-
     }]);
 });

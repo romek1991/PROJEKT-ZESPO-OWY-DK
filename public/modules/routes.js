@@ -1,19 +1,23 @@
 define(['app'], function (app) {
     'use strict';
-    return app.config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/login', {
-            templateUrl: 'modules/user/login.html'
-        });
-
-        $routeProvider.when('/signup', {
-            templateUrl: 'modules/user/signup.html'
-        });
-
-       $routeProvider.otherwise({
-            redirectTo: 'index.html'
-
-        });
-    }]);
+    return app.config(function($stateProvider) {
+        $stateProvider
+            .state('index', {
+                url:"",
+                controller: 'LoginController',
+                controllerAs: 'vm'
+            })
+            .state('login',{
+                url:'/login',
+                templateUrl: 'modules/user/login.html'
+            })
+            .state('signup', {
+                url: '/signup',
+                templateUrl: 'modules/user/signup.html',
+                controller: 'RegisterController',
+                controllerAs: 'vm'
+            });
+    });
 });
 
 // todo : move to ui-router
