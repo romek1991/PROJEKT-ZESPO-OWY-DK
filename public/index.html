@@ -22,32 +22,32 @@
             <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
               
               	<ul class="nav">
-          			<li><a href="#" data-toggle="offcanvas" class="visible-xs text-center">Menu</a></li>
+          			<li><a ui-sref="index" data-toggle="offcanvas" class="visible-xs text-center">Menu</a></li>
             	</ul>
                
                 <ul class="nav hidden-xs" id="lg-menu">
-                    <li class="active"><a href="../index.html">Start</a></li>
-                    <li><a href="../profile.html"> Profil</a></li>
-                    <li><a href="../trips.html"> Moje Podróże</a></li>
+                    <li class="active"><a sref="index">Start</a></li>
+                    <li><a ui-sref="profile"> Profil</a></li>
+                    <li><a ui-sref="trips"> Moje Podróże</a></li>
                 </ul>
                 <ul class="list-unstyled hidden-xs" id="sidebar-footer">
                     <li>
-                      <a href="#about"><h3>O Nas</h3></a>
+                      <a ui-sref="about"><h3>O Nas</h3></a>
                     </li>
                 </ul>
               
               	<!-- tiny only nav-->
               <ul class="nav visible-xs" id="xs-menu">
-                  	<li><a href="../index.html" class="text-center"></a></li>
-                    <li><a href="#profile" class="text-center"></a></li>
-                  	<li><a href="#trips" class="text-center"></a></li>
+                  	<li><a ui-sref="index" class="text-center"></a></li>
+                    <li><a ui-sref="profile" class="text-center"></a></li>
+                  	<li><a ui-sref="trips" class="text-center"></a></li>
                 </ul>
               
             </div>
             <!-- /sidebar -->
           
             <!-- main right col -->
-            <div ng-controller="LoginController" class="column col-sm-10 col-xs-11" id="main">
+            <div class="column col-sm-10 col-xs-11" id="main">
                 
                 <!-- top nav -->
               	<div class="navbar navbar-blue navbar-static-top">  
@@ -57,7 +57,7 @@
 
                       </button>
 					  
-                      <a href="../index.html" class="navbar-brand logo">TL</a>
+                      <a ui-sref="index" class="navbar-brand logo">TL</a>
                   	</div>
                   	<nav class="collapse navbar-collapse" role="navigation">
                     <form class="navbar-form navbar-left">
@@ -76,22 +76,22 @@
                         <a href="#postModal" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Post</a>
                       </li>-->
 					  <li>
-                        <a href="./index.html"><span class="badge">Start</span></a>
+                        <a ui-sref="index"><span class="badge">Start</span></a>
                       </li>
 					  <li>
-                        <a href="./profile.html"><span class="badge">Profil</span></a>
+                        <a ui-sref="profile"><span class="badge">Profil</span></a>
                       </li>
 					  <li>
-                        <a href="./trips.html"><span class="badge">Moje Podróże</span></a>
+                        <a ui-sref="trips"><span class="badge">Moje Podróże</span></a>
                       </li>
                       <li>
-                        <a href="#/signup"><span class="badge">Rejestracja</span></a>
+                        <a ui-sref="signup"><span class="badge">Rejestracja</span></a>
                       </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                       <li>
-                        <a href="#/login" ng-show="!loggedInFlag"><span class="badge">Zaloguj</span></a>
-                        <a href="" ng-show="loggedInFlag" ng-click="logout()" ng-cloak><span class="badge">Wyloguj</span></a>
+                        <a ui-sref="login" ng-show="!loggedInFlag"><span class="badge">Zaloguj</span></a>
+                        <a ui-sref="index" ng-show="loggedInFlag" ng-click="logout()" ng-cloak><span class="badge">Wyloguj</span></a>
 
 
                       </li>
@@ -126,11 +126,7 @@
                       	<div class="row">
 
                             <!-- main column -->
-                            <div class="col-sm-12" ng-view>
-
-
-
-
+                            <div class="col-sm-12" ui-view>
                             </div>
                          <!-- main col left --> 
                         <!-- <div class="col-sm-5">
@@ -178,7 +174,7 @@
                           </div>
                           <div class="col-sm-6">
                             <p>
-                            <a href="#" class="pull-right"></a>
+                            <a ui-sref="index" class="pull-right"></a>
                             </p>
                           </div>
                         </div>
@@ -186,7 +182,7 @@
                       <hr>
                       
                       <h4 class="text-center">
-                      <a href="" target="ext">©Copyright 2015 By TripLogger Team</a>
+                      <a ui-sref="index" target="ext">©Copyright 2015 By TripLogger Team</a>
                       </h4>
                         
                       <hr>

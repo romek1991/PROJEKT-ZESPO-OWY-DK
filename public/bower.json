@@ -10,10 +10,11 @@
 
   "dependencies": {
     "angular": "latest",
-    "angular-route": "latest",
     "angular-cookies": "latest",
     "requirejs": "latest",
-    "requirejs-domready": "latest"
+    "requirejs-domready": "latest",
+    "angular-ui-router": "latest"
+
   },
 
   "ignore": [

@@ -43,8 +43,7 @@ router.post('/', function(req, res, next) {
     password: req.body.password,
     email: req.body.email,
     firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    admin: false
+    lastName: req.body.lastName
   });
   
   newUser.save(function(err) {
