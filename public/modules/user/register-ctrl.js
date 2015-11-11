@@ -2,7 +2,7 @@
  * Created by Pawel on 2015-10-28.
  */
 
-define(['./module'], function (controllers) {
+define(['./../module'], function (controllers) {
     'use strict';
 
     // controllers.factory('TokenInterceptor', function ($q, $window, $location, AuthenticationService, $cookies) {
@@ -76,14 +76,12 @@ define(['./module'], function (controllers) {
     // });
 
 
-    controllers.controller('RegisterController', ['$scope', '$location', '$window', 'UserService', 'AuthenticationService',
+    controllers.controller('RegisterController', ['$location', '$window', 'UserService', 'AuthenticationService',
         '$cookies',
-        function LoginCtrl($scope, $location, $window, UserService, AuthenticationService, $cookies){
-
-        
-        
+        function LoginCtrl($location, $window, UserService, AuthenticationService, $cookies){
+		var vm = this;
 		
-		$scope.register = function(login, password, email, firstName, lastName){
+		vm.register = function(login, password, email, firstName, lastName){
 			if(login !== undefined && password !== undefined && email !== undefined && firstName !== undefined && lastName
 			!== undefined){
 				UserService.register(login, password, email, firstName, lastName).success(function(data){

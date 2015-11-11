@@ -1,8 +1,8 @@
 define([
     'angular',
-    'ngRoute',
+    'ui.router',
     'ngCookies',
-    './controllers/index'
+    './../modules/index'
     //'./directives/index',
     //'./filters/index',
     //'./services/index'
@@ -15,7 +15,7 @@ define([
         'ngCookies',
         //'app.filters',
         //'app.directives',
-        'ngRoute'
+        'ui.router'
     ])
 
 });
