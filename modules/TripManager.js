@@ -75,5 +75,5 @@ exports.getTripComments = function(tripId, next) {
         next(comments);
       });
     }
-  }
+  });
 }

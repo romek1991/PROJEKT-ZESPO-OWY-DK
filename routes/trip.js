@@ -143,7 +143,7 @@ router.post('/:tripId/comment', function(req, res, next) {
     text:         text of the comment
 */
 router.get('/:tripId/comments', function(req, res, next) {
-  TripManager.getTripComments(req.params.tripIdfunction(currentTrip){
+  TripManager.getTripComments(req.params.tripId, function(currentTrip){
     if(currentTrip == null) {
       res.json({
         succes: false,
