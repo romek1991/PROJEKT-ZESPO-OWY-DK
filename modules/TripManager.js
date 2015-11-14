@@ -6,14 +6,14 @@ function findTripById(tripId, next) {
   Trip.findById(tripId, function(err, trip) {
 
     if (err) {
-      console.error("ERROR: " + err);
+      console.error("[TripManager.findTripById] ERROR: " + err);
       next(null);
     } else {
       if (!trip) {
-        console.log('[TripManager] Cannot find trip with id ' + tripId);
+        console.log('[TripManager.findTripById] Cannot find trip with id ' + tripId);
         next(null);
       } else {
-        console.log('[TripManager] Found trip with id ' + tripId);
+        console.log('[TripManager.findTripById] Found trip with id ' + tripId);
         next(trip);
       }
     }
@@ -22,7 +22,7 @@ function findTripById(tripId, next) {
 
 exports.getTrip = function(tripId, next) {
   
-  console.log('[TripManager] tripId: ' + tripId);
+  console.log('[TripManager.getTrip] tripId: ' + tripId);
   findTripById(tripId, function(trip) {
     next(trip);
   });
@@ -37,10 +37,10 @@ exports.updateTrip = function(tripId, trip, next){
 exports.saveTrip = function(trip, next) {
   trip.save(function(err) {
     if (err) {
-      console.error('[TripManager] Unable to save trip ' + tripId);
+      console.error('[TripManager.saveTrip] Unable to save trip ' + tripId);
       next();
     } else {
-      console.log('[TripManager] Trip saved successfully.');
+      console.log('[TripManager.saveTrip] Trip saved successfully.');
       next(trip._id)
     }
   });
@@ -61,9 +61,8 @@ exports.commentTrip = function(tripId, text, next) {
         if (err) {
           throw err;
         } else {
-          console.log('[TripManager] Comment added successfully');
+          console.log('[TripManager.commentTrip] Comment added successfully');
         }
-        
       });
       
       next(newComment._id);

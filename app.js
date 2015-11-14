@@ -10,7 +10,7 @@ var jwt = require('jsonwebtoken');
 var config = require('./config');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var user = require('./routes/user');
 var trip = require('./routes/trip');
 var signup = require('./routes/signup');
 var login = require('./routes/login');
@@ -34,7 +34,7 @@ mongoose.connect(config.database);
 app.set('superSecret', config.secret);
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/user', user);
 app.use('/trip', trip);
 app.use('/signup', signup);
 app.use('/login', login);
