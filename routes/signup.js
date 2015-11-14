@@ -36,8 +36,9 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   console.log('POST /signup');
-  
+
   var body = req.body;
+  console.log(body);
   var newUser = new User({
     login: req.body.login,
     password: req.body.password,

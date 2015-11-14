@@ -137,11 +137,11 @@ router.post('/:tripId/comment', function(req, res, next) {
 });
 
 /*
-  GET /trip/{id}/comments
-  Get comments to the trip with given id
-    {id}:         id of the trip
-    text:         text of the comment
-*/
+ GET /trip/{id}/comments
+ Get comments to the trip with given id
+ {id}:         id of the trip
+ text:         text of the comment
+ */
 router.get('/:tripId/comments', function(req, res, next) {
   TripManager.getTripComments(req.params.tripId, function(currentTrip){
     if(currentTrip == null) {
@@ -150,9 +150,37 @@ router.get('/:tripId/comments', function(req, res, next) {
         message: "Cannot find trip with id " + req.params.tripId
       });
     } else {
-            
+
     }
   });
 });
+
+router.put('/:tripId', function(req, res, next) {
+  if(req.body.author == currentUser._id){
+    TripManager.updateTrip(req.params.tripId, req.body, function(trip) {
+      TripManager.getTrip(req.params.tripId,function(updatedTrip){
+        console.log(updatedTrip);
+        console.log(req.body);
+        if (updatedTrip.name == req.body.name
+        && updatedTrip.description == req.body.description
+        && updatedTrip.publicAccess == req.body.publicAccess) {
+          res.json(updatedTrip)
+        } else {
+          res.json({
+            succes: false,
+            message: "Cannot update trip with id " + req.params.tripId
+          });
+        }
+      } );
+    });
+  }
+  else {
+    console.log("given user is not owner of trip")
+  }
+
+
+});
+
+
 
 module.exports = router;

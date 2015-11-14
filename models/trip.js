@@ -10,3 +10,5 @@ module.exports = mongoose.model('Trip', new Schema({
     description: {type: String, maxlength: 10000, required: true },
     publicAccess: {type: Boolean, default: true }
 }));
+
+

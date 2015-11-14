@@ -3,7 +3,6 @@ var Comment = require('../models/comment');
 
 function findTripById(tripId, next) {
   console.log('[TripManager] tripId: ' + tripId);
-  
   Trip.findById(tripId, function(err, trip) {
 
     if (err) {
@@ -27,7 +26,13 @@ exports.getTrip = function(tripId, next) {
   findTripById(tripId, function(trip) {
     next(trip);
   });
-}
+};
+
+exports.updateTrip = function(tripId, trip, next){
+    Trip.findOneAndUpdate({ _id: tripId },trip, function(trip){
+     next(trip);
+    });
+};
 
 exports.saveTrip = function(trip, next) {
   trip.save(function(err) {
@@ -39,7 +44,7 @@ exports.saveTrip = function(trip, next) {
       next(trip._id)
     }
   });
-}
+};
 
 exports.commentTrip = function(tripId, text, next) {
   findTripById(tripId, function(currentTrip) {
