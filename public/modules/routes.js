@@ -20,6 +20,12 @@ define(['app'], function (app) {
                 controller: 'RegisterController',
                 controllerAs: 'vm'
             })
+            .state('profile', {
+                url: '/profile',
+                templateUrl: 'modules/user/profile.html',
+                controller: 'ProfileController',
+                controllerAs: 'vm'
+            })
             .state('app', {
                 url:"/",
                 data: {
