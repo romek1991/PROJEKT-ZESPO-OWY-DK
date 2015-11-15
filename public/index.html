@@ -90,15 +90,17 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                       <li>
-                        <a ui-sref="login" ng-show="!loggedInFlag"><span class="badge">Zaloguj</span></a>
-                        <a ui-sref="index" ng-show="loggedInFlag" ng-click="logout()" ng-cloak><span class="badge">Wyloguj</span></a>
+
+                          <a ui-sref="index.login" ng-show="!loggedInFlag"><span class="badge">Zaloguj</span></a>
+
+                          <a ui-sref="index" ng-show="loggedInFlag" ng-click="logout()" ng-cloak><span class="badge">Wyloguj</span></a>
 
 
                       </li>
 
                       <li>
                           <!-- do testowania tokenow -->
-                          <a href="" ng-click="getUsers()"><span class="badge">Users</span></a>
+                          <a href="" ng-click="vm.getUsers()"><span class="badge">Users</span></a>
 
                       </li>
                         </ul>
@@ -127,6 +129,8 @@
 
                             <!-- main column -->
                             <div class="col-sm-12" ui-view>
+
+
                             </div>
                          <!-- main col left --> 
                         <!-- <div class="col-sm-5">

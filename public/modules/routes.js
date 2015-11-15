@@ -7,7 +7,7 @@ define(['app'], function (app) {
                 controller: 'LoginController',
                 controllerAs: 'vm'
             })
-            .state('login',{
+            .state('index.login',{
                 url:'/login',
                 templateUrl: 'modules/user/login.html'
             })
@@ -16,7 +16,8 @@ define(['app'], function (app) {
                 templateUrl: 'modules/user/signup.html',
                 controller: 'RegisterController',
                 controllerAs: 'vm'
-            });
+            })
+
     });
 });
 

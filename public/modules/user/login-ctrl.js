@@ -90,7 +90,7 @@ define(['./../module'], function (controllers) {
                 vm.loggedInFlag = value;
             }
         );
-
+        alert("asasdasd");
         vm.credsOk = true;
         vm.logIn = function logIn(username, password) {
             if (username !== undefined && password !== undefined) {
