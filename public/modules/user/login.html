@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary" ng-click="logIn(username, password)">Login</button>
+                <button type="submit" class="btn btn-primary" ng-click="vm.logIn(username, password)" ui-sref="app">Login</button>
             </div>
             <div style="margin-top:20px" >
                 <span ng-show="!credsOk">Nieprawidłowy użytkownik i/lub hasło</span>

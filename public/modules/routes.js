@@ -3,20 +3,29 @@ define(['app'], function (app) {
     return app.config(function($stateProvider) {
         $stateProvider
             .state('index', {
-                url:"",
-                controller: 'LoginController',
-                controllerAs: 'vm'
+                url:"/",
+                data: {
+                    requireLogin: true
+                }
             })
             .state('login',{
                 url:'/login',
-                templateUrl: 'modules/user/login.html'
+                templateUrl: 'modules/user/login.html',
+                controller: 'LoginController',
+                controllerAs: 'vm'
             })
             .state('signup', {
                 url: '/signup',
                 templateUrl: 'modules/user/signup.html',
                 controller: 'RegisterController',
                 controllerAs: 'vm'
-            });
+            })
+            .state('app', {
+                url:"/",
+                data: {
+                    requireLogin: true
+                }
+            })
     });
 });
 
