@@ -6,18 +6,37 @@ define(['app'], function (app) {
                 url:"",
                 controller: 'LoginController',
                 controllerAs: 'vm'
+                url:"/",
+                data: {
+                    requireLogin: true
+                }
             })
-            .state('index.login',{
+            .state('login',{
                 url:'/login',
                 templateUrl: 'modules/user/login.html'
+                templateUrl: 'modules/user/login.html',
+                controller: 'LoginController',
+                controllerAs: 'vm'
             })
             .state('signup', {
                 url: '/signup',
                 templateUrl: 'modules/user/signup.html',
                 controller: 'RegisterController',
                 controllerAs: 'vm'
+            });
             })
-
+            .state('profile', {
+                url: '/profile',
+                templateUrl: 'modules/user/profile.html',
+                controller: 'ProfileController',
+                controllerAs: 'vm'
+            })
+            .state('app', {
+                url:"/",
+                data: {
+                    requireLogin: true
+                }
+            })
     });
 });
 

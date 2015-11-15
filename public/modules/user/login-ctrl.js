@@ -99,7 +99,7 @@ define(['./../module'], function (controllers) {
                     if(data.success){
                         AuthenticationService.setIsLogged(true);
                         $cookies.put('token', data.token);
-                        $location.path("/");
+
                     }
                     else{
                         vm.credsOk = false;
