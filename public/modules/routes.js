@@ -5,30 +5,41 @@ define(['app'], function (app) {
             .state('index', {
                 url:"/",
                 data: {
-                    requireLogin: true
+                    requireLogin: false
                 }
             })
             .state('login',{
                 url:'/login',
                 templateUrl: 'modules/user/login.html',
                 controller: 'LoginController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                data: {
+                    requireLogin: false
+                }
             })
             .state('signup', {
                 url: '/signup',
                 templateUrl: 'modules/user/signup.html',
                 controller: 'RegisterController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+                data: {
+                    requireLogin: false
+                }
             })
             .state('app', {
-                url:"/",
+                url:"/app",
+                controller: function () {
+                    var vm = this;
+                    vm.loggedInFlag = true;
+                },
+                controllerAs: 'vm',
                 data: {
                     requireLogin: true
                 }
             })
+            .state('app.test', {
+                url:"/appTest"
+            });
+            //stany ktore sa po zalogowaniu tworzymy na zasadzie app.NAZWASTANU - wtedy sa zagniezdzone i wszedzie obowiazuje requireLogin:true ze stanu app(on jest parentem)
     });
 });
-
-// todo : move to ui-router
-// todo : controller as syntax
-// todo : bowerrc path !

@@ -87,11 +87,14 @@
                       <li>
                         <a ui-sref="signup"><span class="badge">Rejestracja</span></a>
                       </li>
+                        <li>
+                            <a ui-sref="app.test"><span class="badge">AppTest</span></a>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                       <li>
-                        <a ui-sref="login" ng-show="!loggedInFlag"><span class="badge">Zaloguj</span></a>
-                        <a ui-sref="index" ng-show="loggedInFlag" ng-click="logout()" ng-cloak><span class="badge">Wyloguj</span></a>
+                        <a ui-sref="login" ng-if="!vm.loggedInFlag"><span class="badge">Zaloguj</span></a>
+                        <a ui-sref="index" ng-if="vm.loggedInFlag" ng-click="vm.logout()" ng-cloak><span class="badge">Wyloguj</span></a>
 
 
                       </li>
