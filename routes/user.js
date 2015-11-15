@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
+
 var User = require('../models/user');
+
 var UserManager = require('../modules/UserManager');
 var SecurityManager = require('../modules/SecurityManager');
 
@@ -31,7 +33,6 @@ router.get('/:login', function(req, res, next) {
       });
     } else {
       res.json({
-        success: true,
         user: user
       });
     }
