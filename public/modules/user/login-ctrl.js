@@ -94,17 +94,9 @@ define(['./../module'], function (controllers) {
         vm.credsOk = true;
         vm.logIn = function logIn(username, password) {
             if (username !== undefined && password !== undefined) {
-
                 UserService.logIn(username, password).success(function(data) {
-                    if(data.success){
-                        AuthenticationService.setIsLogged(true);
-                        $cookies.put('token', data.token);
-
-                    }
-                    else{
-                        vm.credsOk = false;
-                    }
-                    console.log(data);
+                    AuthenticationService.setIsLogged(true);
+                    $cookies.put('token', data.token);
                 }).error(function(status, data) {
                     console.log(status);
                     console.log(data);

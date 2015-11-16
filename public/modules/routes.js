@@ -34,10 +34,6 @@ define(['app'], function (app) {
             })
             .state('app', {
                 url:"/app",
-                controller: function () {
-                    var vm = this;
-                    vm.loggedInFlag = true;
-                },
                 controllerAs: 'vm',
                 data: {
                     requireLogin: true
