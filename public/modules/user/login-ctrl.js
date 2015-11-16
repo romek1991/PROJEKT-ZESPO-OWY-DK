@@ -28,19 +28,20 @@ define(['./../module'], function (controllers) {
 
     controllers.factory('AuthenticationService', function() {
         var auth = {
-            isLogged: false
+            user: null
         }
 
-        function set(flag) {
-            auth.isLogged = flag;
+        function set(user) {
+            auth.user = user;
+            console.log('auth.user:' + auth.user);
         }
         function get() {
-            return auth.isLogged;
+            return auth.user;
         }
 
         return {
-            setIsLogged: set,
-            getIsLogged: get
+            setUser: set,
+            getUser: get
         }
 
     });
@@ -54,17 +55,18 @@ define(['./../module'], function (controllers) {
                 return $http.post(baseUrl + '/login', {"login": username, "password": password});
             },
 
-			register: function(login, password, email, firstName, lastName ) {
+            register: function(login, password, email, firstName, lastName ) {
                 return $http.post(baseUrl + '/signup', {
-					
-					//login, password, email,name ,surname
-					"login": login,	
-					"password": password,
-					"email":email,
-					"firstName":firstName,
-					"lastName":lastName						
-					
-					});
+                  
+                  //login, password, email,name ,surname
+                  "login": login,	
+                  "password": password,
+                  "email":email,
+                  "firstName":firstName,
+                  "lastName":lastName						
+                  
+                  }
+                );
             },
 			
             logOut: function() {
@@ -85,32 +87,29 @@ define(['./../module'], function (controllers) {
 
         var vm = this;
 
-        $scope.$watch(function () { return AuthenticationService.getIsLogged(); },
-            function (value) {
-                vm.loggedInFlag = value;
-            }
-        );
-
         vm.credsOk = true;
         vm.logIn = function logIn(username, password) {
             if (username !== undefined && password !== undefined) {
                 UserService.logIn(username, password).success(function(data) {
-                    AuthenticationService.setIsLogged(true);
+                    AuthenticationService.setUser(data.login);
                     $cookies.put('token', data.token);
-                }).error(function(status, data) {
-                    console.log(status);
-                    console.log(data);
+                    $cookies.put('login', data.login);
+                }).error(function(data, status) {
+                    console.log(status + ': ' + data.message);
                 });
+            } else {
+                vm.credsOk = false;
             }
-        };
+        }
 
 
         vm.logout = function logout() {
             $scope.credsOk = true;
-            if (AuthenticationService.getIsLogged()) {
-                AuthenticationService.setIsLogged(false);
+            if (AuthenticationService.getUser()) {
+                AuthenticationService.setUser(null);
                 //alert("Logging out");
                 $cookies.remove('token');
+                $cookies.remove('user');
                 $location.path("/");
             }
         };

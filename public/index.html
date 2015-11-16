@@ -75,16 +75,16 @@
                       <li>
                         <a href="#postModal" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Post</a>
                       </li>-->
-					  <li>
-                        <a ui-sref="index"><span class="badge">Start</span></a>
-                      </li>
-					  <li>
-                        <a ui-sref="profile"><span class="badge">Profil</span></a>
-                      </li>
-					  <li>
-                        <a ui-sref="trips"><span class="badge">Moje Podróże</span></a>
-                      </li>
                       <li>
+                        <a ng-if="!mCtrl.isLogged" ui-sref="index"><span class="badge">Start</span></a>
+                      </li>
+                      <li ng-if="mCtrl.isLogged">
+                        <a ui-sref="app.profile"><span class="badge">Profil</span></a>
+                      </li>
+                      <li ng-if="mCtrl.isLogged">
+                        <a ui-sref="app.trips"><span class="badge">Moje Podróże</span></a>
+                      </li>
+                      <li ng-if="!mCtrl.isLogged">
                         <a ui-sref="signup"><span class="badge">Rejestracja</span></a>
                       </li>
                         <li>

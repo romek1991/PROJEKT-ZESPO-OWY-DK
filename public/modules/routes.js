@@ -26,18 +26,18 @@ define(['app'], function (app) {
                     requireLogin: false
                 }
             })
-            .state('profile', {
-                url: '/profile',
-                templateUrl: 'modules/user/profile.html',
-                controller: 'ProfileController',
-                controllerAs: 'vm'
-            })
             .state('app', {
                 url:"/app",
                 controllerAs: 'vm',
                 data: {
                     requireLogin: true
                 }
+            })
+            .state('app.profile', {
+                url: '/profile',
+                templateUrl: 'modules/user/profile.html',
+                controller: 'ProfileController',
+                controllerAs: 'vm'
             })
             .state('app.test', {
                 url:"/appTest"

@@ -8,6 +8,7 @@ define(['./module'], function (controllers) {
         mCtrl.logout = function logout() {
             if ($cookies.get('token')) {
                 $cookies.remove('token');
+                $cookies.remove('login');
             }
         };
 

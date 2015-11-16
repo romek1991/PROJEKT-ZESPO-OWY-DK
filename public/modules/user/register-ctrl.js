@@ -85,13 +85,12 @@ define(['./../module'], function (controllers) {
 			if(login !== undefined && password !== undefined && email !== undefined && firstName !== undefined && lastName
 			!== undefined){
 				UserService.register(login, password, email, firstName, lastName).success(function(data){
-					if(data.success){
+					
 						alert("Dziala");
 						//tu mam  wziasc ktory service?
 						//w sumie tu nic nie trzeba robic wg mnie, bo to tylko rejestracja. wysylasz dane, a serwer
 						//sam wie co zrobic.// to jak je wyslac
 						// musisz powiazac to z widokiem (ten kontroler). dane sie wysla jak klikniesz przycisk w rejestarcji xd
-					}
 					// tu jak sie uda.
 					// w data jest odpowiedz z serwera
 				}).error(function(status, data){
