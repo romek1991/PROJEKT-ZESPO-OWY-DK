@@ -29,18 +29,25 @@ define(['./../module'], function (controllers) {
     controllers.factory('AuthenticationService', function() {
         var auth = {
             isLogged: false
+            user: null
         }
 
         function set(flag) {
             auth.isLogged = flag;
+        function set(user) {
+            auth.user = user;
+            console.log('auth.user:' + auth.user);
         }
         function get() {
             return auth.isLogged;
+            return auth.user;
         }
 
         return {
             setIsLogged: set,
             getIsLogged: get
+            setUser: set,
+            getUser: get
         }
 
     });
@@ -55,6 +62,7 @@ define(['./../module'], function (controllers) {
             },
 
 			register: function(login, password, email, firstName, lastName ) {
+            register: function(login, password, email, firstName, lastName ) {
                 return $http.post(baseUrl + '/signup', {
 					
 					//login, password, email,name ,surname
@@ -65,6 +73,16 @@ define(['./../module'], function (controllers) {
 					"lastName":lastName						
 					
 					});
+                  
+                  //login, password, email,name ,surname
+                  "login": login,	
+                  "password": password,
+                  "email":email,
+                  "firstName":firstName,
+                  "lastName":lastName						
+                  
+                  }
+                );
             },
 			
             logOut: function() {
@@ -90,7 +108,13 @@ define(['./../module'], function (controllers) {
                 vm.loggedInFlag = value;
             }
         );
-        alert("asasdasd");
+
+
+
+
+
+
+
         vm.credsOk = true;
         vm.logIn = function logIn(username, password) {
             if (username !== undefined && password !== undefined) {
@@ -108,17 +132,28 @@ define(['./../module'], function (controllers) {
                 }).error(function(status, data) {
                     console.log(status);
                     console.log(data);
+                    AuthenticationService.setUser(data.login);
+                    $cookies.put('token', data.token);
+                    $cookies.put('login', data.login);
+                }).error(function(data, status) {
+                    console.log(status + ': ' + data.message);
                 });
+            } else {
+                vm.credsOk = false;
             }
         };
+        }
 
 
         vm.logout = function logout() {
             $scope.credsOk = true;
             if (AuthenticationService.getIsLogged()) {
                 AuthenticationService.setIsLogged(false);
+            if (AuthenticationService.getUser()) {
+                AuthenticationService.setUser(null);
                 //alert("Logging out");
                 $cookies.remove('token');
+                $cookies.remove('user');
                 $location.path("/");
             }
         };
