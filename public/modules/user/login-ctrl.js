@@ -123,7 +123,7 @@ define(['./../module'], function (controllers) {
                         console.log(data);
                         console.log(status + ': ' + data.message);
                     });
-                } 
+                }
             }
 
 

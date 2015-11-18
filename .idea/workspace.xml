@@ -36,11 +36,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.153846">
-              <caret line="222" column="12" selection-start-line="222" selection-start-column="10" selection-end-line="222" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.4903846">
+              <caret line="134" column="36" selection-start-line="134" selection-start-column="36" selection-end-line="134" selection-end-column="36" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#form#0;n#nav#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
@@ -101,11 +101,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login-ctrl.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="login-ctrl.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/user/login-ctrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6923077">
-              <caret line="125" column="18" selection-start-line="125" selection-start-column="18" selection-end-line="125" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="125" column="17" selection-start-line="125" selection-start-column="17" selection-end-line="125" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -211,10 +211,10 @@
         <option value="$PROJECT_DIR$/modules/TripManager.js" />
         <option value="$PROJECT_DIR$/public/js/bootstrap.js" />
         <option value="$PROJECT_DIR$/public/modules/menu-ctrl.js" />
-        <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/public/modules/user/profile-ctrl.js" />
         <option value="$PROJECT_DIR$/public/modules/user/login.html" />
         <option value="$PROJECT_DIR$/public/modules/user/login-ctrl.js" />
+        <option value="$PROJECT_DIR$/public/index.html" />
       </list>
     </option>
   </component>
@@ -1010,16 +1010,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.153846">
-          <caret line="222" column="12" selection-start-line="222" selection-start-column="10" selection-end-line="222" selection-end-column="12" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#form#0;n#nav#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/user/login.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.076923">
@@ -1030,9 +1020,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/user/login-ctrl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6923077">
-          <caret line="125" column="18" selection-start-line="125" selection-start-column="18" selection-end-line="125" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="125" column="17" selection-start-line="125" selection-start-column="17" selection-end-line="125" selection-end-column="17" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4903846">
+          <caret line="134" column="36" selection-start-line="134" selection-start-column="36" selection-end-line="134" selection-end-column="36" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#form#0;n#nav#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
