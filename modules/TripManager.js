@@ -7,7 +7,10 @@ var Trip = require('../models/trip');
 var Comment = require('../models/comment');
 
 function checkAccess(req, trip, next) {
-  if ( !trip.publicAccess && ( req.user.admin || req.user.equals(trip.author) ) )  {
+  console.log('req.user: ' + req.user);
+  console.log('trip.author: ' + trip.author);
+  if ( !trip.publicAccess && ( req.user.admin || req.user._id.equals(trip.author) ) )  {
+    console.log('check access true');
     next(true);
   } else {
     next(false);
@@ -91,6 +94,56 @@ exports.updateTrip = function(req, res){
     }
   });
 }
+
+
+
+
+
+
+
+
+
+exports.removeTrip = function(req, res){
+  findTripById(req.body.id, function(trip) {
+    console.log('findTripByID: ' + req.body.id);
+    console.log('findTripByID: ' + req.body.tripId);
+    console.log('findTripByID: ' + trip);
+    if (!trip) {
+      console.error('[TripManager.updateTrip] Cannot find trip with id ' + req.body.id);
+      return res.status(500).json({
+        message: "Cannot remove trip with id " + req.body.tripId
+      });
+    } else {
+      checkAccess(req, trip, function(access) {
+        if (access) {
+
+          Trip.findOneAndRemove({ _id: req.body.id }, function(err){
+            res.json({
+              message: "Trip removed successfully."
+            });
+
+          });
+        } else {
+          res.status(403).json({
+            message: "User has no access to this trip."
+          });
+        }
+      });
+    }
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 exports.addTrip = function(req, res) {
   

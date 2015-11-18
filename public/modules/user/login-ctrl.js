@@ -57,18 +57,18 @@ define(['./../module'], function (controllers) {
 
             register: function(login, password, email, firstName, lastName ) {
                 return $http.post(baseUrl + '/signup', {
-                  
-                  //login, password, email,name ,surname
-                  "login": login,	
-                  "password": password,
-                  "email":email,
-                  "firstName":firstName,
-                  "lastName":lastName						
-                  
-                  }
+
+                        //login, password, email,name ,surname
+                        "login": login,
+                        "password": password,
+                        "email":email,
+                        "firstName":firstName,
+                        "lastName":lastName
+
+                    }
                 );
             },
-			
+
             logOut: function() {
 
             },
@@ -81,46 +81,47 @@ define(['./../module'], function (controllers) {
     });
 
 
-    controllers.controller('LoginController', ['$scope', '$location', '$window', 'UserService', 'AuthenticationService',
+    controllers.controller('LoginController', ['$location', '$window', 'UserService', 'AuthenticationService',
         '$cookies',
-        function LoginCtrl($scope, $location, $window, UserService, AuthenticationService, $cookies){
+        function LoginCtrl($location, $window, UserService, AuthenticationService, $cookies){
 
-        var vm = this;
+            var vm = this;
+            alert("login controller");
+            vm.credsOk = true;
+            vm.logIn = function logIn(username, password) {
+                alert("costam");
+                if (username !== undefined && password !== undefined) {
+                    UserService.logIn(username, password).success(function(data) {
+                        AuthenticationService.setUser(data.login);
+                        $cookies.put('token', data.token);
+                        $cookies.put('login', data.login);
+                    }).error(function(data, status) {
+                        console.log(status + ': ' + data.message);
+                    });
+                } else {
+                    vm.credsOk = false;
+                }
+            }
 
-        vm.credsOk = true;
-        vm.logIn = function logIn(username, password) {
-            if (username !== undefined && password !== undefined) {
-                UserService.logIn(username, password).success(function(data) {
-                    AuthenticationService.setUser(data.login);
-                    $cookies.put('token', data.token);
-                    $cookies.put('login', data.login);
-                }).error(function(data, status) {
-                    console.log(status + ': ' + data.message);
+
+            vm.logout = function logout() {
+                vm.credsOk = true;
+                if (AuthenticationService.getUser()) {
+                    AuthenticationService.setUser(null);
+                    //alert("Logging out");
+                    $cookies.remove('token');
+                    $cookies.remove('user');
+                    $location.path("/");
+                }
+            };
+
+
+            vm.getUsers = function logout() {
+                UserService.getUsers().success(function(data){
+                    console.log(data);
+
                 });
-            } else {
-                vm.credsOk = false;
+
             }
-        }
-
-
-        vm.logout = function logout() {
-            $scope.credsOk = true;
-            if (AuthenticationService.getUser()) {
-                AuthenticationService.setUser(null);
-                //alert("Logging out");
-                $cookies.remove('token');
-                $cookies.remove('user');
-                $location.path("/");
-            }
-        };
-
-
-        vm.getUsers = function logout() {
-            UserService.getUsers().success(function(data){
-                console.log(data);
-
-        });
-
-        }
-    }]);
+        }]);
 });

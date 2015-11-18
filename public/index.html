@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<meta charset="utf-8">
-		<title>TripLogger</title>
-		<meta name="generator" content="Bootply" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<!--[if lt IE 9]>
-			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-		<link href="css/styles.css" rel="stylesheet">
-	</head>
-	<body ng-controller="MenuCtrl as mCtrl">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>TripLogger</title>
+    <meta name="generator" content="Bootply" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body ng-controller="MenuCtrl as mCtrl">
 <div class="wrapper">
     <div class="box">
         <div class="row row-offcanvas row-offcanvas-left">
-                      
-          
+
+
             <!-- sidebar -->
             <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
-              
-              	<ul class="nav">
-          			<li><a ui-sref="index" data-toggle="offcanvas" class="visible-xs text-center">Menu</a></li>
-            	</ul>
-               
+
+                <ul class="nav">
+                    <li><a ui-sref="index" data-toggle="offcanvas" class="visible-xs text-center">Menu</a></li>
+                </ul>
+
                 <ul class="nav hidden-xs" id="lg-menu">
                     <li class="active"><a sref="index">Start</a></li>
                     <li><a ui-sref="app.profile"> Profil</a></li>
@@ -32,7 +32,7 @@
                 </ul>
                 <ul class="list-unstyled hidden-xs" id="sidebar-footer">
                     <li>
-                      <a ui-sref="about"><h3>O Nas</h3></a>
+                        <a ui-sref="about"><h3>O Nas</h3></a>
                     </li>
                 </ul>
               
@@ -42,18 +42,18 @@
                     <li><a ui-sref="app.profile" class="text-center"></a></li>
                   	<li><a ui-sref="trips" class="text-center"></a></li>
                 </ul>
-              
+
             </div>
             <!-- /sidebar -->
-          
+
             <!-- main right col -->
             <div class="column col-sm-10 col-xs-11" id="main">
-                
+
                 <!-- top nav -->
-              	<div class="navbar navbar-blue navbar-static-top">
+                <div class="navbar navbar-blue navbar-static-top">
                     <div class="navbar-header">
-                      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle</span>
+                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle</span>
 
                       </button>
 					  
@@ -107,18 +107,18 @@
                         </ul>
 
 
-                     <!-- <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i></a>
-                        <ul class="dropdown-menu">
-                          <li><a href="">More</a></li>
-                          <li><a href="">More</a></li>
-                          <li><a href="">More</a></li>
-                          <li><a href="">More</a></li>
-                          <li><a href="">More</a></li>
+                        <!-- <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i></a>
+                           <ul class="dropdown-menu">
+                             <li><a href="">More</a></li>
+                             <li><a href="">More</a></li>
+                             <li><a href="">More</a></li>
+                             <li><a href="">More</a></li>
+                             <li><a href="">More</a></li>
+                           </ul>
+                         </li> -->
                         </ul>
-                      </li> -->
-                    </ul>
-                  	</nav>
+                    </nav>
                 </div>
                 <!-- /top nav -->
               
@@ -127,6 +127,9 @@
                       
                         <!-- content -->                      
                       	<div class="row">
+
+                        <!-- content -->
+                        <div class="row">
 
                             <!-- main column -->
                             <div class="col-sm-12" ui-view />

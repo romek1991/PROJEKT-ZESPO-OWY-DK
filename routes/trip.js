@@ -54,6 +54,17 @@ router.put('/', function(req, res, next) {
   TripManager.updateTrip(req, res);
 });
 
+
+/*
+ DELETE /trip
+ Remove trip
+ id:            id of the trip
+*/
+router.delete('/', function(req, res, next) {
+  TripManager.removeTrip(req, res);
+});
+
+
 /*
   POST /trip/comment
   Add a comment to the trip

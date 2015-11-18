@@ -14,6 +14,7 @@ define([
 
             $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
                 var requireLogin = toState.data.requireLogin;
+                alert("require login");
                 console.log("require : " + requireLogin);
                 console.log('toState :');
                 console.log(toState);
@@ -23,7 +24,7 @@ define([
                     $state.transitionTo('index');
                     //if user is not logged in then redirect to
 
-                } 
+                }
             });
         });
 

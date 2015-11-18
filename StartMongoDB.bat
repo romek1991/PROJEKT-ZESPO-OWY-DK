@@ -1,1 +1,1 @@
-start "" "C:\Program Files\MongoDB\Server\3.0\bin\mongod.exe" --dbpath "D:\ProjektZespolowy\TripLogger\data"
+start "" "C:\Program Files\MongoDB\Server\3.0\bin\mongod.exe" --dbpath "D:\Studia\V rok\Projekt zespolowy\Projekt\data"

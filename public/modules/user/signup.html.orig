@@ -1,0 +1,40 @@
+<div class="well">
+    <center>
+        <form class="form">
+            <h4>Rejestracja</h4>
+            <div class="input-group text-center">
+
+                <div class="form-group">
+                    <input type="text" name="username" id="username" class="form-control" placeholder="Podaj login" ng-model="vm.login" required="">
+                </div>       
+				
+                <div class="form-group">
+                    <input type="text" name="password" id="password" class="form-control" placeholder="Podaj hasło" ng-model="vm.password" required="">
+                </div>
+				
+				<div class="form-group">
+                    <input type="text" name="email" id="email" class="form-control" placeholder="Podaj email" ng-model="vm.email" required="">
+                </div>
+				
+                <div class="form-group">
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Immię" ng-model="vm.firstName" required="">
+                </div>
+				
+			    <div class="form-group">
+                    <input type="text" name="surname" id="surname" class="form-control" placeholder="Nazwisko" ng-model="vm.lastName" required="">
+                </div>
+
+<<<<<<< HEAD
+			 </div>
+                            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" ng-click="vm.register(vm.login, vm.password, vm.email,vm.firstName ,vm.lastName )">Zarejestruj</button>            </div>
+=======
+		  	 </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" ng-click="vm.register(vm.login, vm.password, vm.email, vm.firstName, vm.lastName )" ui-sref="login">Zarejestruj</button>
+            </div>
+>>>>>>> b95992d5a82910e3150b90a86045403c520bf384
+            
+        </form>
+    </center>
+</div>
