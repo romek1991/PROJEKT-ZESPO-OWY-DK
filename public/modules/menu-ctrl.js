@@ -1,17 +1,25 @@
 define(['./module'], function (controllers) {
     'use strict';
 
-    controllers.controller('MenuCtrl', function ($cookies) {
+    controllers.controller('MenuCtrl', ['AuthenticationService', '$cookies', '$scope',
+        function (AuthenticationService, $cookies, $scope) {
         var mCtrl = this;
 
-        mCtrl.isLogged = $cookies.get('token');
-        mCtrl.isLogged = false;
-        mCtrl.logout = function logout() {
+
+        $scope.$watch(function(){return AuthenticationService.getLoggedInFlag()},
+            function(value){
+                mCtrl.isLogged = value;
+            }
+        );
+
+        mCtrl.logout = function () {
+            AuthenticationService.setLoggedInFlag(false);
             if ($cookies.get('token')) {
                 $cookies.remove('token');
                 $cookies.remove('login');
             }
         };
 
-    });
+
+    }]);
 });

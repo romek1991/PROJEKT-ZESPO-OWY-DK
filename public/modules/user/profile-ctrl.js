@@ -22,7 +22,7 @@ define(['./../module'], function (controllers) {
     controllers.controller('ProfileController', ['$location', '$window', 'ProfileService', '$cookies',
         function ProfileCtrl($location, $window, ProfileService, $cookies){
           var vm = this;
-          
+
           vm.getProfile = function(login){
               var token = $cookies.get('token');
               alert('token:' + token);

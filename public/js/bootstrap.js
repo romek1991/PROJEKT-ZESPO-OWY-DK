@@ -10,11 +10,12 @@ define([
             $httpProvider.interceptors.push('TokenInterceptor');
         });
 
-        app.run(function ($rootScope, $cookies, $state) {
+        app.run(['AuthenticationService','$rootScope', '$cookies', '$state',
+            function (AuthenticationService, $rootScope, $cookies, $state) {
 
             $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
                 var requireLogin = toState.data.requireLogin;
-                alert("require login");
+                //alert("state changed");
                 console.log("require : " + requireLogin);
                 console.log('toState :');
                 console.log(toState);
@@ -26,7 +27,7 @@ define([
 
                 }
             });
-        });
+        }]);
 
         ng.bootstrap(document, ['app']);
     });

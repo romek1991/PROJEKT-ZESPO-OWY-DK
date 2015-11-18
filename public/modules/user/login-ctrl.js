@@ -31,6 +31,10 @@ define(['./../module'], function (controllers) {
             user: null
         }
 
+        var log = {
+            loggedInFlag: false
+        }
+
         function set(user) {
             auth.user = user;
             console.log('auth.user:' + auth.user);
@@ -39,10 +43,27 @@ define(['./../module'], function (controllers) {
             return auth.user;
         }
 
+        function setLoggedIn(flag){
+            log.loggedInFlag = flag;
+            console.log('set logged in flag: ' + log.loggedInFlag);
+        }
+
+        function getLoggedIn() {
+            console.log('get logged in flag: ' + log.loggedInFlag);
+            return log.loggedInFlag;
+        }
+
         return {
             setUser: set,
-            getUser: get
+            getUser: get,
+            setLoggedInFlag: setLoggedIn,
+            getLoggedInFlag: getLoggedIn
         }
+
+    });
+
+
+    controllers.factory('LoginFlagService', function()    {
 
     });
 
@@ -86,16 +107,19 @@ define(['./../module'], function (controllers) {
         function LoginCtrl($location, $window, UserService, AuthenticationService, $cookies){
 
             var vm = this;
-            alert("login controller");
+            //alert("login controller");
             vm.credsOk = true;
             vm.logIn = function logIn(username, password) {
-                alert("costam");
+                //alert("costam");
                 if (username !== undefined && password !== undefined) {
                     UserService.logIn(username, password).success(function(data) {
                         AuthenticationService.setUser(data.login);
+                        AuthenticationService.setLoggedInFlag(true);
                         $cookies.put('token', data.token);
                         $cookies.put('login', data.login);
+
                     }).error(function(data, status) {
+                        console.log(data);
                         console.log(status + ': ' + data.message);
                     });
                 } else {
@@ -104,10 +128,11 @@ define(['./../module'], function (controllers) {
             }
 
 
-            vm.logout = function logout() {
+            vm.logout = function(){
                 vm.credsOk = true;
                 if (AuthenticationService.getUser()) {
                     AuthenticationService.setUser(null);
+                    AuthenticationService.setLoggedInFlag(false);
                     //alert("Logging out");
                     $cookies.remove('token');
                     $cookies.remove('user');
@@ -116,8 +141,9 @@ define(['./../module'], function (controllers) {
             };
 
 
-            vm.getUsers = function logout() {
+            vm.getUsers = function() {
                 UserService.getUsers().success(function(data){
+
                     console.log(data);
 
                 });
