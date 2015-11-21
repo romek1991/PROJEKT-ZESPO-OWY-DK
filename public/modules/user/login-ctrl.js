@@ -117,7 +117,7 @@ define(['./../module'], function (controllers) {
                         AuthenticationService.setLoggedInFlag(true);
                         $cookies.put('token', data.token);
                         $cookies.put('login', data.login);
-                        $state.go('app');
+                        $state.go('app.start');
                     }).error(function(data, status) {
                         vm.credsOk = false;
                         console.log(data);

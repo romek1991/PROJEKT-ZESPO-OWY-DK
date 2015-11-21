@@ -76,13 +76,10 @@
                                 <a href="#postModal" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Post</a>
                               </li>-->
                             <li>
-                                <a ng-if="!mCtrl.isLogged" ui-sref="index"><span class="badge">Start</span></a>
+                                <a ng-if="!mCtrl.isLogged" ui-sref="index"><span class="badge">TripLogger</span></a>
                             </li>
                             <li ng-if="mCtrl.isLogged" ng-cloak>
-                                <a ui-sref="app.profile"><span class="badge">Profil</span></a>
-                            </li>
-                            <li ng-if="mCtrl.isLogged" ng-cloak>
-                                <a ui-sref="app.trips"><span class="badge">Moje Podróże</span></a>
+                                <a ui-sref="app.trip"><span class="badge">Wycieczka</span></a>
                             </li>
                             <li ng-if="!mCtrl.isLogged">
                                 <a ui-sref="signup"><span class="badge">Rejestracja</span></a>
@@ -92,6 +89,9 @@
                             </li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+                            <li ng-if="mCtrl.isLogged" ng-cloak>
+                                <a ui-sref="app.profile"><span class="badge">Mój profil</span></a>
+                            </li>
                             <li>
                                 <a ui-sref="login" ng-if="!mCtrl.isLogged"><span class="badge">Zaloguj</span></a>
                                 <!--<a ui-sref="login"><span class="badge">Zaloguj</span></a>-->
@@ -126,15 +126,13 @@
                     <div class="full col-sm-9">
 
                         <!-- content -->
-                        <div class="row">
+                        <div class="row" ui-view>
 
                             <!-- main column -->
-                            <div class="col-sm-12" ui-view>
-                                <div ui-view>
+                            <div ui-view>
 
-                                    
-                                </div>
-                            <div>
+                                
+                            </div>
 
                             <!-- main col left -->
                             <!-- <div class="col-sm-5">
@@ -161,13 +159,7 @@
                                     </div>
                            </div>-
                            <!--/row-->
-
-                            <div class="row">
-                                <div class="col-sm-6">
-
-                                </div>
-                            </div>
-
+                           
                             <div class="row" id="footer">
                                 <div class="col-sm-6">
 
@@ -187,14 +179,13 @@
 
                             <hr>
 
-
-                        </div><!-- /col-9 -->
-                    </div><!-- /padding -->
-                </div>
-                <!-- /main -->
-
+                          </div><!-- /col-9 -->
+                      </div><!-- /row -->
+                </div><!-- /padding -->
             </div>
-        </div>
+            <!-- /main -->
+
+          </div>
     </div>
 
 
@@ -227,5 +218,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/scripts.js"></script>
     <script type="text/javascript" src="./bower_components/requirejs/require.js" data-main="./js/main.js"></script>
-</div>	</body>
+</div>
+
+</body>
 </html>
