@@ -78,17 +78,7 @@ router.post('/:tripId/comment', function(req, res, next) {
       message: "Unable to add new comment."
     });
   } else {
-    TripManager.commentTrip(res.tripId, req.body.text, function(commentId){
-      if (!commentId) {
-        res.status(500).json({
-          message: "Unable to add new comment."
-        });
-      } else {
-        res.json({
-          commentId: commentId
-        });
-      }
-    });
+    TripManager.commentTrip(req, res); //, function(commentId){
   }
 });
 
@@ -99,7 +89,8 @@ router.post('/:tripId/comment', function(req, res, next) {
     text:         text of the comment
  */
 router.get('/:tripId/comments', function(req, res, next) {
-  console.log('res.tripId: ' + req.tripId);
+  console.log('req.tripId: ' + req.tripId);
+  console.log('req.body.text: ' + req.body.text);
   TripManager.getTripComments(req.tripId, function(tripComments){
     if(tripComments == null) {
       res.status(500).json({
