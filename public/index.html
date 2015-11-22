@@ -78,6 +78,9 @@
                             <li>
                                 <a ng-if="!mCtrl.isLogged" ui-sref="index"><span class="badge">TripLogger</span></a>
                             </li>
+							<li ng-if="mCtrl.isLogged" ng-cloak>
+                                <a ui-sref="app.addtrip"><span class="badge">Dodaj Wycieczke</span></a>
+                            </li>
                             <li ng-if="mCtrl.isLogged" ng-cloak>
                                 <a ui-sref="app.trip"><span class="badge">Wycieczka</span></a>
                             </li>

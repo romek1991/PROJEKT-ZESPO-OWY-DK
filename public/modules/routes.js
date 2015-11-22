@@ -52,6 +52,12 @@ define(['app'], function (app) {
                 controller: 'TripController',
                 controllerAs: 'vm'
             })
+			 .state('app.addtrip', {
+                url: '/addtrip',
+                templateUrl: 'modules/trip/addtrip.html',
+                controller: 'TripController',
+                controllerAs: 'vm'
+            })
             .state('app.test', {
                 url:"/appTest"
             });
