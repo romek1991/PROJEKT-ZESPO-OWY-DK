@@ -24,7 +24,19 @@ define(['./../module'], function (controllers) {
             'x-access-token': token
           }
         });
+      },
+      
+      addTrip: function(name, description, token) {
+        console.log(name + ' ' + description + ' ' + token);
+        return $http.post(baseUrl + '/trip', {
+          'name': name,
+          'description': description,
+          headers: {
+            'x-access-token': token
+          }
+        });
       }
+      
     }
   });
 
@@ -37,21 +49,21 @@ define(['./../module'], function (controllers) {
       var tripId = '5647e897572538ec27750e0c';
       
 	  
-	  	vm.addTrip = function(name, description)  {
-		  if(name !== undefined && description !== undefined ){
-			UserService.addTrip(name, description).success(function(data){
-				if(data.success){
-						alert("Dziala");
-				}
-					// tu jak sie uda.
-					// w data jest odpowiedz z serwera
-				}).error(function(status, data){
-					// tu kod jak sie post nie uda
-					
-				});
-			}
-			
-	    }
+      vm.addTrip = function(name, description)  {
+        if(name !== undefined && description !== undefined ){
+          TripService.addTrip(name, description, token).success(function(data){
+          if(data.success){
+              alert("Dziala");
+          }
+            // tu jak sie uda.
+            // w data jest odpowiedz z serwera
+          }).error(function(status, data){
+            // tu kod jak sie post nie uda
+            
+          });
+        }
+        
+      }
 		
       var refreshComments = function() {
         TripService.getComments(tripId, token).success(function(data) {            
