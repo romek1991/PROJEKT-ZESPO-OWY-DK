@@ -15,17 +15,44 @@
 
 <div ng-if="!vm.tripNotFound">
 <div class="column col-sm-12 col-lg-8" >
+  
+  <div class="well">
+    <h2>{{vm.tripName}}</h2>
+    <p>{{tripHeader.fromDate ? 'od: ' + tripHeader.fromDate : '' }}</p>
+    <p>{{tripHeader.toDate ? 'do: ' + tripHeader.toDate : ''}}</p>
+  </div>
+  
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title"><strong>{{vm.displayTripName}}</strong></h3>
+      <h3 class="panel-title">Zdjęcia (4)</h3>
+    </div>
+          
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-6 col-md-3">
+          <img class="thumbnail" src="/img/bigben.jpg" alt="...">
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <img class="thumbnail" src="/img/londoneye.jpg" alt="...">
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <img class="thumbnail" src="/img/buckingham.jpg" alt="...">
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <img class="thumbnail" src="/img/towerbridge.jpg" alt="...">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Opis</h3>
     </div>
           
     <div class="panel-body">
         <p>{{vm.tripDescription}}</p>
     </div>
-
-
-    
   </div>
 </div>
 <div class="column col-sm-12 col-lg-4">
@@ -37,11 +64,12 @@
       <div class="media" ng-repeat="comment in vm.comments">
         <div class="media-left pull-left">
           <a href="#" ui-sref="app.profile">
-            <img class="media-object" src="/img/user.png" width="48" height="48">
+            <img class="media-object" ng-src="/img/{{comment.author.login}}.jpg" width="48" height="48">
           </a>
         </div>
         <div class="media-body">
-          <h4 class="media-heading"><strong>{{comment.author.firstName}} {{comment.author.lastName}}</strong> ({{comment.time}})</h4>
+          <h4 class="media-heading"><strong>{{comment.author.firstName}} {{comment.author.lastName}}</strong></h4>
+          <em>{{comment.time}}</em>
           <p>{{comment.text}}</p>
         </div>
       </div>
@@ -49,11 +77,11 @@
       <div class="media">
         <div class="media-left pull-left">
           <a href="#" ui-sref="app.profile">
-            <img class="media-object" src="/img/user.png" width="48" height="48">
+            <img class="media-object" ng-src="/img/{{vm.user.login}}.jpg" width="48" height="48">
           </a>
         </div>
         <div class="media-body">
-          <h4 class="media-heading"><strong>Aktualnie Zalogowany</strong></h4>
+          <h4 class="media-heading"><strong>{{vm.user.firstName + ' ' + vm.user.lastName}}</strong></h4>
           <textarea class="form-control" placeholder="Your comment here..." ng-model="vm.newCommentText"></textarea>
           <button class="btn btn-primary pull-right" ng-click="vm.addComment()">Dodaj komentarz</button>
         </div>

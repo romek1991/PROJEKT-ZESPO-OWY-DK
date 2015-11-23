@@ -27,8 +27,20 @@
         <h3 class="panel-title">Wycieczki</h3>
       </div>
       <div class="panel-body">
-        <p>Tutaj miejsce na wypisanie wycieczek danego usera.</p>
-        <p>Na początek można w liście</p>
+        <div ng-repeat="tripHeader in vm.userTripsHeaders" class="well">
+          <a ui-sref="app.trip({tripId: tripHeader._id})">
+            <div class="media">
+              <div class="media-left">
+                <img class="media-object pull-left" src="/img/bigben.jpg" width="50" height="50">
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading"><strong>{{tripHeader.name}}</strong></h4>
+                <p ng-if="tripHeader.fromDate || tripHeader.toDate">{{tripHeader.fromDate ? 'od: ' + tripHeader.fromDate : '' }} {{tripHeader.toDate ? 'do: ' + tripHeader.toDate : ''}}</p>
+                <p>dodano: {{tripHeader.createdDate}}</p>
+              </div>
+            </div>
+          </a>
+        </div>
       </div>
     </div>
   </div>

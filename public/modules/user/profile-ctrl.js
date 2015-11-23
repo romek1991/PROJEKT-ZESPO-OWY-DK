@@ -11,9 +11,17 @@ define(['./../module'], function (controllers) {
 
             getProfile: function(login, token) {
                 return $http.get(baseUrl + '/user/' + login, {
-                  headers: {
-                    'x-access-token': token
-                  }
+                    headers: {
+                        'x-access-token': token
+                    }
+                });
+            },
+            
+            getUserTripsHeaders: function(login, token) {
+                return $http.get(baseUrl + '/user/' + login + '/trips', {
+                    headers: {
+                        'x-access-token': token
+                    }
                 });
             }
         }
@@ -21,26 +29,30 @@ define(['./../module'], function (controllers) {
 
     controllers.controller('ProfileController', ['$location', '$window', '$stateParams', 'ProfileService', 'AuthenticationService', '$cookies',
         function ProfileCtrl($location, $window, $stateParams, ProfileService, AuthenticationService, $cookies) {
-          var vm = this;
-          console.log("profile controller");
-          
-          var token = $cookies.get('token');
-          var loginToDisplay = $stateParams.login;
-          
-          // gdy nie ma loginu w adresie -> wyświetl profil zalogowanego usera
-          if(loginToDisplay === '') {
+            var vm = this;
+            console.log("profile controller");
+            
+            var token = $cookies.get('token');
             var user = AuthenticationService.getUser();
-            loginToDisplay = user.login;
-          }
+            var loginToDisplay = $stateParams.login;
+            
+            // gdy nie ma loginu w adresie -> wyświetl profil zalogowanego usera
+            if(loginToDisplay === '') {
+                loginToDisplay = user.login;
+            }
 
-              //alert('token:' + token);
-
-          ProfileService.getProfile(loginToDisplay, token).success(function(data){
-            vm.displayName = data.user.firstName + ' ' + data.user.lastName
-            vm.login = data.user.login
-          }).error(function(status, data){
-            vm.userNotFound = true;
-          });
-      }
+            ProfileService.getProfile(loginToDisplay, token).success(function(data){
+                vm.displayName = data.user.firstName + ' ' + data.user.lastName;
+                vm.login = data.user.login;
+            }).error(function(status, data){
+                vm.userNotFound = true;
+            });
+            
+            ProfileService.getUserTripsHeaders(loginToDisplay, token).success(function(data) {
+                vm.userTripsHeaders = data.trips
+            }).error(function(status, data){
+                alert(status + ': ' + data.message);
+            });
+        }
     ]);
 });

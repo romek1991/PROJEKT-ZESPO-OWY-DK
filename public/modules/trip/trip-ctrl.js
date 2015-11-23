@@ -49,46 +49,45 @@ define(['./../module'], function (controllers) {
     }
   });
 
-  controllers.controller('TripController', ['$location', '$window', '$stateParams', 'TripService', 'AuthenticationService', '$cookies',
-    function TripCtrl($location, $window, $stateParams, TripService, AuthenticationService, $cookies) {
+  controllers.controller('TripController', ['$location', '$window', '$stateParams', 'TripService', 'AuthenticationService', '$cookies', '$state',
+    function TripCtrl($location, $window, $stateParams, TripService, AuthenticationService, $cookies, $state) {
       var vm = this;
       console.log("trip controller");
       
       var token = $cookies.get('token');
       var tripId = $stateParams.tripId;
+      var user = AuthenticationService.getUser();
+      
+      vm.user = user;
       
 	  
       vm.addTrip = function(name, description)  {
         if(name !== undefined && description !== undefined ){
           TripService.addTrip(name, description, token).success(function(data){
-          if(data.success){
-              alert("Dziala");
-          }
-            // tu jak sie uda.
-            // w data jest odpowiedz z serwera
+            $state.go('app.trip', {
+              tripId: data.tripId
+            });
           }).error(function(status, data){
-            // tu kod jak sie post nie uda
-            
+            // TODO: dodać w GUI gdy się nie uda
+            alert("Błąd przy dodawaniu wycieczki!");
           });
         }
         
       }
       
-      var tripToDisplay= $stateParams.tripId;
+      var tripToDisplay = $stateParams.tripId;
       
       if(tripToDisplay === ''){
         vm.tripNotFound = true;
       }else{
         TripService.getTrip(tripId, token).success(function(data){
-          vm.displayTripName = data.trip.name
+          vm.tripName = data.trip.name
           vm.tripDescription = data.trip.description
         }).error(function(status, data){
           vm.tripNotFound = true;
         });
       }
       
-      
-		
       var refreshComments = function() {
         TripService.getComments(tripId, token).success(function(data) {            
           vm.comments = data.comments;
@@ -112,7 +111,6 @@ define(['./../module'], function (controllers) {
       }
       
       refreshComments();
-      
     }
     
   ]);

@@ -6,6 +6,8 @@
 var Trip = require('../models/trip');
 var Comment = require('../models/comment');
 
+var UserManager = require('../modules/UserManager');
+
 function checkAccess(req, trip, next) {
   console.log('req.user: ' + req.user);
   console.log('trip.author: ' + trip.author);
@@ -45,6 +47,7 @@ exports.getTrip = function(req, res) {
       });
     } else {
       checkAccess(req, trip, function(access) {
+        access=true;
         if(access) {
           res.json({
             trip: trip
@@ -95,14 +98,6 @@ exports.updateTrip = function(req, res){
   });
 }
 
-
-
-
-
-
-
-
-
 exports.removeTrip = function(req, res){
   findTripById(req.body.id, function(trip) {
     console.log('findTripByID: ' + req.body.id);
@@ -132,18 +127,6 @@ exports.removeTrip = function(req, res){
     }
   });
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 exports.addTrip = function(req, res) {
   
@@ -178,7 +161,6 @@ exports.addTrip = function(req, res) {
 };
 
 exports.commentTrip = function(req, res) {
-  
   findTripById(req.tripId, function(currentTrip) {
     if(currentTrip == null) {
       res.status(404).json({
@@ -216,5 +198,24 @@ exports.getTripComments = function(tripId, next) {
         next(comments);
       });
     }
+  });
+}
+
+exports.getUserTripsHeaders = function(req, res) {
+  UserManager.getUserByLogin(req.login, function(user) {
+    console.log('user: ' + user);
+    Trip.find({author: user}, 'name createdDate startDate endDate publicAccess', function(err, userTrips) {
+      if (err) {
+        return res.status(500).json({
+          message: "Unable to get trips for user."
+        });
+      }
+      
+      var trips
+      
+      return res.json({
+        trips: userTrips
+      });
+    });
   });
 }
