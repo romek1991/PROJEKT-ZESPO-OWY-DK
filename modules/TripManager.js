@@ -177,26 +177,32 @@ exports.addTrip = function(req, res) {
   });
 };
 
-exports.commentTrip = function(tripId, text, next) {
-  findTripById(tripId, function(currentTrip) {
+exports.commentTrip = function(req, res) {
+  
+  findTripById(req.tripId, function(currentTrip) {
     if(currentTrip == null) {
-      next(null);
+      res.status(404).json({
+        message: "Unable to find trip with id: " + req.tripId
+      });
     } else {
       var newComment = new Comment({
         trip: currentTrip,
         author: req.user,
-        text: text
+        text: req.body.text
       });
       
-      newComment.save(function(err) {
+      newComment.save(function(err, newComment) {
         if (err) {
-          throw err;
+          return res.status(500).json({
+            message: "Unable to add new comment."
+          });
         } else {
           console.log('[TripManager.commentTrip] Comment added successfully');
+          return res.json({
+            commentId: newComment._id
+          });
         }
       });
-      
-      next(newComment._id);
     }
   });
 }
@@ -206,7 +212,7 @@ exports.getTripComments = function(tripId, next) {
     if(currentTrip == null) {
       next(null);
     } else {
-      Comment.find({trip: currentTrip},function(err, comments){
+      Comment.find({trip: currentTrip}).populate('author').exec(function(err, comments){
         next(comments);
       });
     }

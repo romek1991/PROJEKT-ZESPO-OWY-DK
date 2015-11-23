@@ -1,8 +1,8 @@
 define(['./module'], function (controllers) {
     'use strict';
 
-    controllers.controller('MenuCtrl', ['AuthenticationService', '$cookies', '$scope',
-        function (AuthenticationService, $cookies, $scope) {
+    controllers.controller('MenuCtrl', ['AuthenticationService', '$cookies', '$scope', '$state',
+        function (AuthenticationService, $cookies, $scope, $state) {
         var mCtrl = this;
 
 
@@ -18,6 +18,7 @@ define(['./module'], function (controllers) {
             if ($cookies.get('token')) {
                 $cookies.remove('token');
                 $cookies.remove('login');
+                $state.go('index');
             }
         };
 

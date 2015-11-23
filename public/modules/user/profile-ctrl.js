@@ -19,30 +19,27 @@ define(['./../module'], function (controllers) {
         }
     });
 
-    controllers.controller('ProfileController', ['$location', '$window', 'ProfileService', '$cookies',
-        function ProfileCtrl($location, $window, ProfileService, $cookies){
+    controllers.controller('ProfileController', ['$location', '$window', '$stateParams', 'ProfileService', 'AuthenticationService', '$cookies',
+        function ProfileCtrl($location, $window, $stateParams, ProfileService, AuthenticationService, $cookies) {
           var vm = this;
           console.log("profile controller");
-
-          vm.getProfile = function(login){
-              var token = $cookies.get('token');
-              alert('token:' + token);
-
-              if(login !== undefined){
-                  ProfileService.getProfile(login, token).success(function(data){
-                
-                  vm.displayName = data.user.firstName + ' ' + data.user.lastName
-                  vm.login = data.user.login
-                  // tu jak sie uda.
-                  // w data jest odpowiedz z serwera
-              }).error(function(status, data){
-                // tu kod jak sie post nie uda
-
-            });
-          }
           
-        }
-       
+          var token = $cookies.get('token');
+          var loginToDisplay = $stateParams.login;
+          
+          // gdy nie ma loginu w adresie -> wyświetl profil zalogowanego usera
+          if(loginToDisplay === '') {
+            loginToDisplay = AuthenticationService.getUser();
+          }
 
-    }]);
+              //alert('token:' + token);
+
+          ProfileService.getProfile(loginToDisplay, token).success(function(data){
+            vm.displayName = data.user.firstName + ' ' + data.user.lastName
+            vm.login = data.user.login
+          }).error(function(status, data){
+            vm.userNotFound = true;
+          });
+      }
+    ]);
 });

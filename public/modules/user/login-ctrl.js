@@ -103,8 +103,8 @@ define(['./../module'], function (controllers) {
 
 
     controllers.controller('LoginController', ['$location', '$window', 'UserService', 'AuthenticationService',
-        '$cookies',
-        function LoginCtrl($location, $window, UserService, AuthenticationService, $cookies){
+        '$cookies', '$state',
+        function LoginCtrl($location, $window, UserService, AuthenticationService, $cookies, $state){
 
             var vm = this;
             //alert("login controller");
@@ -117,7 +117,7 @@ define(['./../module'], function (controllers) {
                         AuthenticationService.setLoggedInFlag(true);
                         $cookies.put('token', data.token);
                         $cookies.put('login', data.login);
-                        $location.path("/");
+                        $state.go('app.start');
                     }).error(function(data, status) {
                         vm.credsOk = false;
                         console.log(data);

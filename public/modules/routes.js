@@ -3,7 +3,8 @@ define(['app'], function (app) {
     return app.config(function($stateProvider) {
         $stateProvider
             .state('index', {
-                url:"/",
+                url:"",
+                templateUrl: 'modules/welcome/welcome.html',
                 data: {
                     requireLogin: false
                 }
@@ -27,16 +28,34 @@ define(['app'], function (app) {
                 }
             })
             .state('app', {
-                url:"/app",
+                url:"",
                 controllerAs: 'vm',
                 data: {
                     requireLogin: true
                 }
             })
+            .state('app.start', {
+                url: '/start',
+                templateUrl: '/modules/start/start.html',
+                controller: 'StartController',
+                contollerAs: 'vm'
+            })
             .state('app.profile', {
-                url: '/profile',
+                url: '/profile/:login',
                 templateUrl: 'modules/user/profile.html',
                 controller: 'ProfileController',
+                controllerAs: 'vm'
+            })
+            .state('app.trip', {
+                url: '/trip',
+                templateUrl: 'modules/trip/trip.html',
+                controller: 'TripController',
+                controllerAs: 'vm'
+            })
+			 .state('app.addtrip', {
+                url: '/addtrip',
+                templateUrl: 'modules/trip/addtrip.html',
+                controller: 'TripController',
                 controllerAs: 'vm'
             })
             .state('app.test', {

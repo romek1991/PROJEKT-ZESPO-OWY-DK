@@ -1,13 +1,47 @@
-<div class="well">
+
+<div ng-if="vm.userNotFound">
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <h3 class="panel-title">Błąd</h3>
+    </div>
+    <div class="panel-body">
+      <center>
+        <h3>USER NOT FOUND!</h3>
+      </center>
+    </div>
+  </div>
+</div>
+<div ng-if="!vm.userNotFound">
+  <div class="column col-sm-12 col-lg-12">
     <div class="panel panel-default">
       <div class="panel-body">
-        <div class="column col-sm-8 col-lg-8">
-          <h2>{{vm.displayName}}</h2> <h3>{{vm.login}}</h3>
-          <button class="button btn-primary" ng-click="vm.getProfile('kozak')">Get Kozak</button>
-        </div>
-        <div class="column col-sm-4 col-lg-4" style="text-align: right;">
-          <img src="/img/user.jpg" width="200" height="200"/>
-        </div>
+        <img src="/img/user.png" class="pull-right" width="200" height="200"/>
+        <h2>{{vm.displayName}}</h2> <h3>{{vm.login}}</h3>
       </div>
     </div>
+  </div>
+  
+  <div class="column col-sm-12 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Wycieczki</h3>
+      </div>
+      <div class="panel-body">
+        <p>Tutaj miejsce na wypisanie wycieczek danego usera.</p>
+        <p>Na początek można w liście</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="column col-sm-12 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Zdjęcia</h3>
+      </div>
+      <div class="panel-body">
+        <p>Tutaj mogą być np. zdjęcia.</p>
+        <p>Na kolejny sprint</p>
+      </div>
+    </div>
+  </div>
 </div>
