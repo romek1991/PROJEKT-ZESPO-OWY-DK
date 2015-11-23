@@ -5,6 +5,12 @@ define(['./module'], function (controllers) {
         function (AuthenticationService, $cookies, $scope, $state) {
         var mCtrl = this;
 
+        if(!(typeof $cookies.get('token') === 'undefined')){
+            AuthenticationService.setLoggedInFlag(true);
+            AuthenticationService.setUser($cookies.get('login'));
+        }
+
+
 
         $scope.$watch(function(){return AuthenticationService.getLoggedInFlag()},
             function(value){

@@ -18,7 +18,12 @@ define(['./../module'], function (controllers) {
                 return config;
             },
 
-            requestError: function(rejection) {
+            responseError: function(rejection) {
+                if(rejection.status == 401 || rejection.status == 403){
+                    AuthenticationService.setLoggedInFlag(false);
+                    $cookies.remove('token');
+                    $cookies.remove('login');
+                }
                 return $q.reject(rejection);
             },
 
@@ -126,7 +131,7 @@ define(['./../module'], function (controllers) {
                 }
             }
 
-
+/*
             vm.logout = function(){
                 vm.credsOk = true;
                 if (AuthenticationService.getUser()) {
@@ -138,7 +143,7 @@ define(['./../module'], function (controllers) {
                     $location.path("/");
                 }
             };
-
+*/
 
             vm.getUsers = function() {
                 UserService.getUsers().success(function(data){
