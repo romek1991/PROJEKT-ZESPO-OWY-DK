@@ -5,13 +5,17 @@
 define(['./../module'], function (controllers) {
     'use strict';
 
-    controllers.controller('StartController', ['$location', '$window', '$stateParams', 'ProfileService', 'AuthenticationService', '$cookies',
-        function ProfileCtrl($location, $window, $stateParams, ProfileService, AuthenticationService, $cookies) {
-          var vm = this;
-          console.log("profile controller");
+    controllers.controller('StartController', ['$location', '$window', 'AuthenticationService', '$cookies',
+        function StartCtrl($location, $window, AuthenticationService, $cookies) {
+            var vm = this;
+            console.log("start controller");
+            
+            var token = $cookies.get('token');
+            var user = AuthenticationService.getUser();
+            console.log(user.firstName);
+
+            vm.firstName = user.login;
           
-          var token = $cookies.get('token');
-          
-      }
+        }
     ]);
 });

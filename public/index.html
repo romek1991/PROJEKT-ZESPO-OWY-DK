@@ -75,11 +75,14 @@
                               <li>
                                 <a href="#postModal" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Post</a>
                               </li>-->
-                            <li>
-                                <a ng-if="!mCtrl.isLogged" ui-sref="index"><span class="badge">TripLogger</span></a>
+                            <li ng-if="!mCtrl.isLogged">
+                                <a ui-sref="index"><span class="badge">TripLogger</span></a>
                             </li>
-							<li ng-if="mCtrl.isLogged" ng-cloak>
-                                <a ui-sref="app.addtrip"><span class="badge">Dodaj Wycieczke</span></a>
+                            <li ng-if="mCtrl.isLogged">
+                                <a ui-sref="app.start"><span class="badge">Start</span></a>
+                            </li>
+                            <li ng-if="mCtrl.isLogged" ng-cloak>
+                                <a ui-sref="app.addtrip"><span class="badge">Dodaj Wycieczkę</span></a>
                             </li>
                             <li ng-if="mCtrl.isLogged" ng-cloak>
                                 <a ui-sref="app.trip"><span class="badge">Wycieczka</span></a>
