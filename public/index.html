@@ -69,12 +69,12 @@
                             </div>
                         </form>
                         <ul class="nav navbar-nav">
-                            <!--  <li>
+                         <!-- <li>
                                 <a href="#"><i class="glyphicon glyphicon-home"></i> Home</a>
                               </li>
                               <li>
                                 <a href="#postModal" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Post</a>
-                              </li>-->
+                              </li> -->
                             <li ng-if="!mCtrl.isLogged">
                                 <a ui-sref="index"><span class="badge">TripLogger</span></a>
                             </li>
@@ -90,9 +90,10 @@
                             <li ng-if="!mCtrl.isLogged">
                                 <a ui-sref="signup"><span class="badge">Rejestracja</span></a>
                             </li>
+                            <!--
                             <li>
                                 <a ui-sref="app.test"><span class="badge">AppTest</span></a>
-                            </li>
+                            </li> -->
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li ng-if="mCtrl.isLogged" ng-cloak>
@@ -104,12 +105,12 @@
                                 <a ui-sref="index" ng-if="mCtrl.isLogged" ng-click="mCtrl.logout()" ng-cloak><span class="badge">Wyloguj</span></a>
                                 <!--<a ui-sref="index" ng-if="mCtrl.isLogged" ng-click="mCtrl.logout()" ng-cloak><span class="badge">Wyloguj</span></a>-->
                             </li>
-
+                            <!-- do testowania tokenow
                             <li>
-                                <!-- do testowania tokenow -->
+                               
                                 <a href="" ng-click="vm.getUsers()"><span class="badge">Users</span></a>
 
-                            </li>
+                            </li>-->
                         </ul>
 
 

@@ -5,11 +5,20 @@
 define(['./../module'], function (controllers) {
   'use strict';
   
+  
   controllers.factory('TripService', function($http) {
     var baseUrl = "http://localhost:3000";
     return {
       getComments: function(tripId, token) {
         return $http.get(baseUrl + '/trip/' + tripId + '/comments', {
+          headers: {
+            'x-access-token': token
+          }
+        });
+      },
+      
+      getTrip: function(tripId, token) {
+        return $http.get(baseUrl + '/trip/' + tripId, {
           headers: {
             'x-access-token': token
           }
@@ -46,7 +55,7 @@ define(['./../module'], function (controllers) {
       console.log("trip controller");
       
       var token = $cookies.get('token');
-      var tripId = 'TERAZ BĘDZIE KONFLIKT!';
+      var tripId = $stateParams.tripId;
       
 	  
       vm.addTrip = function(name, description)  {
@@ -64,6 +73,21 @@ define(['./../module'], function (controllers) {
         }
         
       }
+      
+      var tripToDisplay= $stateParams.tripId;
+      
+      if(tripToDisplay === ''){
+        vm.tripNotFound = true;
+      }else{
+        TripService.getTrip(tripId, token).success(function(data){
+          vm.displayTripName = data.trip.name
+          vm.tripDescription = data.trip.description
+        }).error(function(status, data){
+          vm.tripNotFound = true;
+        });
+      }
+      
+      
 		
       var refreshComments = function() {
         TripService.getComments(tripId, token).success(function(data) {            

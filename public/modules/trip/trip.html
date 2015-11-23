@@ -1,12 +1,33 @@
-<div class="column col-sm-12 col-lg-8">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <h3>Trip!</h3>
-      <p> Miejsce na widok wycieczki </p>
+<div class="column col-sm-12 col-lg-12" ng-if="vm.tripNotFound">
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <h3 class="panel-title"><strong>Błąd</strong></h3>
     </div>
+          
+    <div class="panel-body">
+        <p>TRIP NOT FOUND</p>
+    </div>
+
+
+    
   </div>
 </div>
 
+<div ng-if="!vm.tripNotFound">
+<div class="column col-sm-12 col-lg-8" >
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title"><strong>{{vm.displayTripName}}</strong></h3>
+    </div>
+          
+    <div class="panel-body">
+        <p>{{vm.tripDescription}}</p>
+    </div>
+
+
+    
+  </div>
+</div>
 <div class="column col-sm-12 col-lg-4">
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -15,8 +36,8 @@
     <div class="panel-body">
       <div class="media" ng-repeat="comment in vm.comments">
         <div class="media-left pull-left">
-          <a href="#">
-            <img class="media-object" src="/img/user.png" width="64" height="64">
+          <a href="#" ui-sref="app.profile">
+            <img class="media-object" src="/img/user.png" width="48" height="48">
           </a>
         </div>
         <div class="media-body">
@@ -27,8 +48,8 @@
       
       <div class="media">
         <div class="media-left pull-left">
-          <a href="#">
-            <img class="media-object" src="/img/user.png" width="64" height="64">
+          <a href="#" ui-sref="app.profile">
+            <img class="media-object" src="/img/user.png" width="48" height="48">
           </a>
         </div>
         <div class="media-body">
@@ -38,5 +59,8 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>       
+
+ 
+</div>
 </div>
