@@ -46,7 +46,7 @@ define(['./../module'], function (controllers) {
       console.log("trip controller");
       
       var token = $cookies.get('token');
-      var tripId = '5647e897572538ec27750e0c';
+      var tripId = 'TERAZ BĘDZIE KONFLIKT!';
       
 	  
       vm.addTrip = function(name, description)  {
