@@ -7,7 +7,9 @@ define(['./module'], function (controllers) {
 
         if(!(typeof $cookies.get('token') === 'undefined')){
             AuthenticationService.setLoggedInFlag(true);
-            AuthenticationService.setUser($cookies.get('login'));
+            var user = JSON.parse($cookies.get('user'));
+            console.log(user);
+            AuthenticationService.setUser(user);
         }
 
 
@@ -23,7 +25,7 @@ define(['./module'], function (controllers) {
             AuthenticationService.setLoggedInFlag(false);
             if ($cookies.get('token')) {
                 $cookies.remove('token');
-                $cookies.remove('login');
+                $cookies.remove('user');
                 $state.go('index');
             }
         };

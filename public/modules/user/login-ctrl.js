@@ -42,7 +42,6 @@ define(['./../module'], function (controllers) {
 
         function set(user) {
             auth.user = user;
-            console.log('auth.user:' + auth.user);
         }
         function get() {
             return auth.user;
@@ -118,10 +117,11 @@ define(['./../module'], function (controllers) {
                 //alert("costam");
                 if (username !== undefined && password !== undefined) {
                     UserService.logIn(username, password).success(function(data) {
-                        AuthenticationService.setUser(data.login);
+                        AuthenticationService.setUser(data.user);
                         AuthenticationService.setLoggedInFlag(true);
                         $cookies.put('token', data.token);
-                        $cookies.put('login', data.login);
+                        $cookies.put('user', JSON.stringify(data.user));
+                        console.log($cookies.get('user'));
                         $state.go('app.start');
                     }).error(function(data, status) {
                         vm.credsOk = false;

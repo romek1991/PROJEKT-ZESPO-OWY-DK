@@ -29,7 +29,8 @@ define(['./../module'], function (controllers) {
           
           // gdy nie ma loginu w adresie -> wyświetl profil zalogowanego usera
           if(loginToDisplay === '') {
-            loginToDisplay = AuthenticationService.getUser();
+            var user = AuthenticationService.getUser();
+            loginToDisplay = user.login;
           }
 
               //alert('token:' + token);
