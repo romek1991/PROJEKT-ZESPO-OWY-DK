@@ -219,3 +219,20 @@ exports.getUserTripsHeaders = function(req, res) {
     });
   });
 }
+
+exports.getNewestTripsHeaders = function(req, res) {
+  Trip.find({}, 'name createdDate startDate endDate author publicAccess')
+  .populate('author', 'firstName lastName')
+  .sort('-createdDate')
+  .limit(10)
+  .exec(function(err, newestTrips) {
+    if (err) {
+      return res.status(500).json({
+        message: "Unable to get trips for user."
+      });
+    }      
+    return res.json({
+      trips: newestTrips
+    });
+  });
+}

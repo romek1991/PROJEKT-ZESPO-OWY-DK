@@ -38,7 +38,7 @@ define(['app'], function (app) {
                 url: '/start',
                 templateUrl: '/modules/start/start.html',
                 controller: 'StartController',
-                contollerAs: 'vm'
+                controllerAs: 'vm'
             })
             .state('app.profile', {
                 url: '/profile/:login',

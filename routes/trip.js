@@ -27,6 +27,10 @@ router.post('/', function(req, res, next) {
   TripManager.addTrip(req, res);
 });
 
+router.get('/newest', function(req, res, next) {
+  TripManager.getNewestTripsHeaders(req, res);
+});
+
 router.param('tripId', function(req, res, next, param) {
   console.log('param tripId: ' + param);
   req.tripId = param;
