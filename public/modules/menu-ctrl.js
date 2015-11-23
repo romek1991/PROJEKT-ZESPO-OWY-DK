@@ -10,6 +10,7 @@ define(['./module'], function (controllers) {
             var user = JSON.parse($cookies.get('user'));
             console.log(user);
             AuthenticationService.setUser(user);
+            mCtrl.user = user;
         }
 
 

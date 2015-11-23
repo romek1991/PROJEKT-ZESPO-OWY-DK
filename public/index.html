@@ -26,9 +26,31 @@
                 </ul>
 
                 <ul class="nav hidden-xs" id="lg-menu">
-                    <li class="active"><a sref="index">Start</a></li>
-                    <li><a ui-sref="profile"> Profil</a></li>
-                    <li><a ui-sref="trips"> Moje Podróże</a></li>
+                    <br/>
+                    <br/>
+                    <div class="text-center" ng-if="mCtrl.isLogged">
+                      <img ng-src="/img/{{mCtrl.user.login}}.jpg" class="img-circle" width="100" height="100">
+                      <h4>{{mCtrl.user.firstName + ' ' + mCtrl.user.lastName}}</h4>
+                    </div>
+                    <br/>
+                    <br/>
+                    <li ng-if="!mCtrl.isLogged">
+                        <a ui-sref="index">TripLogger</a>
+                    </li>
+                    <li ng-if="mCtrl.isLogged">
+                        <a ui-sref="app.start">Start</a>
+                    </li>
+                    <li ng-if="mCtrl.isLogged" ng-cloak>
+                        <a ui-sref="app.addtrip">Dodaj Wycieczkę</a>
+                    </li>
+                    <!--
+                    <li ng-if="mCtrl.isLogged" ng-cloak>
+                        <a ui-sref="app.trip"><span class="badge">Wycieczka</span></a>
+                    </li>
+                    -->
+                    <li ng-if="!mCtrl.isLogged">
+                        <a ui-sref="signup">Rejestracja</a>
+                    </li>
                 </ul>
                 <ul class="list-unstyled hidden-xs" id="sidebar-footer">
                     <li>
@@ -38,9 +60,23 @@
 
                 <!-- tiny only nav-->
                 <ul class="nav visible-xs" id="xs-menu">
-                    <li><a ui-sref="index" class="text-center"></a></li>
-                    <li><a ui-sref="profile" class="text-center"></a></li>
-                    <li><a ui-sref="trips" class="text-center"></a></li>
+                    <li ng-if="!mCtrl.isLogged">
+                        <a ui-sref="index">TripLogger</a>
+                    </li>
+                    <li ng-if="mCtrl.isLogged">
+                        <a ui-sref="app.start">Start</a>
+                    </li>
+                    <li ng-if="mCtrl.isLogged" ng-cloak>
+                        <a ui-sref="app.addtrip">Dodaj Wycieczkę</a>
+                    </li>
+                    <!--
+                    <li ng-if="mCtrl.isLogged" ng-cloak>
+                        <a ui-sref="app.trip"><span class="badge">Wycieczka</span></a>
+                    </li>
+                    -->
+                    <li ng-if="!mCtrl.isLogged">
+                        <a ui-sref="signup">Rejestracja</a>
+                    </li>
                 </ul>
 
             </div>
