@@ -47,7 +47,7 @@ define(['app'], function (app) {
                 controllerAs: 'vm'
             })
             .state('app.trip', {
-                url: '/trip',
+                url: '/trip/:tripId',
                 templateUrl: 'modules/trip/trip.html',
                 controller: 'TripController',
                 controllerAs: 'vm'

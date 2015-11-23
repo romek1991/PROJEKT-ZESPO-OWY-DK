@@ -4,7 +4,7 @@
  
 define(['./../module'], function (controllers) {
   'use strict';
-  var tripId = '565229d904d661d001d3261';
+  
   
   controllers.factory('TripService', function($http) {
     var baseUrl = "http://localhost:3000";
@@ -55,7 +55,7 @@ define(['./../module'], function (controllers) {
       console.log("trip controller");
       
       var token = $cookies.get('token');
-      var tripId = '565229d904d661d001d3261';
+      var tripId = $stateParams.tripId;
       
 	  
       vm.addTrip = function(name, description)  {
@@ -74,12 +74,20 @@ define(['./../module'], function (controllers) {
         
       }
       
-      TripService.getTrip(tripId, token).success(function(data){
-        vm.displayTripName = data.trip.name
-        vm.tripDescription = data.trip.description
-      }).error(function(status, data){
+      var tripToDisplay= $stateParams.tripId;
+      
+      if(tripToDisplay === ''){
         vm.tripNotFound = true;
-      });
+      }else{
+        TripService.getTrip(tripId, token).success(function(data){
+          vm.displayTripName = data.trip.name
+          vm.tripDescription = data.trip.description
+        }).error(function(status, data){
+          vm.tripNotFound = true;
+        });
+      }
+      
+      
 		
       var refreshComments = function() {
         TripService.getComments(tripId, token).success(function(data) {            
