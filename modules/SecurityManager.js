@@ -71,7 +71,13 @@ exports.login = function(req, res) {
         // return the information including token as JSON
         console.log('[SecurityManager.login] User ' + user.login + ' logged in.');
         res.json({
-          login: user.login,
+          user: {
+            login: user.login,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            admin: user.admin
+          },
           token: token
         });
       }   
