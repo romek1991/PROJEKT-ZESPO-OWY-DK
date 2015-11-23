@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 mongoose.connect(config.database);
 
 app.set('superSecret', config.secret);
-app.set('tokenExpiresIn', 15);
+app.set('tokenExpiresIn', 600);
 
 app.use('/', routes);
 app.use('/user', user);
