@@ -120,7 +120,7 @@ define(['./../module'], function (controllers) {
                         AuthenticationService.setUser(data.user);
                         AuthenticationService.setLoggedInFlag(true);
                         $cookies.put('token', data.token);
-                        $cookies.put('user', data.user);
+                        $cookies.put('user', JSON.stringify(data.user));
                         console.log($cookies.get('user'));
                         $state.go('app.start');
                     }).error(function(data, status) {

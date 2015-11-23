@@ -7,7 +7,9 @@ define(['./module'], function (controllers) {
 
         if(!(typeof $cookies.get('token') === 'undefined')){
             AuthenticationService.setLoggedInFlag(true);
-            AuthenticationService.setUser($cookies.get('user'));
+            var user = JSON.parse($cookies.get('user'));
+            console.log(user);
+            AuthenticationService.setUser(user);
         }
 
 

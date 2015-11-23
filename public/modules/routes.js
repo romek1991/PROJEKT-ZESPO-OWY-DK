@@ -52,7 +52,7 @@ define(['app'], function (app) {
                 controller: 'TripController',
                 controllerAs: 'vm'
             })
-			 .state('app.addtrip', {
+            .state('app.addtrip', {
                 url: '/addtrip',
                 templateUrl: 'modules/trip/addtrip.html',
                 controller: 'TripController',
