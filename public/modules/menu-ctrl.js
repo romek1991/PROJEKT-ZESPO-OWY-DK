@@ -12,6 +12,7 @@ define(['./module'], function (controllers) {
             }
         );
 
+
         mCtrl.logout = function () {
             AuthenticationService.setLoggedInFlag(false);
             if ($cookies.get('token')) {
