@@ -4,6 +4,7 @@
 */
 
 var User = require('../models/user');
+var Trip = require('../models/trip');
 
 exports.signup = function(req, res) {
   if (!req.body.login || !req.body.password || !req.body.email || !req.body.firstName || !req.body.lastName) {
@@ -74,3 +75,57 @@ exports.getUserById = function(id, next) {
     }
   });
 }
+
+
+
+exports.removeUser = function(req, res){
+
+    console.log('findTripByID: ' + req.body.id);
+    console.log('remove trip - trip id: ' + req.tripId);
+    var currentUserId;
+    if(req.user.login == req.login){
+      User.findOne({login: req.login}, function(err, user){
+        console.log('looking for user: '+ user);
+        currentUserId = user._id;
+        typeof user;
+
+        console.log('current user id: ' + user._id);
+
+        Trip.find({author: currentUserId}, 'id name createdDate startDate endDate publicAccess', function(err, userTrips) {
+              console.log(userTrips);
+              console.log("/////////////////////////");
+              userTrips.forEach(function(entry){
+                Trip.findOneAndRemove({ _id: entry._id }, function(err){
+                  console.log('Trip removed successfully.');
+                });
+
+              });
+
+              User.findOneAndRemove({login: req.login}, function(err){
+                console.log('Trip removed successfully.');
+                console.log('Error message: ' + err);
+
+              });
+              res.json({
+                message: "The user and its trips has been removed."
+              });
+
+            }
+        );
+      });
+    }
+    else {
+      res.status(403).json({
+        message: "Not authorized."
+      });
+
+    }
+
+
+
+
+
+
+
+}
+
