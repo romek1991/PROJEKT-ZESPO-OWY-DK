@@ -5,12 +5,12 @@ define(['./module'], function (controllers) {
         function (AuthenticationService, UserService, $cookies, $scope, $state) {
         var mCtrl = this;
 
+        mCtrl.getUser = function(){return JSON.parse($cookies.get('user'));}
+
         if(!(typeof $cookies.get('token') === 'undefined')){
             AuthenticationService.setLoggedInFlag(true);
-            var user = JSON.parse($cookies.get('user'));
-            console.log('zmartwychwstanie: ' + user);
-            AuthenticationService.setUser(user);
-            mCtrl.user = user;
+            mCtrl.user = mCtrl.getUser();
+            AuthenticationService.setUser(mCtrl.user);
         }
 
 

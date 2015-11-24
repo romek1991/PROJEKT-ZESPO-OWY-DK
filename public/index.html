@@ -29,8 +29,8 @@
                     <br/>
                     <br/>
                     <div class="text-center" ng-if="mCtrl.isLogged">
-                      <img ng-src="/img/{{mCtrl.user.login}}.jpg" class="img-circle" width="100" height="100">
-                      <h4>{{mCtrl.user.firstName + ' ' + mCtrl.user.lastName}}</h4>
+                      <img ng-src="/img/{{mCtrl.getUser().login}}.jpg" class="img-circle" width="100" height="100" ng-cloak>
+                      <h4 ng-cloak>{{mCtrl.getUser().firstName + ' ' + mCtrl.getUser().lastName}}</h4>
                     </div>
                     <br/>
                     <br/>
