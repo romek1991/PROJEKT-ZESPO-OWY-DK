@@ -27,23 +27,5 @@ define(['./module'], function (controllers) {
         };
 
 
-        mCtrl.removeUser2 = function(){
-            console.log('MENU CONTROLLER: remove user!');
-            $state.go('index');
-            /*
-             $http.delete(baseUrl + /user/ + loginToDisplay).success(function(data){
-             console.log('function(data): '+ data );
-             UserService.logOut();
-             //window.location.reload();
-
-             }).error(function(data, status){
-             console.log('function(data, status): '+ data + " status: " + status);
-             })
-             */
-
-
-        };
-
-
     }]);
 });
