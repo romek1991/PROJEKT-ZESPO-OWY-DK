@@ -31,6 +31,7 @@ exports.verifyToken = function(req, res, next) {
         UserManager.getUserById(decoded.userId, function(user) {
           if (user) {
             req.user = user;
+            console.log("XXXXXXXXX: " + user.login);
             next();
           }
         });

@@ -30,8 +30,8 @@ define(['./../module'], function (controllers) {
 
 
     controllers.controller('ProfileController', ['$location', '$window', '$stateParams', 'ProfileService', 'AuthenticationService',
-        'UserService', '$cookies', '$http', '$state',
-        function ProfileCtrl($location, $window, $stateParams, ProfileService, AuthenticationService, UserService, $cookies, $http, $state) {
+        'UserService', '$cookies', '$http', '$state', '$scope',
+        function ProfileCtrl($location, $window, $stateParams, ProfileService, AuthenticationService, UserService, $cookies, $http, $state, $scope) {
             var vm = this;
             var baseUrl = "http://localhost:3000";
 
@@ -49,20 +49,10 @@ define(['./../module'], function (controllers) {
                 })
             };
 
-            vm.removeUser = function(){
-                console.log('remove user!');
-                $http.delete(baseUrl + /user/ + AuthenticationService.getUser().login).success(function(data){
-                    console.log('function(data): '+data );
-                    UserService.logOut();
-                    window.location.reload();
-
-                }).error(function(data, status){
-                    console.log('function(data, status): '+ data + " status: " + status);
-                })
 
 
 
-            };
+
 
             // gdy nie ma loginu w adresie -> wyświetl profil zalogowanego usera
             if(loginToDisplay === '') {
@@ -81,6 +71,19 @@ define(['./../module'], function (controllers) {
             }).error(function(status, data){
                 alert(status + ': ' + data.message);
             });
+
+
+            vm.removeUser = function(){
+                jQuery('#removeUser').on('hidden.bs.modal', function () {
+                    $http.delete(baseUrl + /user/ + loginToDisplay).success(function(data){
+                        console.log('function(data): '+ data );
+                        UserService.logOut();
+                    }).error(function(data, status){
+                        console.log('function(data, status): '+ data + " status: " + status);
+                    });
+                    $state.go('index');
+                });
+            };
         }
     ]);
 });

@@ -83,6 +83,8 @@ exports.removeUser = function(req, res){
     console.log('findTripByID: ' + req.body.id);
     console.log('remove trip - trip id: ' + req.tripId);
     var currentUserId;
+    console.log('req.user.login: ' + req.user.login);
+    console.log('req.login: ' + req.login);
     if(req.user.login == req.login){
       User.findOne({login: req.login}, function(err, user){
         console.log('looking for user: '+ user);
