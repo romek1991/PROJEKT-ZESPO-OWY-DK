@@ -11,7 +11,7 @@ var UserManager = require('../modules/UserManager');
 function checkAccess(req, trip, next) {
   console.log('req.user: ' + req.user);
   console.log('trip.author: ' + trip.author);
-  if ( trip.publicAccess || ( req.user.admin || req.user._id.equals(trip.author) ) )  {
+  if (  req.user.admin || req.user._id.equals(trip.author)  )  {
     console.log('check access true');
     next(true);
   } else {
@@ -100,20 +100,21 @@ exports.updateTrip = function(req, res){
 }
 
 exports.removeTrip = function(req, res){
-  findTripById(req.body.id, function(trip) {
+  findTripById(req.tripId, function(trip) {
     console.log('findTripByID: ' + req.body.id);
-    console.log('findTripByID: ' + req.body.tripId);
+    console.log('remove trip - trip id: ' + req.tripId);
     console.log('findTripByID: ' + trip);
     if (!trip) {
-      console.error('[TripManager.updateTrip] Cannot find trip with id ' + req.body.id);
+      console.error('[TripManager.updateTrip] Cannot find trip with id ' + req.tripId);
       return res.status(500).json({
-        message: "Cannot remove trip with id " + req.body.tripId
+        message: "Cannot remove trip with id " + req.tripId
       });
     } else {
       checkAccess(req, trip, function(access) {
         if (access) {
 
-          Trip.findOneAndRemove({ _id: req.body.id }, function(err){
+
+          Trip.findOneAndRemove({ _id: req.tripId }, function(err){
             res.json({
               message: "Trip removed successfully."
             });

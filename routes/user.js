@@ -47,6 +47,14 @@ router.get('/:login', function(req, res, next) {
 
 });
 
+
+router.delete('/:login', function(req, res, next){
+  UserManager.removeUser(req, res);
+
+
+});
+
+
 /*
   GET /user/{login}/trips
   Get trips of user with given login

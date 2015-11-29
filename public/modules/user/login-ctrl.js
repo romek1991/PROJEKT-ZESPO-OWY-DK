@@ -72,7 +72,8 @@ define(['./../module'], function (controllers) {
     });
 
 
-    controllers.factory('UserService', function($http) {
+    controllers.factory('UserService', ['$http', '$cookies', '$state', 'AuthenticationService',
+        function($http, $cookies, $state, AuthenticationService) {
         var baseUrl = "http://localhost:3000";
         return {
 
@@ -95,7 +96,12 @@ define(['./../module'], function (controllers) {
             },
 
             logOut: function() {
-
+                AuthenticationService.setLoggedInFlag(false);
+                if ($cookies.get('token')) {
+                    $cookies.remove('token');
+                    $cookies.remove('user');
+                    $state.go('index');
+                }
             },
 
             getUsers: function(){
@@ -103,12 +109,12 @@ define(['./../module'], function (controllers) {
             }
 
         }
-    });
+    }]);
 
 
     controllers.controller('LoginController', ['$location', '$window', 'UserService', 'AuthenticationService',
-        '$cookies', '$state',
-        function LoginCtrl($location, $window, UserService, AuthenticationService, $cookies, $state){
+        '$cookies', '$state', '$http',
+        function LoginCtrl($location, $window, UserService, AuthenticationService, $cookies, $state, $http){
 
             var vm = this;
             //alert("login controller");
@@ -130,7 +136,19 @@ define(['./../module'], function (controllers) {
                     });
                 }
             }
+/*
+            vm.removeTrip = function(id){
+                $http.delete("http://localhost:3000", { "id": "56548be4775271318f2bbc21"}).success(function(data){
+                    alert("wiedz, ze cos sie dzieje");
 
+                }).error(function(data, status){
+
+                    alert("cos nie dziala");
+                })
+
+
+            }
+*/
 /*
             vm.logout = function(){
                 vm.credsOk = true;

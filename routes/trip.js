@@ -64,7 +64,7 @@ router.put('/', function(req, res, next) {
  Remove trip
  id:            id of the trip
 */
-router.delete('/', function(req, res, next) {
+router.delete('/:tripId', function(req, res, next) {
   TripManager.removeTrip(req, res);
 });
 

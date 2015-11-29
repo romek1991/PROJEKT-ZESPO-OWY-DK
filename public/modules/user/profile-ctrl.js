@@ -27,15 +27,33 @@ define(['./../module'], function (controllers) {
         }
     });
 
-    controllers.controller('ProfileController', ['$location', '$window', '$stateParams', 'ProfileService', 'AuthenticationService', '$cookies',
-        function ProfileCtrl($location, $window, $stateParams, ProfileService, AuthenticationService, $cookies) {
+
+
+    controllers.controller('ProfileController', ['$location', '$window', '$stateParams', 'ProfileService', 'AuthenticationService',
+        'UserService', '$cookies', '$http', '$state', '$scope',
+        function ProfileCtrl($location, $window, $stateParams, ProfileService, AuthenticationService, UserService, $cookies, $http, $state, $scope) {
             var vm = this;
+            var baseUrl = "http://localhost:3000";
+
             console.log("profile controller");
             
             var token = $cookies.get('token');
             var user = AuthenticationService.getUser();
             var loginToDisplay = $stateParams.login;
-            
+
+
+
+            vm.removeTrip = function(tripId){
+                $http.delete(baseUrl + "/trip/" + tripId).success(function(data){
+                }).error(function(data, status){
+                })
+            };
+
+
+
+
+
+
             // gdy nie ma loginu w adresie -> wyświetl profil zalogowanego usera
             if(loginToDisplay === '') {
                 loginToDisplay = user.login;
@@ -53,6 +71,19 @@ define(['./../module'], function (controllers) {
             }).error(function(status, data){
                 alert(status + ': ' + data.message);
             });
+
+
+            vm.removeUser = function(){
+                jQuery('#removeUser').on('hidden.bs.modal', function () {
+                    $http.delete(baseUrl + /user/ + loginToDisplay).success(function(data){
+                        console.log('function(data): '+ data );
+                        UserService.logOut();
+                    }).error(function(data, status){
+                        console.log('function(data, status): '+ data + " status: " + status);
+                    });
+                    $state.go('index');
+                });
+            };
         }
     ]);
 });

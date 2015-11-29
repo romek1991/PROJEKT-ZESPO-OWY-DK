@@ -86,7 +86,7 @@ define(['./../module'], function (controllers) {
 			!== undefined){
 				UserService.register(login, password, email, firstName, lastName).success(function(data){
 					
-						alert("Dziala");
+
 						//tu mam  wziasc ktory service?
 						//w sumie tu nic nie trzeba robic wg mnie, bo to tylko rejestracja. wysylasz dane, a serwer
 						//sam wie co zrobic.// to jak je wyslac
