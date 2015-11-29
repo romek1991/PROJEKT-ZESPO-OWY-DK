@@ -40,6 +40,22 @@ define(['./../module'], function (controllers) {
         return $http.post(baseUrl + '/trip', {
           'name': name,
           'description': description,
+          'publicAccess': false,  //todo : pozniej do parametru
+          headers: {
+            'x-access-token': token
+          }
+        });
+      },
+
+      updateTrip: function(id,name, description, publicAccess, token) {
+        console.log(name + ' ' + description + ' ' + token);
+        console.log("UPDATE");
+        console.log(publicAccess);
+        return $http.put(baseUrl + '/trip/', {
+          'id': id,
+          'name': name,
+          'description': description,
+          'publicAccess': publicAccess,
           headers: {
             'x-access-token': token
           }
@@ -57,10 +73,12 @@ define(['./../module'], function (controllers) {
       var token = $cookies.get('token');
       var tripId = $stateParams.tripId;
       var user = AuthenticationService.getUser();
+
+      vm.tripIsEditable = false;
       
       vm.user = user;
-      
-	  
+
+
       vm.addTrip = function(name, description)  {
         if(name !== undefined && description !== undefined ){
           TripService.addTrip(name, description, token).success(function(data){
@@ -73,7 +91,7 @@ define(['./../module'], function (controllers) {
           });
         }
         
-      }
+      };
       
       var tripToDisplay = $stateParams.tripId;
       
@@ -81,10 +99,16 @@ define(['./../module'], function (controllers) {
         vm.tripNotFound = true;
       }else{
         TripService.getTrip(tripId, token).success(function(data){
-          vm.tripName = data.trip.name
-          vm.tripDescription = data.trip.description
+          vm.tripName = data.trip.name;
+          vm.tripDescription = data.trip.description;
+          if(data.trip.author === user.id) {
+            vm.tripIsEditable = true;
+          }
+          else{
+            vm.tripIsEditable = false;
+          }
         }).error(function(status, data){
-          vm.tripNotFound = true;
+        vm.tripNotFound = true;
         });
       }
       
@@ -97,7 +121,7 @@ define(['./../module'], function (controllers) {
           vm.userNotFound = null;
         });
       }
-      
+
       vm.addComment = function() {
         if(vm.newCommentText) {
           TripService.addComment(tripId, vm.newCommentText, token).success(function(data) {
@@ -108,9 +132,18 @@ define(['./../module'], function (controllers) {
             console.error(data)
           });
         }
-      }
-      
+      };
+
       refreshComments();
+
+      vm.updateTrip = function(){
+        console.log("UPDATE");
+        TripService.updateTrip(tripId, vm.tripName, vm.tripDescription, false, token) //todo: jak wdrozymy publiczne/prywatne to parametr publicAccess wycuagnac do UI
+          .success(function(data) {
+        }).error(function(status, data){
+          alert("Bład aktualizacji " + status +" data " + data);
+        });
+      }
     }
     
   ]);

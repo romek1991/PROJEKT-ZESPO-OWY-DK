@@ -11,7 +11,7 @@ var UserManager = require('../modules/UserManager');
 function checkAccess(req, trip, next) {
   console.log('req.user: ' + req.user);
   console.log('trip.author: ' + trip.author);
-  if ( !trip.publicAccess && ( req.user.admin || req.user._id.equals(trip.author) ) )  {
+  if ( trip.publicAccess || ( req.user.admin || req.user._id.equals(trip.author) ) )  {
     console.log('check access true');
     next(true);
   } else {
@@ -72,14 +72,15 @@ exports.updateTrip = function(req, res){
     } else {
       checkAccess(req, trip, function(access) {
         if (access) {
-          updatedTrip = {
-            name: req.body.name,
-            description: req.body.description,
-            startDate: req.body.startDate,
-            endDate: req.body.endDate,
-            publicAccess: req.body.publicAccess
-          }
-          Trip.findOneAndUpdate({ _id: req.body.tripId }, updatedTrip, function(err){
+            trip.name=req.body.name;
+            trip.description=req.body.description;
+            trip.startDate=req.body.startDate;
+            trip.endDate=req.body.endDate;
+            trip.publicAccess=req.body.publicAccess;
+
+          console.log(trip);
+
+          Trip.findOneAndUpdate({ _id: req.body.id }, trip, function(err){
             if (err) {
               console.error('[TripManager.updateTrip] ERROR: ' + err);
             } else {

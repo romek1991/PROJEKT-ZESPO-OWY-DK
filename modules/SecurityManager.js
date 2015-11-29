@@ -72,6 +72,7 @@ exports.login = function(req, res) {
         console.log('[SecurityManager.login] User ' + user.login + ' logged in.');
         res.json({
           user: {
+            id: user._id,
             login: user.login,
             firstName: user.firstName,
             lastName: user.lastName,
