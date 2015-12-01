@@ -101,6 +101,7 @@ define(['./../module'], function (controllers) {
         TripService.getTrip(tripId, token).success(function(data){
           vm.tripName = data.trip.name;
           vm.tripDescription = data.trip.description;
+          vm.tripIdent = tripId;
           if(data.trip.author === user.id) {
             vm.tripIsEditable = true;
           }
