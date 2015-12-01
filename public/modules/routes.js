@@ -46,6 +46,12 @@ define(['app'], function (app) {
                 controller: 'ProfileController',
                 controllerAs: 'vm'
             })
+            .state('app.editprofile', {
+                url: '/editProfile',
+                templateUrl: 'modules/user/editProfile.html',
+                controller: 'ProfileEditController',
+                controllerAs: 'vm'
+            })
             .state('app.trip', {
                 url: '/trip/:tripId',
                 templateUrl: 'modules/trip/trip.html',

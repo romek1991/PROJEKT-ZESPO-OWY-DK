@@ -23,6 +23,18 @@ define(['./../module'], function (controllers) {
                         'x-access-token': token
                     }
                 });
+            },
+
+            updateProfile: function(login, email, firstName, lastName, token) {
+                return $http.put(baseUrl + '??', {
+                    'login': login,
+                    'email': email,
+                    'firstName': firstName,
+                    'lastName': lastName,
+                    headers: {
+                        'x-access-token': token
+                    }
+                });
             }
         }
     });
@@ -50,13 +62,12 @@ define(['./../module'], function (controllers) {
             };
 
 
-
-
-
-
             // gdy nie ma loginu w adresie -> wyświetl profil zalogowanego usera
             if(loginToDisplay === '') {
                 loginToDisplay = user.login;
+                if(loginToDisplay == user.login){   // w razie czego double check
+                    vm.canEditProfile=true;
+                }
             }
 
             ProfileService.getProfile(loginToDisplay, token).success(function(data){
