@@ -16,6 +16,10 @@
                 <div class="form-group">
                     <textarea  placeholder="Opis" rows="10" maxlength="10000" style="overflow:hidden" type="text" name="description" id="description" class="form-control" ng-model="description" required=""></textarea>
                 </div>
+                
+                <div class="form-group">
+                    <input type="checkbox" ng-model="vm.publicAccess">Public trip</input>
+                </div>
 
                 <div class="form-group">
                   <div class="input-daterange input-group" id="datepicker">
@@ -50,7 +54,7 @@
 			
              <div class="form-actions">
 			   
-                <button type="submit" class="btn btn-primary" ng-click="vm.addTrip(name, description)">Dodaj podróż</button>
+                <button type="submit" class="btn btn-primary" ng-click="vm.addTrip(name, description, publicAccess)">Dodaj podróż</button>
 				
 			 </div>
 			 
