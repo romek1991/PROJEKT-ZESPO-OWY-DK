@@ -35,12 +35,12 @@ define(['./../module'], function (controllers) {
         });
       },
       
-      addTrip: function(name, description, token) {
+      addTrip: function(name, description, publicAccess, token) {
         console.log(name + ' ' + description + ' ' + token);
         return $http.post(baseUrl + '/trip', {
           'name': name,
           'description': description,
-          'publicAccess': false,  //todo : pozniej do parametru
+          'publicAccess': publicAccess,  //todo : pozniej do parametru
           headers: {
             'x-access-token': token
           }
@@ -79,9 +79,9 @@ define(['./../module'], function (controllers) {
       vm.user = user;
 
 
-      vm.addTrip = function(name, description)  {
+      vm.addTrip = function(name, description, publicAccess)  {
         if(name !== undefined && description !== undefined ){
-          TripService.addTrip(name, description, token).success(function(data){
+          TripService.addTrip(name, description, publicAccess, token).success(function(data){
             $state.go('app.trip', {
               tripId: data.tripId
             });
@@ -102,6 +102,7 @@ define(['./../module'], function (controllers) {
           vm.tripName = data.trip.name;
           vm.tripDescription = data.trip.description;
           vm.tripIdent = tripId;
+          vm.publicAccess = data.trip.publicAccess;
           if(data.trip.author === user.id) {
             vm.tripIsEditable = true;
           }
@@ -139,7 +140,7 @@ define(['./../module'], function (controllers) {
 
       vm.updateTrip = function(){
         console.log("UPDATE");
-        TripService.updateTrip(tripId, vm.tripName, vm.tripDescription, false, token) //todo: jak wdrozymy publiczne/prywatne to parametr publicAccess wycuagnac do UI
+        TripService.updateTrip(tripId, vm.tripName, vm.tripDescription, vm.publicAccess, false, token) //todo: jak wdrozymy publiczne/prywatne to parametr publicAccess wycuagnac do UI
           .success(function(data) {
               $state.go('app.start')
         }).error(function(status, data){

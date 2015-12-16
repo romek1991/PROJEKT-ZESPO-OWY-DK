@@ -17,6 +17,7 @@
 <div class="column col-sm-12 col-lg-8" >
   
   <div class="well">
+    <img class="pull-right" ng-src="{{vm.publicAccess ? '/img/closed_lock.png' : '/img/opened_lock.png'}}"/>
     <h2>{{vm.tripName}}</h2>
     <p>{{tripHeader.fromDate ? 'od: ' + tripHeader.fromDate : '' }}</p>
     <p>{{tripHeader.toDate ? 'do: ' + tripHeader.toDate : ''}}</p>
