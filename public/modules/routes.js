@@ -70,6 +70,15 @@ define(['app'], function (app) {
                 controller: 'TripController',
                 controllerAs: 'vm'
             })
+            .state('app.error', {
+                url: '/error',
+                templateUrl: 'modules/error/error.html',
+                controller: 'ErrorController',
+                controllerAs: 'vm',
+                data: {
+                    message: "Wystąpił bład"
+                }
+            })
             .state('app.test', {
                 url:"/appTest"
             });

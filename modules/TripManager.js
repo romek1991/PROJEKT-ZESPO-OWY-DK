@@ -8,10 +8,21 @@ var Comment = require('../models/comment');
 
 var UserManager = require('../modules/UserManager');
 
-function checkAccess(req, trip, next) {
+function checkAccessForModification(req, trip, next) {
   console.log('req.user: ' + req.user);
   console.log('trip.author: ' + trip.author);
   if (  req.user.admin || req.user._id.equals(trip.author)  )  {
+    console.log('check access true');
+    next(true);
+  } else {
+    next(false);
+  }
+}
+
+function checkAccessForRead(req, trip, next) {
+  console.log('req.user: ' + req.user);
+  console.log('trip.author: ' + trip.author);
+  if ( trip.publicAccess || req.user._id.equals(trip.author) || req.user.admin )  {
     console.log('check access true');
     next(true);
   } else {
@@ -46,8 +57,8 @@ exports.getTrip = function(req, res) {
         message: "Cannot find trip with id " + req.tripId
       });
     } else {
-      checkAccess(req, trip, function(access) {
-        access=true;
+      checkAccessForRead(req, trip, function(access) {
+        //access=true;
         if(access) {
           res.json({
             trip: trip
@@ -70,7 +81,7 @@ exports.updateTrip = function(req, res){
         message: "Cannot update trip with id " + req.body.tripId
       });
     } else {
-      checkAccess(req, trip, function(access) {
+      checkAccessForModification(req, trip, function(access) {
         if (access) {
             trip.name=req.body.name;
             trip.description=req.body.description;
@@ -110,7 +121,7 @@ exports.removeTrip = function(req, res){
         message: "Cannot remove trip with id " + req.tripId
       });
     } else {
-      checkAccess(req, trip, function(access) {
+      checkAccessForModification(req, trip, function(access) {
         if (access) {
 
 

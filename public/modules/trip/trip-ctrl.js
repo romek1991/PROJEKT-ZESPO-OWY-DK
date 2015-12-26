@@ -109,8 +109,12 @@ define(['./../module'], function (controllers) {
           else{
             vm.tripIsEditable = false;
           }
-        }).error(function(status, data){
-        vm.tripNotFound = true;
+        }).error(function(data){
+          console.log('ERROR on get trip');
+
+          $state.go('app.error', {
+            message: "Brak dostępu do wycieczki!"
+          });
         });
       }
       

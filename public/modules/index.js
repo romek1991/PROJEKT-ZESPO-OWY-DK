@@ -5,5 +5,6 @@ define([
     './user/editProfile-ctrl',
     './start/start-ctrl',
     './trip/trip-ctrl',
+    './error/error-ctrl',
     './menu-ctrl'
 ], function () {});

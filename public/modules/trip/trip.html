@@ -5,7 +5,7 @@
     </div>
           
     <div class="panel-body">
-        <p>TRIP NOT FOUND</p>
+        <p>Nie znaleziono wycieczki.</p>
     </div>
 
 
@@ -13,11 +13,26 @@
   </div>
 </div>
 
-<div ng-if="!vm.tripNotFound">
+<div class="column col-sm-12 col-lg-12" ng-if="vm.accessDenied">
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <h3 class="panel-title"><strong>Błąd</strong></h3>
+    </div>
+          
+    <div class="panel-body">
+        <p>Brak dostępu do wycieczki.</p>
+    </div>
+
+
+    
+  </div>
+</div>
+
+<div ng-if="!vm.tripNotFound && !vm.accessDenied">
 <div class="column col-sm-12 col-lg-8" >
   
   <div class="well">
-    <img class="pull-right" ng-src="{{vm.publicAccess ? '/img/closed_lock.png' : '/img/opened_lock.png'}}"/>
+    <img class="pull-right" ng-src="{{vm.publicAccess ? '/img/opened_lock.png' : '/img/closed_lock.png'}}"/>
     <h2>{{vm.tripName}}</h2>
     <p>{{tripHeader.fromDate ? 'od: ' + tripHeader.fromDate : '' }}</p>
     <p>{{tripHeader.toDate ? 'do: ' + tripHeader.toDate : ''}}</p>
