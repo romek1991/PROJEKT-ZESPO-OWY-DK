@@ -97,7 +97,7 @@ define(['./../module'], function (controllers) {
       
       if(tripToDisplay === ''){
         vm.tripNotFound = true;
-      }else{
+      }else if(tripToDisplay){
         TripService.getTrip(tripId, token).success(function(data){
           vm.tripName = data.trip.name;
           vm.tripDescription = data.trip.description;
@@ -109,6 +109,7 @@ define(['./../module'], function (controllers) {
           else{
             vm.tripIsEditable = false;
           }
+          refreshComments();
         }).error(function(data){
           console.log('ERROR on get trip');
 
@@ -140,7 +141,7 @@ define(['./../module'], function (controllers) {
         }
       };
 
-      refreshComments();
+      
 
       vm.updateTrip = function(){
         console.log("UPDATE");

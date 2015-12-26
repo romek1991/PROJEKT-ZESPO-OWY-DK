@@ -17,7 +17,7 @@
         <a ui-sref="app.trip({tripId: tripHeader._id})">
           <div class="media">
             <div class="media-left">
-              <img class="media-object pull-left" src="/img/bigben.jpg" width="50" height="50">
+              <img class="media-object pull-left" ng-src="/img/avatars/{{tripHeader.author.lastName}}" width="50" height="50">
             </div>
             <div class="media-body">
               <h4 class="media-heading"><strong>{{tripHeader.name}}</strong></h4>

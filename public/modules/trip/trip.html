@@ -81,7 +81,7 @@
       <div class="media" ng-repeat="comment in vm.comments">
         <div class="media-left pull-left">
           <a href="#" ui-sref="app.profile">
-            <img class="media-object" ng-src="/img/{{comment.author.login}}.jpg" width="48" height="48">
+            <img class="media-object" ng-src="/img/avatars/{{comment.author.login}}" width="48" height="48">
           </a>
         </div>
         <div class="media-body">
@@ -94,7 +94,7 @@
       <div class="media">
         <div class="media-left pull-left">
           <a href="#" ui-sref="app.profile">
-            <img class="media-object" ng-src="/img/{{vm.user.login}}.jpg" width="48" height="48">
+            <img class="media-object" ng-src="/img/avatars/{{vm.user.login}}" width="48" height="48">
           </a>
         </div>
         <div class="media-body">
