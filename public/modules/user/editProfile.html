@@ -4,38 +4,61 @@
             <h3 class="panel-title">Edytuj Profil</h3>
         </div>
         <div class="panel-body">
-            <center>
-                <form class="form">
-                    <div class="input-group text-center">
-
-                        <div class="form-group">
-                            <input type="text" name="username" id="username" class="form-control" placeholder="Login" ng-model="vm.login" required="">
-                        </div>
-
-<!--
-                        <div class="form-group">
-                            <input type="text" name="password" id="password" class="form-control" placeholder="Hasło" ng-model="vm.password" required="">
-                        </div>
--->
-
-                        <div class="form-group">
-                            <input type="text" name="email" id="email" class="form-control" placeholder="Email" ng-model="vm.email" required="">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="text" name="name" id="name" class="form-control" placeholder="Imię" ng-model="vm.firstName" required="">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="text" name="surname" id="surname" class="form-control" placeholder="Nazwisko" ng-model="vm.lastName" required="">
-                        </div>
-
+            <div class="column col-sm-12 col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Twoje dane</h3>
                     </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary" ng-click="vm.update()">Uaktualnij</button>
+                    <div class="panel-body">
+                        <center>
+                            <form class="form">
+                                <div class="input-group text-center">
+
+                                    <div class="form-group">
+                                        <input type="text" name="username" id="username" class="form-control" placeholder="Login" ng-model="vm.login" required="">
+                                    </div>
+
+            <!--
+                                    <div class="form-group">
+                                        <input type="text" name="password" id="password" class="form-control" placeholder="Hasło" ng-model="vm.password" required="">
+                                    </div>
+            -->
+
+                                    <div class="form-group">
+                                        <input type="text" name="email" id="email" class="form-control" placeholder="Email" ng-model="vm.email" required="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" name="name" id="name" class="form-control" placeholder="Imię" ng-model="vm.firstName" required="">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" name="surname" id="surname" class="form-control" placeholder="Nazwisko" ng-model="vm.lastName" required="">
+                                    </div>
+
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary" ng-click="vm.update()">Uaktualnij</button>
+                                </div>
+                            </form>
+                        </center>
                     </div>
-                </form>
-            </center>
+                </div>
+            </div>
+            <div class="column col-sm-12 col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Twój avatar</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form method="post" enctype="multipart/form-data" action="photo/avatar">
+                          <input type="text" name="username" ng-model="vm.login">
+                          <input type="file" name="avatar">
+                          <input type="submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

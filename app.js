@@ -6,12 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var jwt = require('jsonwebtoken');
+var multer = require('multer');
 
 var config = require('./config');
 
 var routes = require('./routes/index');
 var user = require('./routes/user');
 var trip = require('./routes/trip');
+var photo = require('./routes/photo');
 var signup = require('./routes/signup');
 var login = require('./routes/login');
 
@@ -37,6 +39,7 @@ app.set('tokenExpiresIn', 60*60);
 app.use('/', routes);
 app.use('/user', user);
 app.use('/trip', trip);
+app.use('/photo', photo);
 app.use('/signup', signup);
 app.use('/login', login);
 
