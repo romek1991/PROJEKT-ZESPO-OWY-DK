@@ -120,6 +120,36 @@ exports.addPhotos = function(req, res) {
       }
     }
   });
-  
-  
 };
+
+exports.getPhotosForTrip = function(req, res) {
+  
+  if (!req.tripId) {
+    res.status(500).json({message: "No tripId provided in URL!"});
+  } else {
+  
+    Trip.findById(req.tripId, function(err, trip) {
+      if (err) {
+        console.error("[PhotoManager] ERROR: " + err);
+        res.status(500).json({message: "Error!"});
+      } else {
+        if (!trip) {
+          res.status(404).json({message: "trip doesn't exist!"});
+        } else {
+          
+          Photo.find({trip: trip}).exec(function(err, photos){
+            if (err) {
+              res.send(500).json({message: "Error while getting photos from DB!"});
+            } else {
+              res.status(200).json({photos: photos});
+            }
+          });
+          
+        }
+      }
+    });
+    
+  }
+  
+  
+}

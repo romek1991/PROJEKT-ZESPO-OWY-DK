@@ -47,7 +47,7 @@ define(['./../module'], function (controllers) {
         });
       },
 
-      updateTrip: function(id,name, description, publicAccess, token) {
+      updateTrip: function(id, name, description, publicAccess, token) {
         console.log(name + ' ' + description + ' ' + token);
         console.log("UPDATE");
         console.log(publicAccess);
@@ -56,6 +56,15 @@ define(['./../module'], function (controllers) {
           'name': name,
           'description': description,
           'publicAccess': publicAccess,
+          headers: {
+            'x-access-token': token
+          }
+        });
+      },
+      
+      getPhotos: function(tripId, token) {
+        console.log("Get photos");
+        return $http.get(baseUrl + '/photo/trip/' + tripId, {
           headers: {
             'x-access-token': token
           }
@@ -115,6 +124,14 @@ define(['./../module'], function (controllers) {
 
           $state.go('app.error', {
             message: "Brak dostępu do wycieczki!"
+          });
+        });
+        
+        TripService.getPhotos(tripId, token).success(function(data){
+          vm.photos = data.photos;
+        }).error(function(data){
+          $state.go('app.error', {
+            message: "Nie moożna pobrać zdjęć!"
           });
         });
       }

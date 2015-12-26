@@ -58,6 +58,11 @@
           <img class="thumbnail" src="/img/towerbridge.jpg" alt="...">
         </div>
       </div>
+      <div class="row">
+        <ul>
+        <li ng-repeat="photo in vm.photos"> Name: {{photo.name}}, Filename: {{photo.filename}}, Description: {{photo.description}}, Date: {{photo.createdDate}}</li>
+        </ul>
+      </div>
     </div>
   </div>
   

@@ -31,16 +31,22 @@ var uploadPhotos = multer({ storage: photoStorage });
 var TripManager = require('../modules/TripManager');
 var PhotoManager = require('../modules/PhotoManager');
 // var UserManager = require('../modules/UserManager');
-// var SecurityManager = require('../modules/SecurityManager');
+var SecurityManager = require('../modules/SecurityManager');
 
-// router.use(function(req, res, next) {
-//   SecurityManager.verifyToken(req, res, next);
-// });
+router.use(function(req, res, next) {
+  SecurityManager.verifyToken(req, res, next);
+});
+
+router.param('tripId', function(req, res, next, param) {
+  console.log('param tripId: ' + param);
+  req.tripId = param;
+  next();
+});
 
 /*
-  POST /photo/trip
+  POST /photo
   Add new photo to the trip
-    trip:         id of the trip
+    tripId:         id of the trip
     name:         name of photo
     description:  description of photo
 */
@@ -55,7 +61,7 @@ router.post('/', uploadPhotos.array('photos', 50), function (req, res, next) {
 });
 
 /*
-  POST /avatar
+  POST /photo/avatar
   Add new avatar for current user
 */
 router.post('/avatar', uploadAvatar.single('avatar'), function (req, res, next) {
@@ -66,6 +72,15 @@ router.post('/avatar', uploadAvatar.single('avatar'), function (req, res, next) 
   console.log(req.file);
   
   res.status(200).redirect('/#/profile/');
+});
+
+/*
+  GET /photo/trip/:tripId
+  Get photos objects for particular trip
+    tripId:   i
+*/
+router.get('/trip/:tripId', function (req, res, next) {
+  PhotoManager.getPhotosForTrip(req, res);
 });
 
 module.exports = router;
