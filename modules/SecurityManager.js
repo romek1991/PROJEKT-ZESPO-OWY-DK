@@ -13,6 +13,10 @@ var UserManager = require('../modules/UserManager');
 */
 exports.verifyToken = function(req, res, next) {
   var token = req.headers['x-access-token'];
+  if (!token) {  // alternative token location
+    token = req.body.token;
+  }
+
   if (!token) {
     console.log('[SecurityManager.verifyToken] No token provided.');
     return res.status(403).send({

@@ -60,7 +60,9 @@
       </div>
       <div class="row">
         <ul>
-        <li ng-repeat="photo in vm.photos"> Name: {{photo.name}}, Filename: {{photo.filename}}, Description: {{photo.description}}, Date: {{photo.createdDate}}</li>
+        <li ng-repeat="photo in vm.photos"> 
+        <img ng-src="/photo/{{photo.filename}}" width="200"/>
+        Name: {{photo.name}}, Filename: {{photo.filename}}, Description: {{photo.description}}, Date: {{photo.createdDate}}</li>
         </ul>
       </div>
     </div>

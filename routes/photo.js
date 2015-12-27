@@ -8,6 +8,10 @@ var avatarStorage = multer.diskStorage({
     cb(null, './public/img/avatars');
   },
   filename: function (req, file, cb) {
+    console.log("req.body:");
+    console.log(req.body);
+    console.log("req.user:");
+    console.log(req.user);
     cb(null, req.body.username);
   }
 });
@@ -33,9 +37,7 @@ var PhotoManager = require('../modules/PhotoManager');
 // var UserManager = require('../modules/UserManager');
 var SecurityManager = require('../modules/SecurityManager');
 
-router.use(function(req, res, next) {
-  SecurityManager.verifyToken(req, res, next);
-});
+// Security manager used directly in methods because multer firstly has to parse form
 
 router.param('tripId', function(req, res, next, param) {
   console.log('param tripId: ' + param);
@@ -43,21 +45,30 @@ router.param('tripId', function(req, res, next, param) {
   next();
 });
 
+router.param('filename', function(req, res, next, param) {
+  console.log('param filename: ' + param);
+  req.filename = param;
+  next();
+});
+
 /*
   POST /photo
   Add new photo to the trip
     tripId:         id of the trip
-    name:         name of photo
-    description:  description of photo
+    token:          token
 */
 router.post('/', uploadPhotos.array('photos', 50), function (req, res, next) {
-  console.log("in POST /photo");
-  console.log(req.body);
-  //console.log(req.user);
-  console.log(req.files);
+  
+  SecurityManager.verifyToken(req, res, function() {
+    console.log("in POST /photo");
+    console.log(req.body);
+    //console.log(req.user);
+    console.log(req.files);
 
-  PhotoManager.addPhotos(req, res);
-  //res.status(200).redirect('/#/edittrip/' + req.body.tripId);
+    PhotoManager.addPhotos(req, res);
+    //res.status(200).redirect('/#/edittrip/' + req.body.tripId);
+  });
+  
 });
 
 /*
@@ -65,22 +76,38 @@ router.post('/', uploadPhotos.array('photos', 50), function (req, res, next) {
   Add new avatar for current user
 */
 router.post('/avatar', uploadAvatar.single('avatar'), function (req, res, next) {
-  // req.file is the `avatar` file
-  // req.body will hold the text fields, if there were any
-  console.log(req.body);
-  console.log(req.user);
-  console.log(req.file);
   
-  res.status(200).redirect('/#/profile/');
+  SecurityManager.verifyToken(req, res, function() {
+    // req.file is the `avatar` file
+    // req.body will hold the text fields, if there were any
+    console.log(req.body);
+    console.log(req.user);
+    console.log(req.file);
+    res.status(200).redirect('/#/profile/');
+  });
 });
 
 /*
   GET /photo/trip/:tripId
   Get photos objects for particular trip
-    tripId:   i
+    tripId:   trip id
 */
 router.get('/trip/:tripId', function (req, res, next) {
-  PhotoManager.getPhotosForTrip(req, res);
+  SecurityManager.verifyToken(req, res, function() {
+    PhotoManager.getPhotosForTrip(req, res);
+  });
+});
+
+/*
+  GET /photo/:filename
+  Get photo with given name
+    filename:   photo name
+*/
+router.get('/:filename', function (req, res, next) {
+  // temporary public access to photos by filename
+  //SecurityManager.verifyToken(req, res, function() {
+    PhotoManager.getPhotoFile(req, res);
+  //});
 });
 
 module.exports = router;

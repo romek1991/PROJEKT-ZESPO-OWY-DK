@@ -80,6 +80,7 @@ define(['./../module'], function (controllers) {
       console.log("trip controller");
       
       var token = $cookies.get('token');
+      vm.token = token;
       var tripId = $stateParams.tripId;
       var user = AuthenticationService.getUser();
 

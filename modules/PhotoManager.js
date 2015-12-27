@@ -81,45 +81,48 @@ exports.addPhotos = function(req, res) {
     return res.status(400).json({
       message: "Request must contain files!"
     });
-  }
+  } else {
   
-  Trip.findById(req.body.tripId, function(err, trip) {
+    Trip.findById(req.body.tripId, function(err, trip) {
 
-    if (err) {
-      console.error("[PhotoManager] ERROR: " + err);
-      res.status(500).json({message: "Error!"});
-    } else {
-      if (!trip) {
-        res.status(404).json({message: "trip doesn't exist!"});
+      if (err) {
+        console.error("[PhotoManager] ERROR: " + err);
+        res.status(500).json({message: "Error!"});
       } else {
-        console.log('req.files:');
-        console.log(req.files);
-        
-        for (i in req.files) {
-          var file = req.files[i];
+        if (!trip) {
+          res.status(404).json({message: "trip doesn't exist!"});
+        } else {
+          console.log('req.files:');
+          console.log(req.files);
           
-          console.log('processing file:');
-          console.log(file);
-        
-          var newPhoto = new Photo({
-            name: file.filename,
-            filename: file.filename,
-            trip: trip
-          });
+          for (i in req.files) {
+            var file = req.files[i];
+            
+            console.log('processing file:');
+            console.log(file);
           
-          newPhoto.save(function(err) {
-            if (err) {
-              console.error('[PhotoManager.addPhotos] Unable to add photo with filename ' + file.filename);
-              console.log(err);
-            } else {
-              console.log('[PhotoManager.addPhotos] Photo ' + file.filename + ' saved successfully.');
-            }
-          });
-          
+            var newPhoto = new Photo({
+              name: file.filename,
+              filename: file.filename,
+              trip: trip
+            });
+            
+            newPhoto.save(function(err) {
+              if (err) {
+                console.error('[PhotoManager.addPhotos] Unable to add photo with filename ' + file.filename);
+                console.log(err);
+              } else {
+                console.log('[PhotoManager.addPhotos] Photo ' + file.filename + ' saved successfully.');
+              }
+            });
+            
+          }
         }
       }
-    }
-  });
+    });
+  }
+  
+  res.redirect('/#/trip/' + req.body.tripId);
 };
 
 exports.getPhotosForTrip = function(req, res) {
@@ -150,6 +153,19 @@ exports.getPhotosForTrip = function(req, res) {
     });
     
   }
-  
-  
+}
+
+exports.getPhotoFile = function(req, res) {
+  if (!req.filename) {
+    res.status(500).json({message: "No photoId provided in URL!"});
+  } else {
+    Photo.find({filename: req.filename}).exec(function(err, photo) {
+      if (err) {
+        console.error('[PhotoManager] getPhotoFile Error: ' + err);
+        res.status(500).json({message: "Error!"});
+      } else {
+        res.sendFile(req.app.get('rootDir') + '/uploads/photos/' + req.filename);
+      }
+    });
+  }
 }

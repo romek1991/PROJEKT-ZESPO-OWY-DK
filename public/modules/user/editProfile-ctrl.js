@@ -6,6 +6,7 @@ define(['./../module'], function (controllers) {
             var vm = this;
 
             var token = $cookies.get('token');
+            vm.token = token;
             var user = AuthenticationService.getUser();
 
             vm.login = user.login;

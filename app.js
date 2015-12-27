@@ -35,6 +35,7 @@ mongoose.connect(config.database);
 
 app.set('superSecret', config.secret);
 app.set('tokenExpiresIn', 60*60);
+app.set('rootDir', __dirname);
 
 app.use('/', routes);
 app.use('/user', user);
