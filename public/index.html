@@ -12,11 +12,13 @@
     <script src="js/scripts.js"></script>
     <script type="text/javascript" src="./bower_components/requirejs/require.js" data-main="./js/main.js"></script>
 
+
     <link href="css/bootstrap.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link href="css/styles.css" rel="stylesheet">
+	<link href="css/lightbox.css" rel="stylesheet">
 
 
 
@@ -62,8 +64,8 @@
                     </li>
                 </ul>
                 <ul class="list-unstyled hidden-xs" id="sidebar-footer">
-                    <li>
-                        <a ui-sref="about"><h3>O Nas</h3></a>
+                    <li id="test">
+                        <h3>O Nas</h3>
                     </li>
                 </ul>
 
@@ -338,6 +340,11 @@
 
 </div>
 
+<script>
+$( "#test" ).click(function() {
+  alert( "Handler for .click() called." );
+});
+</script>
 
 
 </body>
