@@ -35,6 +35,14 @@ define(['./../module'], function (controllers) {
                         'x-access-token': token
                     }
                 });
+            },
+            
+            resetAvatar: function(login, token) {
+              return $http.post(baseUrl + '/photo/avatar/reset', {
+                    headers: {
+                        'x-access-token': token
+                    }
+                });
             }
         }
     });

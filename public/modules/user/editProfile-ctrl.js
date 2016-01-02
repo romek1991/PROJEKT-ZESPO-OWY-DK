@@ -3,6 +3,8 @@ define(['./../module'], function (controllers) {
     controllers.controller('ProfileEditController', ['ProfileService', 'AuthenticationService',
         'UserService', '$cookies', '$http', '$state',
         function ProfileCtrl(ProfileService, AuthenticationService, UserService, $cookies, $http, $state) {
+            console.log('editProfile controller');
+            
             var vm = this;
 
             var token = $cookies.get('token');
@@ -15,7 +17,12 @@ define(['./../module'], function (controllers) {
             vm.lastName = user.lastName;
 
             vm.updateProfile = function() {
-                ProfileService.updateProfile(vm.login, vm.email, vm.firstName, vm.lastName);
+              ProfileService.updateProfile(vm.login, vm.email, vm.firstName, vm.lastName);
+            }
+            
+            vm.resetAvatar = function() {
+              ProfileService.resetAvatar(vm.login, token);
+              $state.go('app.profile');
             }
         }
     ]);

@@ -88,6 +88,16 @@ router.post('/avatar', uploadAvatar.single('avatar'), function (req, res, next) 
 });
 
 /*
+  POST /photo/avatar/reset
+  Set default avatar for authenticated user
+*/
+router.post('/avatar/reset', function (req, res, next) {
+  SecurityManager.verifyToken(req, res, function() {
+    PhotoManager.defaultAvatar(req.user.login);
+  });
+});
+
+/*
   GET /photo/trip/:tripId
   Get photos objects for particular trip
     tripId:   trip id
