@@ -40,31 +40,39 @@
   
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Zdjęcia (4)</h3>
+      <h3 class="panel-title">Zdjęcia</h3>
     </div>
           
     <div class="panel-body">
-      <div class="row">
-        <div class="col-xs-6 col-md-3">
-          <img class="thumbnail" src="/img/bigben.jpg" alt="...">
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <img class="thumbnail" src="/img/londoneye.jpg" alt="...">
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <img class="thumbnail" src="/img/buckingham.jpg" alt="...">
-        </div>
-        <div class="col-xs-6 col-md-3">
-          <img class="thumbnail" src="/img/towerbridge.jpg" alt="...">
-        </div>
-      </div>
+	
+<!--	<div class="image-row">
+		<div class="image-set">
+		  <a class="example-image-link" href="images/image-3.jpg" data-lightbox="example-set" data-title="Click the right half of the image to move forward."><img class="example-image" src="images/thumb-3.jpg" alt="Golden Gate Bridge with San Francisco in distance"></a>
+		  <a class="example-image-link" href="images/image-4.jpg" data-lightbox="example-set" data-title="Or press the right arrow on your keyboard."><img class="example-image" src="images/thumb-4.jpg" alt="Forest with mountains behind"></a>
+		  <a class="example-image-link" href="images/image-5.jpg" data-lightbox="example-set" data-title="The next image in the set is preloaded as you&apos;re viewing."><img class="example-image" src="images/thumb-5.jpg" alt="Bicyclist looking out over hill at ocean"></a>
+		  <a class="example-image-link" href="images/image-6.jpg" data-lightbox="example-set" data-title="Click anywhere outside the image or the X to the right to close."><img class="example-image" src="images/thumb-6.jpg" alt="Small lighthouse at bottom with ocean behind"></a>
+		</div>
+	</div>-->
+	<div class="image-row">
+	<div class="image-set">
+	<a href="/photo/5686ec94f0a673b8113d23b3_test - Kopia.png" class="example-image-link" data-lightbox="example-set" data-title="My caption">
+	  <img src="photo/5686ec94f0a673b8113d23b3_test - Kopia"/>
+	</a>
+	<label ng-repeat="photo in vm.photos">
+		<a ng-href="/photo/{{photo.filename}}" class="example-image-link" data-lightbox="example-set" data-title="My caption">
+		<img width="100" height="50" class="example-image" ng-src="/photo/{{photo.filename}}" alt="test"/></a>
+	</label>	
+	</div>
+	</div>
+	  
+	  <!--
       <div class="row">
         <ul>
         <li ng-repeat="photo in vm.photos"> 
         <img ng-src="/photo/{{photo.filename}}" width="200"/>
         Name: {{photo.name}}, Filename: {{photo.filename}}, Description: {{photo.description}}, Date: {{photo.createdDate}}</li>
         </ul>
-      </div>
+      </div> -->
     </div>
   </div>
   
@@ -116,3 +124,5 @@
  
 </div>
 </div>
+
+<script src="js/lightbox.js"></script>
