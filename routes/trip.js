@@ -108,4 +108,16 @@ router.get('/:tripId/comments', function(req, res, next) {
   });
 });
 
+/*
+  POST /trip/search
+  Search trips with names containing given string
+    searchString:   string to search
+*/
+router.post('/search', function(req, res, next){
+  console.log('Searching trips like: ' + req.body.searchString );
+  var trips = TripManager.searchTrips(req.body.searchString, function(trips){
+    res.json(trips);
+  });
+});
+
 module.exports = router;

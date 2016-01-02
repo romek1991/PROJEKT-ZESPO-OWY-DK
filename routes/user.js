@@ -75,4 +75,16 @@ router.get('/:login/trips', function(req, res, next) {
 
 });
 
+/*
+  POST /user/search
+  Search users with firstName or lastName containing given string
+    searchString:   string to search
+*/
+router.post('/search', function(req, res, next){
+  console.log('Searching users like: ' + req.body.searchString );
+  var users = UserManager.searchUsers(req.body.searchString, function(users){
+    res.json(users);
+  });
+});
+
 module.exports = router;

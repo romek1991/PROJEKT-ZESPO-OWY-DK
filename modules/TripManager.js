@@ -224,8 +224,6 @@ exports.getUserTripsHeaders = function(req, res) {
         });
       }
       
-      var trips
-      
       return res.json({
         trips: userTrips
       });
@@ -234,18 +232,33 @@ exports.getUserTripsHeaders = function(req, res) {
 }
 
 exports.getNewestTripsHeaders = function(req, res) {
-  Trip.find({}, 'name createdDate startDate endDate author publicAccess')
-  .populate('author', 'firstName lastName')
-  .sort('-createdDate')
-  .limit(10)
-  .exec(function(err, newestTrips) {
-    if (err) {
-      return res.status(500).json({
-        message: "Unable to get trips for user."
+  Trip
+    .find({}, 'name createdDate startDate endDate author publicAccess')
+    .populate('author', 'firstName lastName')
+    .sort('-createdDate')
+    .limit(10)
+    .exec(function(err, newestTrips) {
+      if (err) {
+        return res.status(500).json({
+          message: "Unable to get trips for user."
+        });
+      }      
+      return res.json({
+        trips: newestTrips
       });
-    }      
-    return res.json({
-      trips: newestTrips
     });
-  });
+}
+
+  
+exports.searchTrips = function(searchString, next) {
+  if (searchString=="") {
+    next([]);
+  } else {
+    Trip
+      .find({name: new RegExp('.*'+searchString+'.*', "i")})
+      .exec(function(err, trips){
+        if (err) throw err;
+        next(trips);
+      });
+  }
 }
