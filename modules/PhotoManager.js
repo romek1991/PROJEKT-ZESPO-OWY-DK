@@ -3,6 +3,8 @@
   Module contains wrappers for database operations and business logic for photos in trips
 */
 
+var fs = require('fs');
+
 var Photo = require('../models/photo');
 var Trip = require('../models/trip');
 //var Comment = require('../models/comment');
@@ -168,4 +170,9 @@ exports.getPhotoFile = function(req, res) {
       }
     });
   }
+}
+
+exports.defaultAvatar = function(login) {
+  console.log("[PhotoManager] Setting default avatar for login " + login);
+  fs.createReadStream('avatar.png').pipe(fs.createWriteStream('public/img/avatars/' + login));
 }

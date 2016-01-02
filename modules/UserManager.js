@@ -3,6 +3,8 @@
   Module contains wrappers for database operations and business logic for user profiles and accounts
 */
 
+var PhotoManager = require('../modules/PhotoManager');
+
 var User = require('../models/user');
 var Trip = require('../models/trip');
 
@@ -33,6 +35,10 @@ exports.signup = function(req, res) {
           throw err;
         }
       } else {
+        
+        // set default avatar
+        PhotoManager.defaultAvatar(req.body.login);
+        
         console.log('User saved successfully');
         res.status(200).send();
       }
@@ -122,12 +128,21 @@ exports.removeUser = function(req, res){
       });
 
     }
-
-
-
-
-
-
-
 }
 
+exports.searchUsers = function(searchString, next) {
+  if (searchString=="") {
+    next([]);
+  } else {
+    User
+      .find({$or:[
+        {firstName: new RegExp('.*'+searchString+'.*', "i")},
+        {lastName: new RegExp('.*'+searchString+'.*', "i")}
+      ]})
+      .exec(function(err, users){
+        if (err) throw err;
+        next(users);
+      });
+  }
+  
+}
