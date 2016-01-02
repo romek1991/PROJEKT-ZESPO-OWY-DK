@@ -255,7 +255,10 @@ exports.searchTrips = function(searchString, next) {
     next([]);
   } else {
     Trip
-      .find({name: new RegExp('.*'+searchString+'.*', "i")})
+      .find({$and:[
+        {name: new RegExp('.*'+searchString+'.*', "i")},
+        {publicAccess: true}
+      ]})
       .exec(function(err, trips){
         if (err) throw err;
         next(trips);
