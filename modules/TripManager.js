@@ -259,6 +259,7 @@ exports.searchTrips = function(searchString, next) {
         {name: new RegExp('.*'+searchString+'.*', "i")},
         {publicAccess: true}
       ]})
+      .populate('author', 'firstName lastName')
       .exec(function(err, trips){
         if (err) throw err;
         next(trips);
