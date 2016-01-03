@@ -108,21 +108,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="editProfile-ctrl.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="editProfile-ctrl.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/modules/user/editProfile-ctrl.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.4132901">
+              <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="editProfile.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="editProfile.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/modules/user/editProfile.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.56852794">
-              <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+            <state vertical-scroll-proportion="-11.615385">
+              <caret line="64" column="42" selection-start-line="64" selection-start-column="42" selection-end-line="64" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -207,9 +207,9 @@
         <option value="$PROJECT_DIR$/public/js/main.js" />
         <option value="$PROJECT_DIR$/public/js/app.js" />
         <option value="$PROJECT_DIR$/public/modules/trip/editTrip.html" />
-        <option value="$PROJECT_DIR$/public/modules/user/editProfile-ctrl.js" />
-        <option value="$PROJECT_DIR$/public/modules/user/editProfile.html" />
         <option value="$PROJECT_DIR$/public/modules/trip/trip-ctrl.js" />
+        <option value="$PROJECT_DIR$/public/modules/user/editProfile.html" />
+        <option value="$PROJECT_DIR$/public/modules/user/editProfile-ctrl.js" />
       </list>
     </option>
   </component>
@@ -1019,14 +1019,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/modules/user/editProfile-ctrl.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/trip/trip-ctrl.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.6666665">
@@ -1037,8 +1029,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/modules/user/editProfile.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.56852794">
-          <caret line="62" column="0" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+        <state vertical-scroll-proportion="-11.615385">
+          <caret line="64" column="42" selection-start-line="64" selection-start-column="42" selection-end-line="64" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/modules/user/editProfile-ctrl.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4132901">
+          <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
           <folding />
         </state>
       </provider>

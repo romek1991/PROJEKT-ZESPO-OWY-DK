@@ -28,13 +28,13 @@ define(['./../module'], function (controllers) {
 
 
 
-            vm.upload = function (file) {
+            vm.upload = function() {
                 console.log("test:");
-                console.log(files);
+                console.log(vm.file);
                 console.log(vm.tripIdent);
                 Upload.upload({
                     url: 'http://localhost:3000/photo/avatar',
-                    data: {username: vm.login, token: vm.token, photos: file},
+                    data: {username: vm.login, token: vm.token, avatar: vm.file},
                     method: 'POST'
                 }).then(function (resp) {
                     console.log('Success ');
