@@ -132,7 +132,7 @@ define(['./../module'], function (controllers) {
           vm.photos = data.photos;
         }).error(function(data){
           $state.go('app.error', {
-            message: "Nie moożna pobrać zdjęć!"
+            message: "Nie można pobrać zdjęć!"
           });
         });
       }

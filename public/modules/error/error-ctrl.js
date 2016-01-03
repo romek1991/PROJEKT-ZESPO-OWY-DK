@@ -9,7 +9,7 @@ define(['./../module'], function (controllers) {
     function ErrorCtrl($location, $window, $stateParams, TripService, AuthenticationService, $cookies, $state) {
       var vm = this;
       console.log($stateParams);
-      
+      vm.message = $stateParams.message;
     }  
   ]);
 });

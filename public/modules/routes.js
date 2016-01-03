@@ -71,7 +71,8 @@ define(['app'], function (app) {
                 controllerAs: 'vm'
             })
             .state('app.error', {
-                url: '/error',
+
+                url: '/error/:message',
                 templateUrl: 'modules/error/error.html',
                 controller: 'ErrorController',
                 controllerAs: 'vm',
