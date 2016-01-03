@@ -184,19 +184,34 @@ define(['./../module'], function (controllers) {
         console.log("test:");
         console.log(files);
         console.log(vm.tripIdent);
-        Upload.upload({
-          url: 'http://localhost:3000/photo',
-          data: {tripId: vm.tripIdent, token: vm.token, photos: files},
-          method: 'POST'
-        }).then(function (resp) {
-          console.log('Success ');
-        }, function (resp) {
-          console.log('Error status: ' + resp.status);
-        }, function (evt) {
-          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-          console.log('progress: ' + progressPercentage + '% ');
-        });
+
+
+        for (var i = 0; i < files.length; i++) {
+          Upload.upload({
+            url: 'http://localhost:3000/photo',
+            data: {tripId: vm.tripIdent, token: vm.token, photos: files[i]},
+            method: 'POST'
+          }).then(function (resp) {
+            console.log('Success ');
+          }, function (resp) {
+            console.log('Error status: ' + resp.status);
+          }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ');
+          });
+
+
         }
+
+      }
+
+
+
+
+
+
+
+
 
 
     }

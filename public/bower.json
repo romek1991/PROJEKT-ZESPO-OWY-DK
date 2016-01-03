@@ -17,6 +17,7 @@
 	"angular-bootstrap": "latest",
 	"ng-file-upload": "latest"
 
+
   },
 
   "ignore": [
