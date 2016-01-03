@@ -13,7 +13,9 @@
     "angular-cookies": "latest",
     "requirejs": "latest",
     "requirejs-domready": "latest",
-    "angular-ui-router": "latest"
+    "angular-ui-router": "latest",
+	"angular-bootstrap": "latest",
+	"ng-file-upload": "latest"
 
   },
 

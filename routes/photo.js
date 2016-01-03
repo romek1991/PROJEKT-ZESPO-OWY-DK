@@ -21,6 +21,8 @@ var photoStorage = multer.diskStorage({
     cb(null, './uploads/photos');
   },
   filename: function (req, file, cb) {
+    console.log(req.body.tripId);
+    console.log(req.body.token);
     cb(null, req.body.tripId + '_' + file.originalname);
   }
 });

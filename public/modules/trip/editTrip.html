@@ -38,12 +38,26 @@
                         <h3 class="panel-title">Zdjęcia</h3>
                     </div>
                     <div class="panel-body">
+
+
+                        <form name="form">
+                            <button type="submit" class="btn btn-primary" ngf-select ng-model="vm.files" ngf-multiple="true">Wybierz zdjęcia</button>
+                            <button type="submit" ng-click="vm.submit()">Wyślij</button>
+                        </form>
+
+
+<!--
+
                         <form method="post" enctype="multipart/form-data" action="/photo">
                             <input type="text" name="tripId" ng-model="vm.tripIdent">
                             <input type="text" name="token" ng-model="vm.token">
                             <input type="file" name="photos" multiple>
                             <input type="submit">
+
+
                         </form>
+
+-->
                     </div>
                 </div>
             </div>
