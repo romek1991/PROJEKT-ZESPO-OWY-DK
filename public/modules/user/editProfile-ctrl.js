@@ -46,8 +46,6 @@ define(['./../module'], function (controllers) {
                 });
             }
 
-
-
         }
     ]);
 });

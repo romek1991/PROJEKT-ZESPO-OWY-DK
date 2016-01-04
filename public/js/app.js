@@ -6,7 +6,8 @@ define([
     //'./directives/index',
     //'./filters/index',
     //'./services/index'
-    'ngFileUpload'
+    'ngFileUpload',
+    'ui.bootstrap'
 ], function (ng) {
     'use strict';
 
@@ -17,7 +18,8 @@ define([
         //'app.filters',
         //'app.directives',
         'ui.router',
-        'ngFileUpload'
+        'ngFileUpload',
+        'ui.bootstrap'
     ])
 
 });

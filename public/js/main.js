@@ -6,7 +6,8 @@ require.config({
         'ui.router' : '../bower_components/angular-ui-router/release/angular-ui-router',
         'ngCookies': '../bower_components/angular-cookies/angular-cookies',
         //'ngProgressLite': '../bower_components/ngprogress-lite/ngprogress-lite'
-        'ngFileUpload': '../bower_components/ng-file-upload/ng-file-upload'
+        'ngFileUpload': '../bower_components/ng-file-upload/ng-file-upload',
+        'ui.bootstrap': '../bower_components/angular-bootstrap/ui-bootstrap'
     },
     shim: {
  /*       ngRoute: {
@@ -29,6 +30,9 @@ require.config({
             exports : 'angular'
         },
         ngFileUpload: {
+            deps: ['angular']
+        },
+        'ui.bootstrap': {
             deps: ['angular']
         }
 
