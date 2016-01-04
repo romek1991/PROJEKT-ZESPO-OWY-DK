@@ -15,7 +15,7 @@ define(['./module'], function (controllers) {
 			if(name !== undefined && description !== undefined ){
 				UserService.addTrip(name, description).success(function(data){
 					if(data.success){
-						alert("Dziala");
+						//alert("Dziala");
 					}
 					// tu jak sie uda.
 					// w data jest odpowiedz z serwera

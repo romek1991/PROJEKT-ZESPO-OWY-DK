@@ -128,12 +128,21 @@ exports.removeUser = function(req, res){
       });
 
     }
-
-
-
-
-
-
-
 }
 
+exports.searchUsers = function(searchString, next) {
+  if (searchString=="") {
+    next([]);
+  } else {
+    User
+      .find({$or:[
+        {firstName: new RegExp('.*'+searchString+'.*', "i")},
+        {lastName: new RegExp('.*'+searchString+'.*', "i")}
+      ]})
+      .exec(function(err, users){
+        if (err) throw err;
+        next(users);
+      });
+  }
+  
+}

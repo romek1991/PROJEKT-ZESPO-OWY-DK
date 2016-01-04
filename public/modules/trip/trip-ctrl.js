@@ -74,8 +74,8 @@ define(['./../module'], function (controllers) {
     }
   });
 
-  controllers.controller('TripController', ['$location', '$window', '$stateParams', 'TripService', 'AuthenticationService', '$cookies', '$state',
-    function TripCtrl($location, $window, $stateParams, TripService, AuthenticationService, $cookies, $state) {
+  controllers.controller('TripController', ['$location', '$window', '$stateParams', 'TripService', 'AuthenticationService', '$cookies', '$state', 'Upload',
+    function TripCtrl($location, $window, $stateParams, TripService, AuthenticationService, $cookies, $state, Upload) {
       var vm = this;
       console.log("trip controller");
       
@@ -132,7 +132,7 @@ define(['./../module'], function (controllers) {
           vm.photos = data.photos;
         }).error(function(data){
           $state.go('app.error', {
-            message: "Nie moożna pobrać zdjęć!"
+            message: "Nie można pobrać zdjęć!"
           });
         });
       }
@@ -170,6 +170,51 @@ define(['./../module'], function (controllers) {
           alert("Bład aktualizacji " + status +" data " + data);
         });
       }
+
+
+
+////
+
+      vm.submit = function() {
+          vm.upload(vm.files);
+      };
+
+
+      vm.upload = function (files) {
+        console.log("test:");
+        console.log(files);
+        console.log(vm.tripIdent);
+
+
+
+        Upload.upload({
+          url: 'http://localhost:3000/photo',
+          arrayKey: '',
+          data: {tripId: vm.tripIdent, token: vm.token, photos: files},
+          method: 'POST'
+        }).then(function (resp) {
+          console.log('Success ');
+        }, function (resp) {
+          console.log('Error status: ' + resp.status);
+        }, function (evt) {
+          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+          console.log('progress: ' + progressPercentage + '% ');
+        });
+
+
+
+
+      }
+
+
+
+
+
+
+
+
+
+
     }
     
   ]);

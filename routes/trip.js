@@ -34,6 +34,7 @@ router.get('/newest', function(req, res, next) {
 router.param('tripId', function(req, res, next, param) {
   console.log('param tripId: ' + param);
   req.tripId = param;
+  console.log(next);
   next();
 });
 
@@ -45,6 +46,8 @@ router.param('tripId', function(req, res, next, param) {
 router.get('/:tripId', function(req, res, next) {
   TripManager.getTrip(req, res);
 });
+
+
 
 /*
   PUT /trip
@@ -105,6 +108,18 @@ router.get('/:tripId/comments', function(req, res, next) {
         comments: tripComments
       });
     }
+  });
+});
+
+/*
+  POST /trip/search
+  Search trips with names containing given string
+    searchString:   string to search
+*/
+router.post('/search', function(req, res, next){
+  console.log('Searching trips like: ' + req.body.searchString );
+  var trips = TripManager.searchTrips(req.body.searchString, function(trips){
+    res.json(trips);
   });
 });
 

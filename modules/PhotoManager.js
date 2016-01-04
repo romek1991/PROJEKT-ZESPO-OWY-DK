@@ -78,9 +78,11 @@ exports.removePhoto = function(req, res){
 }
 
 exports.addPhotos = function(req, res) {
-  
+  console.log('ADD PHOTOS');
   if (!req.files) { //|| !req.body.startDate || !req.body.endDate) {
+    console.log('request must contain files!');
     return res.status(400).json({
+
       message: "Request must contain files!"
     });
   } else {

@@ -2,10 +2,13 @@ define([
     'angular',
     'ui.router',
     'ngCookies',
-    './../modules/index'
+    './../modules/index',
     //'./directives/index',
     //'./filters/index',
     //'./services/index'
+    'ngFileUpload',
+    'ui.bootstrap',
+    'lightbox'
 ], function (ng) {
     'use strict';
 
@@ -15,7 +18,9 @@ define([
         'ngCookies',
         //'app.filters',
         //'app.directives',
-        'ui.router'
+        'ui.router',
+        'ngFileUpload',
+        'ui.bootstrap'
     ])
 
 });

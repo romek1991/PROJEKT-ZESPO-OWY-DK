@@ -12,18 +12,18 @@ define(['./../module'], function (controllers) {
                 //alert($cookies.get('token'));
                 config.headers = config.headers || {};
                 if ($cookies.get('token')) {
-
                     config.headers['x-access-token'] = $cookies.get('token');
                 }
                 return config;
             },
 
             responseError: function(rejection) {
-                if(rejection.status == 401 || rejection.status == 403){
+                if(rejection.status == 401){
                     AuthenticationService.setLoggedInFlag(false);
                     $cookies.remove('token');
                     $cookies.remove('login');
                 }
+
                 return $q.reject(rejection);
             },
 
@@ -136,6 +136,7 @@ define(['./../module'], function (controllers) {
                     });
                 }
             }
+
 /*
             vm.removeTrip = function(id){
                 $http.delete("http://localhost:3000", { "id": "56548be4775271318f2bbc21"}).success(function(data){

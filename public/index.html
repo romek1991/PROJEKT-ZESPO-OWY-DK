@@ -12,11 +12,13 @@
     <script src="js/scripts.js"></script>
     <script type="text/javascript" src="./bower_components/requirejs/require.js" data-main="./js/main.js"></script>
 
+
     <link href="css/bootstrap.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link href="css/styles.css" rel="stylesheet">
+	<link href="bower_components/lightbox2/dist/css/lightbox.css" rel="stylesheet">
 
 
 
@@ -62,8 +64,8 @@
                     </li>
                 </ul>
                 <ul class="list-unstyled hidden-xs" id="sidebar-footer">
-                    <li>
-                        <a ui-sref="about"><h3>O Nas</h3></a>
+                    <li id="test">
+                        <h3>O Nas</h3>
                     </li>
                 </ul>
 
@@ -107,10 +109,7 @@
                     <nav class="collapse navbar-collapse" role="navigation">
                         <form class="navbar-form navbar-left">
                             <div class="input-group input-group-sm" style="max-width:360px;">
-                                <input type="text" class="form-control" placeholder="Szukaj..." name="srch-term" id="srch-term">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-default" type="submit">Szukaj</button>
-                                </div>
+                                <input type="text" class="form-control" placeholder="Szukaj..." name="srch-term" id="srch-term" ng-model="mCtrl.searchString">
                             </div>
                         </form>
                         <ul class="nav navbar-nav">
@@ -178,6 +177,76 @@
 
                 <div class="padding">
                     <div class="full col-sm-9">
+                    
+                        <!-- searchResults -->
+                        <div ng-if="!mCtrl.searchString == ''" class="row">
+                            
+                            <div>
+                                <div class="column col-sm-12 col-lg-12" >
+                                    <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Wyniki dla "{{mCtrl.searchString}}"</h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                        <div class="column col-sm-12 col-lg-6">
+                                        
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">Użytkownicy</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="media" ng-repeat="foundUser in mCtrl.foundUsers">
+                                                    
+                                                      <div class="media-left pull-left">
+                                                        <a ui-sref="app.profile({login: foundUser.login})">
+                                                          <img class="media-object" ng-src="/img/avatars/{{foundUser.login}}" width="48" height="48">
+                                                        </a>
+                                                      </div>
+                                                      <div class="media-body">
+                                                        <a ui-sref="app.profile({login: foundUser.login})">
+                                                          <h4 class="media-heading"><strong>{{foundUser.firstName}} {{foundUser.lastName}}</strong></h4>
+                                                        </a>
+                                                      </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+                                        
+                                        <div class="column col-sm-12 col-lg-6">
+                                        
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">Wycieczki</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    
+                                                    <div class="media" ng-repeat="foundTrip in mCtrl.foundTrips">
+                                                      <div class="media-left pull-left">
+                                                        <a ui-sref="app.trip({tripId: foundTrip._id})">
+                                                          <img class="media-object" src="/img/bigben.jpg" width="48" height="48">
+                                                        </a>
+                                                      </div>
+                                                      <div class="media-body">
+                                                        <a ui-sref="app.trip({tripId: foundTrip._id})">
+                                                          <h4 class="media-heading"><strong>{{foundTrip.name}}</strong></h4>
+                                                          <em>{{foundTrip.createdDate}}</em>
+                                                          <p>{{foundTrip.author.firstName}} {{foundTrip.author.lastName}}</p>
+                                                        </a>
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <!-- content -->
                         <div class="row" ui-view>
@@ -270,6 +339,11 @@
 
 
 </div>
+
+<script>
+
+</script>
+
 
 
 
