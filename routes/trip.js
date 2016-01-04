@@ -34,6 +34,7 @@ router.get('/newest', function(req, res, next) {
 router.param('tripId', function(req, res, next, param) {
   console.log('param tripId: ' + param);
   req.tripId = param;
+  console.log(next);
   next();
 });
 
@@ -45,6 +46,8 @@ router.param('tripId', function(req, res, next, param) {
 router.get('/:tripId', function(req, res, next) {
   TripManager.getTrip(req, res);
 });
+
+
 
 /*
   PUT /trip

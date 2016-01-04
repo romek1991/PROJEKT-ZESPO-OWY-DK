@@ -7,7 +7,8 @@ define([
     //'./filters/index',
     //'./services/index'
     'ngFileUpload',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'lightbox'
 ], function (ng) {
     'use strict';
 

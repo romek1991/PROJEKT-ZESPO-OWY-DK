@@ -15,7 +15,8 @@
     "requirejs-domready": "latest",
     "angular-ui-router": "latest",
 	"angular-bootstrap": "latest",
-	"ng-file-upload": "latest"
+	"ng-file-upload": "latest",
+	"lightbox2": "latest"
 
 
   },
