@@ -25,8 +25,9 @@ define(['./../module'], function (controllers) {
                 });
             },
 
-            updateProfile: function(login, email, firstName, lastName, token) {
-                return $http.put(baseUrl + '??', {
+            updateProfile: function(id, login, email, firstName, lastName, token) {
+                return $http.put(baseUrl + '/user', {
+                    'id': id,
                     'login': login,
                     'email': email,
                     'firstName': firstName,

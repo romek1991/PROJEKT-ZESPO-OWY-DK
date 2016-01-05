@@ -17,13 +17,13 @@ define(['./../module'], function (controllers) {
             vm.lastName = user.lastName;
 
             vm.updateProfile = function() {
-              ProfileService.updateProfile(vm.login, vm.email, vm.firstName, vm.lastName);
-            }
+              ProfileService.updateProfile(user.id, vm.login, vm.email, vm.firstName, vm.lastName, token);
+            };
             
             vm.resetAvatar = function() {
               ProfileService.resetAvatar(vm.login, token);
               $state.go('app.profile');
-            }
+            };
 
 
 
