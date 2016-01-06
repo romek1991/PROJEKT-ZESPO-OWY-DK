@@ -28,14 +28,11 @@ router.get('/all', function(req, res, next) {
 });
 
 router.put('/', function(req, res, next){
-  console.log("tutaj");
   UserManager.updateUser(req, function(user) {
         if(user==null){
-          console.log("fail");
           res.status(404).json({ message: "Cannot find user with login" + req.body.id})
         }
         else{
-          console.log("succes");
           res.status(200).json({ message: "Success"});
         }
       }
