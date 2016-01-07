@@ -99,6 +99,15 @@ hr {
    color:#fff;
 }
 
+
+.thumb {
+    max-width: 150px;
+    max-height: 150px;
+    float: none;
+    position: relative;
+    top: 7px;
+}
+
 #main {
    background-color:#e9eaed;
    padding-left:0;
@@ -290,4 +299,5 @@ small.text-muted {
   #sidebar, #sidebar a, #sidebar-footer a {
     padding-left:3px;
   }
+
 }

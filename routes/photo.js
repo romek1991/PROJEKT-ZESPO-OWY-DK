@@ -60,7 +60,7 @@ router.param('filename', function(req, res, next, param) {
     token:          token
 */
 router.post('/', uploadPhotos.array('photos', 50), function (req, res, next) {
-  
+
   SecurityManager.verifyToken(req, res, function() {
     console.log("in POST /photo");
     console.log(req.body);
