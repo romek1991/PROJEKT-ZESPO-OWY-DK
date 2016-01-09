@@ -44,12 +44,12 @@
                                 <br>
                                 <legend>Dodaj Zdjęcia</legend>
 
-                                <input type="file" ngf-select ngf-multiple="true" ng-model="vm.pictures" name="file"
+                                <input type="file" ngf-select ngf-multiple="true" ng-model="vm.photos" name="file"
                                        accept="image/*" ngf-max-size="1MB"
                                        ngf-model-invalid="errorFiles">
                                 <i ng-show="picturesForm.file.$error.maxSize">File too large
                                     {{errorFiles[0].size / 1000000|number:1}}MB: max 1M</i>
-                                <li ng-repeat="pic in vm.pictures">
+                                <li ng-repeat="pic in vm.photos">
                                     <br>
                                     <img ng-show="picturesForm.file.$valid" ngf-thumbnail="pic" class="thumb">
                                     <button ng-click="vm.removeFromPhotosList($index)" ng-show="pic">Remove</button>

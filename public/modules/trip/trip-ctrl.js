@@ -88,7 +88,7 @@ define(['./../module'], function (controllers) {
       
       vm.user = user;
 
-      vm.pictures = null;
+      //vm.pictures = null;
 
 
       vm.addTrip = function(name, description, publicAccess)  {
@@ -208,12 +208,12 @@ define(['./../module'], function (controllers) {
       };
 
       vm.uploadPictures = function (tripId) {
-        if (vm.pictures && vm.pictures.length) {
+        if (vm.photos && vm.photos.length) {
           Upload.upload({
               url: 'http://localhost:3000/photo',
               arrayKey: '',
               data: {
-                tripId: tripId, token: vm.token, photos: vm.pictures
+                tripId: tripId, token: vm.token, photos: vm.photos
               },
               method: 'POST'
           }).then(function (response) {
@@ -232,7 +232,7 @@ define(['./../module'], function (controllers) {
       };
 
         vm.removeFromPhotosList = function (index) {
-            vm.pictures.splice(index, 1);
+            vm.photos.splice(index, 1);
         }
 
     }
