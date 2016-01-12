@@ -15,7 +15,7 @@ define(['app'], function (app) {
                 controller: 'LoginController',
                 controllerAs: 'vm',
                 params: {
-                    loginAfterSignup: null
+                    successfulSignup: null
                 },
                 data: {
                     requireLogin: false

@@ -113,22 +113,25 @@ define(['./../module'], function (controllers) {
 
 
     controllers.controller('LoginController', ['$location', '$window', '$stateParams', 'UserService', 'AuthenticationService',
-        '$cookies', '$state', '$http',
-        function LoginCtrl($location, $window, $stateParams, UserService, AuthenticationService, $cookies, $state, $http){
+        '$cookies', '$state', '$http', 'md5',
+        function LoginCtrl($location, $window, $stateParams, UserService, AuthenticationService, $cookies, $state, $http, md5){
 
             var vm = this;
             console.log("$stateParams:");
             console.log($stateParams);
-            if($stateParams.loginAfterSignup) {
-              vm.loginAfterSignup = $stateParams.loginAfterSignup;
+            if($stateParams.successfulSignup) {
+              vm.successfulSignup = $stateParams.successfulSignup;
             }
 
             //alert("login controller");
             vm.credsOk = true;
+            var username = vm.username;
             vm.logIn = function logIn(username, password) {
                 //alert("costam");
                 if (username !== undefined && password !== undefined) {
-                    UserService.logIn(username, password).success(function(data) {
+                    var hash = md5.createHash(password);
+                    console.log('hash:' + hash);
+                    UserService.logIn(username, hash).success(function(data) {
                         AuthenticationService.setUser(data.user);
                         AuthenticationService.setLoggedInFlag(true);
                         $cookies.put('token', data.token);

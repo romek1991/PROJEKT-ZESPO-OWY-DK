@@ -14,9 +14,10 @@ define(['./../module'], function (controllers) {
             if(login !== undefined && password !== undefined && email !== undefined && firstName !== undefined && lastName
             !== undefined){
               var hash = md5.createHash(password);
+              console.log('hash:' + hash);
               UserService.register(login, hash, email, firstName, lastName).success(function(data){
                 $state.go('login', {
-                  loginAfterSignup: login
+                  successfulSignup: true
                 });
               }).error(function(data, status){
                 vm.registrationFailed = true;
