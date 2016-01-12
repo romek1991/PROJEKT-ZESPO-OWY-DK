@@ -18,6 +18,8 @@
                                         <input disabled type="text" name="username" id="username" class="form-control"
                                                placeholder="Login" ng-model="vm.login" required="">
                                     </div>
+                                    
+                                    <div class="alert alert-info" role="alert">Login nie może zostać zmieniony.</div>
 
                                     <!--
                                                             <div class="form-group">
@@ -50,34 +52,59 @@
                         </center>
                     </div>
                 </div>
-                <div class="column col-sm-12 col-lg-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Twój avatar</h3>
-                        </div>
-                        <div class="panel-body">
+            </div>
+            <div class="column col-sm-12 col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Twój avatar</h3>
+                    </div>
+                    <div class="panel-body">
 
-                            <!--
-                            <form method="post" enctype="multipart/form-data" action="photo/avatar">
-                              <input type="text" name="username" ng-model="vm.login">
-                              <input type="text" name="token" ng-model="vm.token">
-                              <input type="file" name="avatar">
-                              <input type="submit">
-                            </form>
-                           -->
+                        <!--
+                        <form method="post" enctype="multipart/form-data" action="photo/avatar">
+                          <input type="text" name="username" ng-model="vm.login">
+                          <input type="text" name="token" ng-model="vm.token">
+                          <input type="file" name="avatar">
+                          <input type="submit">
+                        </form>
+                       -->
+                       
+                       <div class="pull-right">
+                          <img ng-src="img/avatars/{{vm.login}}" width="200" height="200"/>
+                       </div>
 
 
-                            <form name="form">
-                                <button type="submit" class="btn btn-primary" ngf-select ng-model="vm.file">Wybierz
-                                    avatar
-                                </button>
-                                <button type="submit" ng-click="vm.upload()">Dodaj</button>
-                            </form>
+                        <form class="form" name="picturesForm">
+                            <div class="input-group text-center">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" ngf-select ng-model="vm.file">
+                                        Wybierz avatar
+                                    </button>
+                                    <span class="btn-file">
+                                      <input type="file" ngf-select ngf-multiple="false" ng-model="vm.file" name="file"
+                                             accept="image/*" ngf-max-size="1MB"
+                                             ngf-model-invalid="errorFiles">
+                                    </span>
+                                    <i ng-show="picturesForm.file.$error.maxSize">File too large
+                                        {{errorFiles[0].size / 1000000|number:1}}MB: max 1M</i>
+                                    <div ng-show="vm.file">
+                                        <img ng-show="picturesForm.file.$valid" ngf-thumbnail="vm.file" class="thumb">
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <button ng-disabled="!vm.file" class="btn btn-primary" ng-click="vm.upload()">
+                                        Uaktualnij
+                                    </button>
+                                    <button class="btn btn-danger" ng-click="vm.resetAvatar()">
+                                        Przywróć domyślny
+                                    </button>
+                                </div>
 
-                            <button type="submit" class="btn btn-primary" ng-click="vm.resetAvatar()">Przywróć
-                                domyślny
-                            </button>
-                        </div>
+                            </div>
+                        </form>
+
+                        
                     </div>
                 </div>
             </div>

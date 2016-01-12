@@ -85,7 +85,7 @@ router.post('/avatar', uploadAvatar.single('avatar'), function (req, res, next) 
     console.log(req.body);
     console.log(req.user);
     console.log(req.file);
-    res.status(200).redirect('/#/profile/');
+    res.status(200).send();
   });
 });
 

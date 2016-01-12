@@ -38,6 +38,7 @@ define(['./../module'], function (controllers) {
                     method: 'POST'
                 }).then(function (resp) {
                     console.log('Success ');
+                    window.location.reload();
                 }, function (resp) {
                     console.log('Error status: ' + resp.status);
                 }, function (evt) {
