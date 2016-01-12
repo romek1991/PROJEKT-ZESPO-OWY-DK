@@ -9,7 +9,8 @@ require.config({
         'ngFileUpload': '../bower_components/ng-file-upload/ng-file-upload',
         'ui.bootstrap': '../bower_components/angular-bootstrap/ui-bootstrap',
         'jquery': '../bower_components/jquery/dist/jquery',
-        'lightbox': '../bower_components/lightbox2/dist/js/lightbox'
+        'lightbox': '../bower_components/lightbox2/dist/js/lightbox',
+        'angular-md5': '../bower_components/angular-md5/angular-md5'
 
     },
     shim: {
@@ -36,6 +37,9 @@ require.config({
             deps: ['angular']
         },
         'ui.bootstrap': {
+            deps: ['angular']
+        },
+        'angular-md5': {
             deps: ['angular']
         }
 

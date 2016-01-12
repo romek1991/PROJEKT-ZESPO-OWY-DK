@@ -14,6 +14,9 @@ define(['app'], function (app) {
                 templateUrl: 'modules/user/login.html',
                 controller: 'LoginController',
                 controllerAs: 'vm',
+                params: {
+                    loginAfterSignup: null
+                },
                 data: {
                     requireLogin: false
                 }

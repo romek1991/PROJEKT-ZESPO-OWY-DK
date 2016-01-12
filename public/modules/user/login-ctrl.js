@@ -112,11 +112,17 @@ define(['./../module'], function (controllers) {
     }]);
 
 
-    controllers.controller('LoginController', ['$location', '$window', 'UserService', 'AuthenticationService',
+    controllers.controller('LoginController', ['$location', '$window', '$stateParams', 'UserService', 'AuthenticationService',
         '$cookies', '$state', '$http',
-        function LoginCtrl($location, $window, UserService, AuthenticationService, $cookies, $state, $http){
+        function LoginCtrl($location, $window, $stateParams, UserService, AuthenticationService, $cookies, $state, $http){
 
             var vm = this;
+            console.log("$stateParams:");
+            console.log($stateParams);
+            if($stateParams.loginAfterSignup) {
+              vm.loginAfterSignup = $stateParams.loginAfterSignup;
+            }
+
             //alert("login controller");
             vm.credsOk = true;
             vm.logIn = function logIn(username, password) {

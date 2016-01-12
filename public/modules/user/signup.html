@@ -7,13 +7,17 @@
       <center>
         <form class="form">
           <div class="input-group text-center">
-
+              <div class="alert-danger" ng-show="vm.registrationFailed">
+                Rejestracja nie powiodła się! {{vm.registrationFailedMessage}}
+              </div>
               <div class="form-group">
                   <input type="text" name="username" id="username" class="form-control" placeholder="Login" ng-model="vm.login" required="">
               </div>
+              
+              <div class="alert alert-warning" role="alert">Uwaga! Login nie może zostań zmieniony po rejestracji.</div>
 
               <div class="form-group">
-                  <input type="text" name="password" id="password" class="form-control" placeholder="Hasło" ng-model="vm.password" required="">
+                  <input type="password" name="password" id="password" class="form-control" placeholder="Hasło" ng-model="vm.password" required="">
               </div>
 
               <div class="form-group">
