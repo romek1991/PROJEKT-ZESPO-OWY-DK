@@ -16,6 +16,32 @@
                 <div class="form-group">
                     <textarea  placeholder="Opis" rows="10" maxlength="10000" style="overflow:hidden" type="text" name="description" id="description" class="form-control" ng-model="description" required=""></textarea>
                 </div>
+                <!--right column Tutaj dodawanie zdjęć następny sprint (mercedes sprinter )-->
+
+                <div class="col-sm-6">
+                    <div class="well">
+                        <form name="picturesForm">
+                            <fieldset>
+                                <br>
+                                <legend>Dodaj Zdjęcia</legend>
+
+                                <input type="file" ngf-select ngf-keep="true" ngf-multiple="true" ng-model="vm.photos" name="file"
+                                       accept="image/*" ngf-max-size="1MB"
+                                       ngf-model-invalid="errorFiles">
+                                <i ng-show="picturesForm.file.$error.maxSize">File too large
+                                    {{errorFiles[0].size / 1000000|number:1}}MB: max 1M</i>
+                                <li ng-repeat="pic in vm.photos">
+                                    <br>
+                                    <img ng-show="picturesForm.file.$valid" ngf-thumbnail="pic" class="thumb">
+                                    <button ng-click="vm.removeFromPhotosList($index)" ng-show="pic">Remove</button>
+                                </li>
+
+                                <br>
+                            </fieldset>
+                        </form>
+
+                    </div>
+
                 
                 <div class="form-group">
                     <input type="checkbox" ng-model="vm.publicAccess">Public trip</input>

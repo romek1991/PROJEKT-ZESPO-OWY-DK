@@ -39,10 +39,34 @@
                     </div>
                     <div class="panel-body">
 
+                    <!--    <label ng-repeat="photo in vm.photos">
+                            <a ng-href="/photo/{{photo.filename}}" class="example-image-link" data-lightbox="example-set" data-title="My caption">
+                                <img class="thumb" ng-src="/photo/{{photo.filename}}" alt="test"/></a>
+                        </label>-->
 
-                        <form name="form">
+                   <!--     <form name="form">
                             <button type="submit" class="btn btn-primary" ngf-select ng-model="vm.files" ngf-multiple="true">Wybierz zdjęcia</button>
                             <button type="submit" ng-click="vm.submit()">Wyślij</button>
+                        </form>-->
+
+                        <form name="picturesForm">
+                            <fieldset>
+                                <br>
+                                <legend>Dodaj Zdjęcia</legend>
+
+                                <input type="file" ngf-select ngf-keep="true" ngf-multiple="true" ng-model="vm.photos" name="file"
+                                       accept="image/*" ngf-max-size="1MB"
+                                       ngf-model-invalid="errorFiles">
+                                <i ng-show="picturesForm.file.$error.maxSize">File too large
+                                    {{errorFiles[0].size / 1000000|number:1}}MB: max 1M</i>
+                                <li ng-repeat="pic in vm.photos">
+                                    <br>
+                                    <img ngf-no-object-url="true" ngf-thumbnail="pic" class="thumb">
+                                    <button ng-click="vm.removeFromPhotosList($index)" ng-show="pic">Remove</button>
+                                </li>
+
+                                <br>
+                            </fieldset>
                         </form>
 
 

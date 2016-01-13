@@ -69,6 +69,14 @@ define(['./../module'], function (controllers) {
             'x-access-token': token
           }
         });
+      },
+
+      resolvePhoto: function (photoName, token) {
+        return $http.get(baseUrl + '/photo/' + photoName, {
+          headers: {
+            'x-access-token': token
+          }
+        });
       }
       
     }
@@ -88,6 +96,9 @@ define(['./../module'], function (controllers) {
       
       vm.user = user;
 
+      vm.photos = [];
+
+      //vm.pictures = null;
 
       vm.addTrip = function(name, description, publicAccess)  {
         if(name !== undefined && description !== undefined ){
@@ -127,9 +138,21 @@ define(['./../module'], function (controllers) {
             message: "Brak dostępu do wycieczki!"
           });
         });
-        
+
+
         TripService.getPhotos(tripId, token).success(function(data){
-          vm.photos = data.photos;
+          var promises = data.photos;
+
+          promises.forEach(function(element, index, array) {
+            TripService.resolvePhoto(element.filename, token).success(function(data){
+              vm.photos.push(data);
+            }).error(function(data){
+              $state.go('app.error', {
+                message: "Nie można pobrać zdjęcia!"
+              });
+            });
+          });
+
         }).error(function(data){
           $state.go('app.error', {
             message: "Nie można pobrać zdjęć!"
@@ -145,7 +168,7 @@ define(['./../module'], function (controllers) {
           console.log('error with comments: ' + status)
           vm.userNotFound = null;
         });
-      }
+      };
 
       vm.addComment = function() {
         if(vm.newCommentText) {
