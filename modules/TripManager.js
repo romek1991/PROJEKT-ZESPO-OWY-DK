@@ -234,7 +234,7 @@ exports.getUserTripsHeaders = function(req, res) {
 exports.getNewestTripsHeaders = function(req, res) {
   Trip
     .find({}, 'name createdDate startDate endDate author publicAccess')
-    .populate('author', 'firstName lastName')
+    .populate('author', 'login firstName lastName')
     .sort('-createdDate')
     .limit(10)
     .exec(function(err, newestTrips) {
