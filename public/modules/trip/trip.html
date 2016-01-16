@@ -37,6 +37,17 @@
     <h3>{{(vm.startDate ? 'od ' + (vm.startDate | date:'yyyy.MM.dd') : '') + (vm.endDate ? ' do ' + (vm.endDate | date:'yyyy.MM.dd') : '')}}</h3>
   </div>
   
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Opis</h3>
+    </div>
+          
+    <div class="panel-body">
+        <p>{{vm.tripDescription}}</p>
+    </div>
+  </div>
+  
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Zdjęcia</h3>
@@ -56,7 +67,7 @@
 	<div class="image-set">
 	</a>
 	<label ng-repeat="photo in vm.photos">
-		<a ng-href="/photo/{{photo.filename}}" class="example-image-link" data-lightbox="example-set" data-title="My caption">
+		<a ng-href="/photo/{{photo.filename}}" class="example-image-link" data-lightbox="example-set" data-title="Nazwa zdjęcia: {{photo.name}},<br /> Dodano: {{photo.createdDate}}">
 		<img class="thumb" ng-src="/photo/{{photo.filename}}" alt="test"/></a>
 	</label>	
 	</div>
@@ -73,15 +84,7 @@
     </div>
   </div>
   
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3 class="panel-title">Opis</h3>
-    </div>
-          
-    <div class="panel-body">
-        <p>{{vm.tripDescription}}</p>
-    </div>
-  </div>
+
   <button class=".btn-link" ng-show="vm.tripIsEditable" ui-sref="app.edittrip({tripId: vm.tripIdent})">Edytuj</button>
 </div>
   <div class="column col-sm-12 col-lg-4">

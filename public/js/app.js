@@ -9,7 +9,8 @@ define([
     'ngFileUpload',
     'ui.bootstrap',
     'lightbox',
-    'angular-md5'
+    'angular-md5',
+    'bootstrap-datepicker'
 ], function (ng) {
     'use strict';
 
