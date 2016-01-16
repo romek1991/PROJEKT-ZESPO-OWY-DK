@@ -134,7 +134,7 @@ define(['./../module'], function (controllers) {
           vm.createdDate = data.trip.createdDate;
           vm.tripAuthor = data.trip.author;
           
-          if(data.trip.author === user.id) {
+          if(data.trip.author._id === user.id) {
             vm.tripIsEditable = true;
           }
           else{

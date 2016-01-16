@@ -5,29 +5,30 @@
             <form class="row">
                 <!-- left column-->
                 <div class="col-sm-6">
-                    <div class="well">
-						<center>
-						<legend>Opis twojej wycieczki</legend>
-						</center>
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Szczegóły wycieczki</h3>
+                      </div>
+                      <div class="panel-body">
 
                         <div class="form-group">
-							<label style="text-align: left;">Nazwa twojej podróży:</label>
+							<label style="text-align: left;">Nazwa:</label>
                             <input type="text" maxlength="50" name="name" id="name" class="form-control"
                                    placeholder="Nazwa podróży" ng-model="name" required="">
                         </div>
 
                         <div class="form-group">
-							<label>Opisz swoją podróż:</label>
+                        <label>Opisz swoją podróż:</label>
                             <textarea placeholder="Opis" rows="10" maxlength="10000" style="overflow:hidden" type="text"
                                       name="description" id="description" class="form-control" ng-model="description"
                                       required=""></textarea>
                         </div>
 
-						<center>
-                        <div class="form-group">
-                            <input type="checkbox" ng-model="vm.publicAccess">Wycieczka publiczna</input>
-                        </div>
-						</center>
+                        <center>
+                            <div class="form-group">
+                                <input type="checkbox" ng-model="vm.publicAccess">Wycieczka publiczna</input>
+                            </div>
+                        </center>
 
                         <div class="form-group">
                             <div class="input-daterange input-group" id="datepicker">
@@ -36,22 +37,26 @@
                                 <span class="input-group-addon">to</span>
                                 <input id="endDate" type="text" class="input-sm form-control" name="endDate" ng-model="vm.parent.endDate"
                                       required=""/>
-							</div>
-						</div>
+                          </div>
+                        </div>
 
 
 
                     </div>
+                  </div>
                 </div>
                 <!--right column Tutaj dodawanie zdjęć następny sprint (mercedes sprinter )-->
 
                 <div class="col-sm-6">
-					<center>
-                    <div class="well">
-                        <form name="picturesForm">
-                            <fieldset>
-                                <br>
-                                <legend>Dodaj Zdjęcia</legend>
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Dodaj zdjęcia</h3>
+                      </div>
+                      <div class="panel-body">
+                      
+                          <center>
+                            <form name="picturesForm">
+                            
 
                                 <input type="file" ngf-select ngf-multiple="true" ng-model="vm.photos" name="file"
                                        accept="image/*" ngf-max-size="1MB"
@@ -64,12 +69,11 @@
                                     <button ng-click="vm.removeFromPhotosList($index)" ng-show="pic">Remove</button>
                                 </li>
 
-                                <br>
-                            </fieldset>
-                        </form>
+                            </form>
+                          </center>
+                      </div>
 
                     </div>
-					</center>
                 </div>
 
                 <div class="row" id="footer">
@@ -88,7 +92,7 @@
                 <div class="form-actions">
 
                     <button class="btn btn-primary"
-                            ng-click="vm.addTrip(name, description, vm.startDate, vm.endDate, publicAccess)">Dodaj podróż
+                            ng-click="vm.addTrip(name, description, vm.startDate, vm.endDate, publicAccess)">Dodaj wycieczkę
                     </button>
                   <span class="progress" ng-show="vm.progress >= 0">
                             <div ng-style="{ width:'{{vm.progress}}%'}" ng-bind="vm.progress + '%'">

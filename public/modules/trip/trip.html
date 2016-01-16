@@ -32,6 +32,7 @@
 <div class="column col-sm-12 col-lg-8" >
   
   <div class="well">
+    <button class="btn btn-warning pull-right" ng-show="vm.tripIsEditable" ui-sref="app.edittrip({tripId: vm.tripIdent})">Edytuj wycieczkę</button>
     <img class="pull-right" src="/img/closed_lock.png" ng-show="!vm.publicAccess"/>
     <h2>{{vm.tripName}}</h2>
     <h3>{{(vm.startDate ? 'od ' + (vm.startDate | date:'yyyy.MM.dd') : '') + (vm.endDate ? ' do ' + (vm.endDate | date:'yyyy.MM.dd') : '')}}</h3>
@@ -83,9 +84,7 @@
       </div> -->
     </div>
   </div>
-  
 
-  <button class=".btn-link" ng-show="vm.tripIsEditable" ui-sref="app.edittrip({tripId: vm.tripIdent})">Edytuj</button>
 </div>
   <div class="column col-sm-12 col-lg-4">
   <div class="panel panel-default">
@@ -114,7 +113,7 @@
         </div>
         <div class="media-body">
           <h4 class="media-heading"><strong>{{comment.author.firstName}} {{comment.author.lastName}}</strong></h4>
-          <em>{{comment.time}}</em>
+          <em>{{comment.time | date:'yyyy.MM.dd, HH:mm:ss'}}</em>
           <p>{{comment.text}}</p>
         </div>
       </div>

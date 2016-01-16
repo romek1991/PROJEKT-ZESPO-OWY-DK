@@ -152,8 +152,8 @@ exports.addTrip = function(req, res) {
   var newTrip = new Trip({
     name: req.body.name,
     author: req.user,
-    //startDate: req.body.startDate,
-    //endDate: req.body.endDate,
+    startDate: req.body.startDate,
+    endDate: req.body.endDate,
     description: req.body.description,
 	  publicAccess: req.body.publicAccess
   });
