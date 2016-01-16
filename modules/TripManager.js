@@ -32,7 +32,7 @@ function checkAccessForRead(req, trip, next) {
 
 function findTripById(tripId, next) {
   console.log('[TripManager] tripId: ' + tripId);
-  Trip.findById(tripId, function(err, trip) {
+  Trip.findById(tripId).populate('author').exec(function(err, trip) {
 
     if (err) {
       console.error("[TripManager.findTripById] ERROR: " + err);
@@ -147,13 +147,13 @@ exports.addTrip = function(req, res) {
     return res.status(400).json({
       message: "Request must consist of parameters: name, description." // ,startDate, endDate
     });
-  }
+  }    
   
   var newTrip = new Trip({
     name: req.body.name,
     author: req.user,
-    startDate: req.body.startDate,
-    endDate: req.body.endDate,
+    //startDate: req.body.startDate,
+    //endDate: req.body.endDate,
     description: req.body.description,
 	  publicAccess: req.body.publicAccess
   });
@@ -216,24 +216,45 @@ exports.getTripComments = function(tripId, next) {
 
 exports.getUserTripsHeaders = function(req, res) {
   UserManager.getUserByLogin(req.login, function(user) {
-    console.log('user: ' + user);
-    Trip.find({author: user}, 'name createdDate startDate endDate publicAccess', function(err, userTrips) {
-      if (err) {
-        return res.status(500).json({
-          message: "Unable to get trips for user."
+    var isOwner = (req.user.login === user.login) || req.user.isAdmin;
+    console.log("____isOwner:" + isOwner);
+    if (isOwner) {
+      // return both public and private trips of the user
+      Trip.find({author: user}, 'name createdDate startDate endDate publicAccess', function(err, userTrips) {
+        if (err) {
+          return res.status(500).json({
+            message: "Unable to get trips for user."
+          });
+        }
+        
+        return res.json({
+          trips: userTrips
         });
-      }
-      
-      return res.json({
-        trips: userTrips
       });
-    });
+    } else {
+      // return only public trips of the user
+      Trip.find(
+          {$and:[{author: user},
+          {$or:[
+            {publicAccess: null}, {publicAccess: true}
+          ]}]}, 'name createdDate startDate endDate publicAccess', function(err, userTrips) {
+        if (err) {
+          return res.status(500).json({
+            message: "Unable to get trips for user."
+          });
+        }
+        
+        return res.json({
+          trips: userTrips
+        });
+      });
+    }
   });
 }
 
 exports.getNewestTripsHeaders = function(req, res) {
   Trip
-    .find({}, 'name createdDate startDate endDate author publicAccess')
+    .find({$or:[ {'publicAccess':null}, {'publicAccess':true}]}, 'name createdDate startDate endDate author publicAccess')
     .populate('author', 'login firstName lastName')
     .sort('-createdDate')
     .limit(10)

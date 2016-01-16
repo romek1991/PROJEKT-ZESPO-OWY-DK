@@ -85,7 +85,6 @@ define(['./../module'], function (controllers) {
       var user = AuthenticationService.getUser();
 
       vm.tripIsEditable = false;
-      
       vm.user = user;
 
       //vm.pictures = null;
@@ -116,6 +115,11 @@ define(['./../module'], function (controllers) {
           vm.tripDescription = data.trip.description;
           vm.tripIdent = tripId;
           vm.publicAccess = data.trip.publicAccess;
+          vm.startDate = data.trip.startDate;
+          vm.endDate = data.trip.endDate;
+          vm.createdDate = data.trip.createdDate;
+          vm.tripAuthor = data.trip.author;
+          
           if(data.trip.author === user.id) {
             vm.tripIsEditable = true;
           }

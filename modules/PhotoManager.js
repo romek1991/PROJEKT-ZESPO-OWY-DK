@@ -159,6 +159,42 @@ exports.getPhotosForTrip = function(req, res) {
   }
 }
 
+exports.getThumbnailForTrip = function(req, res) {
+  
+  if (!req.tripId) {
+    res.status(500).json({message: "No tripId provided in URL!"});
+  } else {
+  
+    Trip.findById(req.tripId, function(err, trip) {
+      if (err) {
+        console.error("[PhotoManager] ERROR: " + err);
+        res.status(500).json({message: "Error!"});
+      } else {
+        if (!trip) {
+          res.status(404).json({message: "trip doesn't exist!"});
+        } else {
+          
+          Photo.find({trip: trip}, 'filename').limit(1).exec(function(err, thumbnail){
+            if (err) {
+              res.send(500).json({message: "Error while getting thumbnail from DB!"});
+            } else {
+              console.log('thumbnail: ');
+              console.log(thumbnail);
+              if (thumbnail[0]) {
+                res.sendFile(req.app.get('rootDir') + '/uploads/photos/' + thumbnail[0].filename);
+              } else {
+                res.sendFile(req.app.get('rootDir') + '/tripThumbnail.png');
+              }
+            }
+          });
+          
+        }
+      }
+    });
+    
+  }
+}
+
 exports.getPhotoFile = function(req, res) {
   if (!req.filename) {
     res.status(500).json({message: "No photoId provided in URL!"});
