@@ -7,6 +7,13 @@ define(['./../module'], function (controllers) {
   
   
   controllers.factory('TripService', function($http) {
+
+    $('#sandbox-container .input-daterange').datepicker({
+      format: "yyyy/mm/dd",
+      todayBtn: true,
+      todayHighlight: true
+    });
+
     var baseUrl = "http://localhost:3000";
     return {
       getComments: function(tripId, token) {
@@ -36,11 +43,14 @@ define(['./../module'], function (controllers) {
       },
       
       addTrip: function(name, description, publicAccess, token) {
+
         console.log(name + ' ' + description + ' ' + token);
         return $http.post(baseUrl + '/trip', {
           'name': name,
           'description': description,
-          'publicAccess': publicAccess,  //todo : pozniej do parametru
+          'publicAccess': publicAccess,  //todo : pozniej do parametru,
+          'startDate': '2014/03/03',
+          'endDate': '2014/12/03',
           headers: {
             'x-access-token': token
           }

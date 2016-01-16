@@ -16,7 +16,8 @@
     "angular-bootstrap": "latest",
     "ng-file-upload": "latest",
     "lightbox2": "latest",
-    "angular-md5": "~0.1.10"
+    "angular-md5": "~0.1.10",
+	"bootstrap-datepicker" : "latest"
   },
   "ignore": [
     "**/.*",
