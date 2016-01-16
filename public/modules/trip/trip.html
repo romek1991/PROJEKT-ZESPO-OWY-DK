@@ -68,7 +68,7 @@
 	<div class="image-set">
 	</a>
 	<label ng-repeat="photo in vm.photos">
-		<a ng-href="/photo/{{photo.filename}}" class="example-image-link" data-lightbox="example-set" data-title="My caption">
+		<a ng-href="/photo/{{photo.filename}}" class="example-image-link" data-lightbox="example-set" data-title="Nazwa zdjęcia: {{photo.name}},<br /> Dodano: {{photo.createdDate}}">
 		<img class="thumb" ng-src="/photo/{{photo.filename}}" alt="test"/></a>
 	</label>	
 	</div>
