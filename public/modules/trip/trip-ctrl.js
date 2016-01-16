@@ -42,15 +42,18 @@ define(['./../module'], function (controllers) {
         });
       },
       
-      addTrip: function(name, description, publicAccess, token) {
+      addTrip: function(name, description, startDate, endDate, publicAccess, token) {
+		  
+		console.log('startDate: ' + startDate);
+		console.log('endDate: ' + endDate);
 
-        console.log(name + ' ' + description + ' ' + token);
+        console.log(name + ' ' + description + ' ' + token );
         return $http.post(baseUrl + '/trip', {
           'name': name,
           'description': description,
           'publicAccess': publicAccess,  //todo : pozniej do parametru,
-          'startDate': '2014/03/03',
-          'endDate': '2014/12/03',
+          'startDate': startDate,
+          'endDate': endDate,
           headers: {
             'x-access-token': token
           }
@@ -96,14 +99,15 @@ define(['./../module'], function (controllers) {
 
       vm.tripIsEditable = false;
       
-      vm.user = user;
-
+      vm.user = user;	  
       //vm.pictures = null;
 
 
-      vm.addTrip = function(name, description, publicAccess)  {
-        if(name !== undefined && description !== undefined ){
-          TripService.addTrip(name, description, publicAccess, token).success(function(data){
+      vm.addTrip = function(name, description, startDate, endDate, publicAccess, token)  {
+		  var startDate = $("#startDate").val();
+		  var endDate = $("#endDate").val();
+        if(name !== undefined && description !== undefined && startDate !== undefined && endDate !== undefined){
+          TripService.addTrip(name, description, startDate, endDate, publicAccess, token).success(function(data){
             vm.uploadPictures(data.tripId);
             $state.go('app.trip', {
               tripId: data.tripId

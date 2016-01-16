@@ -31,12 +31,13 @@
 
                         <div class="form-group">
                             <div class="input-daterange input-group" id="datepicker">
-                                <input type="text" class="input-sm form-control" name="start" />
+                                <input id="startDate" type="text" class="input-sm form-control" name="startDate" ng-model="vm.parent.startDate"
+                                      required=""/>
                                 <span class="input-group-addon">to</span>
-                                <input type="text" class="input-sm form-control" name="end" />
-                            </div>
-                        </div>
-
+                                <input id="endDate" type="text" class="input-sm form-control" name="endDate" ng-model="vm.parent.endDate"
+                                      required=""/>
+							</div>
+						</div>
 
 
 
@@ -86,8 +87,8 @@
 				<center>
                 <div class="form-actions">
 
-                    <button type="submit" class="btn btn-primary"
-                            ng-click="vm.addTrip(name, description, publicAccess)">Dodaj podróż
+                    <button class="btn btn-primary"
+                            ng-click="vm.addTrip(name, description, vm.startDate, vm.endDate, publicAccess)">Dodaj podróż
                     </button>
                   <span class="progress" ng-show="vm.progress >= 0">
                             <div ng-style="{ width:'{{vm.progress}}%'}" ng-bind="vm.progress + '%'">
