@@ -88,6 +88,15 @@ router.get('/:login/trips', function(req, res, next) {
 });
 
 /*
+  GET /user/{login}/photos
+  Get photos of user with given login
+    login:           login of the user
+*/
+router.get('/:login/photos', function(req, res, next) {
+  UserManager.getUserPhotosHeaders(req, res);
+});
+
+/*
   POST /user/search
   Search users with firstName or lastName containing given string
     searchString:   string to search
