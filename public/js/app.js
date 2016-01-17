@@ -10,7 +10,9 @@ define([
     'ui.bootstrap',
     'lightbox',
     'angular-md5',
-    'bootstrap-datepicker'
+    'bootstrap-datepicker',
+    'bootstrap-minified',
+    'scripts'
 ], function (ng) {
     'use strict';
 

@@ -119,6 +119,8 @@ define(['./../module'], function (controllers) {
                     });
                     $state.go('index');
                 });
+
+
             };
         }
     ]);
