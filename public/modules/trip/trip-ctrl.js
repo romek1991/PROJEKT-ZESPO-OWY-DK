@@ -82,6 +82,14 @@ define(['./../module'], function (controllers) {
             'x-access-token': token
           }
         });
+      },
+
+      resolvePhoto: function (photoName, token) {
+        return $http.get(baseUrl + '/photo/' + photoName, {
+          headers: {
+            'x-access-token': token
+          }
+        });
       }
       
     }
@@ -98,7 +106,12 @@ define(['./../module'], function (controllers) {
       var user = AuthenticationService.getUser();
 
       vm.tripIsEditable = false;
-      vm.user = user;	  
+      
+      vm.user = user;
+
+      vm.photos = [];
+      vm.photosToBeUploaded = [];
+
       //vm.pictures = null;
 
 
@@ -148,9 +161,24 @@ define(['./../module'], function (controllers) {
             message: "Brak dostępu do wycieczki!"
           });
         });
-        
+
+
         TripService.getPhotos(tripId, token).success(function(data){
+/*
+          var promises = data.photos;
+
+          promises.forEach(function(element, index, array) {
+            TripService.resolvePhoto(element.filename, token).success(function(data){
+              vm.photos.push(data);
+            }).error(function(data){
+              $state.go('app.error', {
+                message: "Nie można pobrać zdjęcia!"
+              });
+            });
+          });
+*/
           vm.photos = data.photos;
+
         }).error(function(data){
           $state.go('app.error', {
             message: "Nie można pobrać zdjęć!"
@@ -166,7 +194,7 @@ define(['./../module'], function (controllers) {
           console.log('error with comments: ' + status)
           vm.userNotFound = null;
         });
-      }
+      };
 
       vm.addComment = function() {
         if(vm.newCommentText) {
@@ -186,6 +214,7 @@ define(['./../module'], function (controllers) {
         console.log("UPDATE");
         TripService.updateTrip(tripId, vm.tripName, vm.tripDescription, vm.publicAccess, token) //todo: jak wdrozymy publiczne/prywatne to parametr publicAccess wycuagnac do UI
           .success(function(data) {
+              vm.uploadPictures(vm.tripIdent)
               $state.go('app.start')
         }).error(function(status, data){
           alert("Bład aktualizacji " + status +" data " + data);
@@ -206,9 +235,10 @@ define(['./../module'], function (controllers) {
         console.log(files);
         console.log(vm.tripIdent);
 
-          vm.pictures=files;    //zrobilem to tak na razie - dodalem ten panel na UI i moja metoda ma tego timeouta itp
+          //vm.pictures=files;    //zrobilem to tak na razie - dodalem ten panel na UI i moja metoda ma tego timeouta itp
                                 // - jak cos zdecydujemy to odkomentujemy. W kazdym razie potrzebowalem metody z parametrem tripId
-          vm.uploadPictures(vm.tripIdent);
+          //vm.uploadPictures(vm.tripIdent);
+
 
         /*Upload.upload({
           url: 'http://localhost:3000/photo',
@@ -226,12 +256,12 @@ define(['./../module'], function (controllers) {
       };
 
       vm.uploadPictures = function (tripId) {
-        if (vm.photos && vm.photos.length) {
+        if (vm.photosToBeUploaded && vm.photosToBeUploaded.length) {
           Upload.upload({
               url: 'http://localhost:3000/photo',
               arrayKey: '',
               data: {
-                tripId: tripId, token: vm.token, photos: vm.photos
+                tripId: tripId, token: vm.token, photos: vm.photosToBeUploaded
               },
               method: 'POST'
           }).then(function (response) {
@@ -250,8 +280,8 @@ define(['./../module'], function (controllers) {
       };
 
         vm.removeFromPhotosList = function (index) {
-            vm.photos.splice(index, 1);
-        }
+            vm.photosToBeUploaded.splice(index, 1);
+      }
 
     }
     

@@ -15,12 +15,15 @@
                                 <div class="input-group text-center">
 
                                     <div class="form-group">
-									    <label class="label-description">Nazwa użytkownika:</label>
-                                        <input class="input-description" disabled type="text" name="username" id="username" class="form-control"
-                                               placeholder="Login" ng-model="vm.login" required=""><br></br>
+                                        <label class="label-description">Nazwa użytkownika:</label>
+                                        <input class="input-description" disabled type="text" name="username"
+                                               id="username" class="form-control"
+                                               placeholder="Login" ng-model="vm.login" required=""><br>
                                     </div>
-                                    
-                                    <div style="width:100%;margin-top:20px;" class="alert alert-info" role="alert">Login nie może zostać zmieniony.</div>
+
+                                    <div style="width:100%;margin-top:20px;" class="alert alert-info" role="alert">Login
+                                        nie może zostać zmieniony.
+                                    </div>
 
                                     <!--
                                                             <div class="form-group">
@@ -29,27 +32,29 @@
                                     -->
 
                                     <div class="form-group">
-										<label class="label-description">Email:</label>
-                                        <input class="input-description" type="text" name="email" id="email" class="form-control"
-                                               placeholder="Email" ng-model="vm.email" required=""><br></br>
+                                        <label class="label-description">Email:</label>
+                                        <input class="input-description" type="text" name="email" id="email"
+                                               class="form-control"
+                                               placeholder="Email" ng-model="vm.email" required=""><br>
                                     </div>
 
                                     <div class="form-group">
-										<label class="label-description">Imie:</label>
-                                        <input class="input-description" type="text" name="name" id="name" class="form-control" placeholder="Imię"
-                                               ng-model="vm.firstName" required=""><br></br>
+                                        <label class="label-description">Imie:</label>
+                                        <input class="input-description" type="text" name="name" id="name"
+                                               class="form-control" placeholder="Imię"
+                                               ng-model="vm.firstName" required=""><br>>
                                     </div>
-									
+
                                     <div class="form-group">
-										<label class="label-description">Nazwisko:</label>
-                                        <input class="input-description" type="text" name="surname" id="surname" class="form-control"
-                                               placeholder="Nazwisko" ng-model="vm.lastName" required=""><br></br>
+                                        <label class="label-description">Nazwisko:</label>
+                                        <input class="input-description" type="text" name="surname" id="surname"
+                                               class="form-control"
+                                               placeholder="Nazwisko" ng-model="vm.lastName" required=""><br>
                                     </div>
 
                                 </div>
                                 <div class="form-actions">
-                                    <button type="submit" class="btn btn-primary" ng-click="vm.updateProfile()">
-                                        Uaktualnij
+                                    <button type="submit" class="btn btn-primary" ng-click="vm.update()">Uaktualnij
                                     </button>
                                 </div>
                             </form>
@@ -72,10 +77,10 @@
                           <input type="submit">
                         </form>
                        -->
-                       
-                       <div class="pull-right">
-                          <img ng-src="img/avatars/{{vm.login}}" width="200" height="200"/>
-                       </div>
+
+                        <div class="pull-right">
+                            <img ng-src="img/avatars/{{vm.login}}" class="avatar"/>
+                        </div>
 
 
                         <form class="form" name="picturesForm">
@@ -84,20 +89,20 @@
                                     <button type="submit" class="btn btn-primary" ngf-select ng-model="vm.file">
                                         Wybierz avatar
                                     </button>
-                                    <span class="btn-file">
+                                    <!--<span class="btn-file">
                                       <input type="file" ngf-select ngf-multiple="false" ng-model="vm.file" name="file"
                                              accept="image/*" ngf-max-size="1MB"
                                              ngf-model-invalid="errorFiles">
                                     </span>
                                     <i ng-show="picturesForm.file.$error.maxSize">File too large
-                                        {{errorFiles[0].size / 1000000|number:1}}MB: max 1M</i>
+                                        {{errorFiles[0].size / 1000000|number:1}}MB: max 1M</i>-->
                                     <div ng-show="vm.file">
-                                        <img ng-show="picturesForm.file.$valid" ngf-thumbnail="vm.file" class="thumb">
+                                        <img ng-show="picturesForm.file.$valid" ngf-thumbnail="vm.file" class="avatar">
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group">
-                                    <button ng-disabled="!vm.file" class="btn btn-primary" ng-click="vm.upload()">
+                                    <button ng-disabled="!vm.file" class="btn btn-primary" ng-click="vm.uploadAvatar()">
                                         Uaktualnij
                                     </button>
                                     <button class="btn btn-danger" ng-click="vm.resetAvatar()">
@@ -108,9 +113,10 @@
                             </div>
                         </form>
 
-                        
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

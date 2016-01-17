@@ -99,7 +99,9 @@
       <p>{{vm.createdDate | date:'yyyy.MM.dd, HH:mm:ss'}}</p>
     </div>
   </div>
-  
+  <!--<button class=".btn-link" ng-show="vm.tripIsEditable" ui-sref="app.edittrip({tripId: vm.tripIdent})">Edytuj</button>-->
+</div>
+  <div class="column col-sm-12 col-lg-4">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Komentarze {{vm.comments ? '(' + vm.comments.length + ')' : ''}}</h3>

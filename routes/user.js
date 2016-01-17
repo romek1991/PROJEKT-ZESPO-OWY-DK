@@ -27,18 +27,6 @@ router.get('/all', function(req, res, next) {
   });
 });
 
-router.put('/', function(req, res, next){
-  UserManager.updateUser(req, function(user) {
-        if(user==null){
-          res.status(404).json({ message: "Cannot find user with login" + req.body.id})
-        }
-        else{
-          res.status(200).json({ message: "Success"});
-        }
-      }
-  );
-});
-
 /*
   GET /user/{login}
   Get user with given login

@@ -60,7 +60,7 @@ router.param('filename', function(req, res, next, param) {
     token:          token
 */
 router.post('/', uploadPhotos.array('photos', 50), function (req, res, next) {
-
+  
   SecurityManager.verifyToken(req, res, function() {
     console.log("in POST /photo");
     console.log(req.body);
@@ -85,7 +85,7 @@ router.post('/avatar', uploadAvatar.single('avatar'), function (req, res, next) 
     console.log(req.body);
     console.log(req.user);
     console.log(req.file);
-    res.status(200).send();
+    res.status(200).redirect('/#/profile/');
   });
 });
 

@@ -14,13 +14,19 @@
     "frisby": "^0.8.5",
     "jshint": "2.8.0",
     "jsonwebtoken": "^5.4.0",
-    "karma": "0.13.11",
-    "karma-jasmine": "~0.1",
+    "karma": "*",
+    "karma-jasmine": "*",
     "karma-phantomjs-launcher": "~0.1",
     "mongodb": "^2.0.46",
     "mongoose": "^4.1.12",
     "morgan": "~1.6.1",
     "multer": "^1.1.0",
     "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "karma-chrome-launcher": "~0.2.2",
+    "karma-firefox-launcher": "~0.1.7",
+    "karma-opera-launcher": "~0.3.0",
+    "karma-ie-launcher": "~0.2.0"
   }
 }

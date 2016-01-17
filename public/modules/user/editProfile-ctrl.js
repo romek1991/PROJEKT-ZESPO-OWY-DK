@@ -17,7 +17,7 @@ define(['./../module'], function (controllers) {
             vm.lastName = user.lastName;
 
             vm.updateProfile = function() {
-              ProfileService.updateProfile(user.id, vm.login, vm.email, vm.firstName, vm.lastName, token);
+              ProfileService.updateProfile(vm.login, vm.email, vm.firstName, vm.lastName);
             };
             
             vm.resetAvatar = function() {
@@ -28,7 +28,7 @@ define(['./../module'], function (controllers) {
 
 
 
-            vm.upload = function() {
+            vm.uploadAvatar = function() {
                 console.log("test:");
                 console.log(vm.file);
                 console.log(vm.tripIdent);
@@ -38,7 +38,6 @@ define(['./../module'], function (controllers) {
                     method: 'POST'
                 }).then(function (resp) {
                     console.log('Success ');
-                    window.location.reload();
                 }, function (resp) {
                     console.log('Error status: ' + resp.status);
                 }, function (evt) {

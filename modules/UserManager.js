@@ -128,29 +128,7 @@ exports.removeUser = function(req, res){
       });
 
     }
-};
-
-exports.updateUser = function(req, next){
-    User.findByIdAndUpdate(req.body.id,
-        { $set: {
-            firstName:req.body.firstName,
-            lastName:req.body.lastName,
-            //login:req.body.login,     - nie chcemy zeby login sie zmienial
-            email:req.body.email
-            }
-        },
-        function(err, user) {
-
-        if (err) {
-            console.log(user);
-            console.log('cossiedzieje1');
-            next(null);
-        } else {
-            console.log('cossiedzieje');
-            next(user);
-        }
-    });
-};
+}
 
 exports.searchUsers = function(searchString, next) {
   if (searchString=="") {
@@ -167,4 +145,4 @@ exports.searchUsers = function(searchString, next) {
       });
   }
   
-};
+}

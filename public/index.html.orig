@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>TripLogger</title>
+    <meta name="generator" content="Bootply" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+<body ng-controller="MenuCtrl as mCtrl">
+<div class="wrapper">
+    <div class="box">
+        <div class="row row-offcanvas row-offcanvas-left">
+
+
+            <!-- sidebar -->
+            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
+
+                <ul class="nav">
+                    <li><a ui-sref="index" data-toggle="offcanvas" class="visible-xs text-center">Menu</a></li>
+                </ul>
+
+                <ul class="nav hidden-xs" id="lg-menu">
+                    <li class="active"><a sref="index">Start</a></li>
+                    <li><a ui-sref="profile"> Profil</a></li>
+                    <li><a ui-sref="trips"> Moje Podróże</a></li>
+                </ul>
+                <ul class="list-unstyled hidden-xs" id="sidebar-footer">
+                    <li>
+                        <a ui-sref="about"><h3>O Nas</h3></a>
+                    </li>
+                </ul>
+
+                <!-- tiny only nav-->
+                <ul class="nav visible-xs" id="xs-menu">
+                    <li><a ui-sref="index" class="text-center"></a></li>
+                    <li><a ui-sref="profile" class="text-center"></a></li>
+                    <li><a ui-sref="trips" class="text-center"></a></li>
+                </ul>
+
+            </div>
+            <!-- /sidebar -->
+
+            <!-- main right col -->
+            <div class="column col-sm-10 col-xs-11" id="main">
+
+                <!-- top nav -->
+                <div class="navbar navbar-blue navbar-static-top">
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle</span>
+
+                        </button>
+
+                        <a ui-sref="index" class="navbar-brand logo">TL</a>
+                    </div>
+                    <nav class="collapse navbar-collapse" role="navigation">
+                        <form class="navbar-form navbar-left">
+                            <div class="input-group input-group-sm" style="max-width:360px;">
+                                <input type="text" class="form-control" placeholder="Szukaj..." name="srch-term" id="srch-term">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit">Szukaj</button>
+                                </div>
+                            </div>
+                        </form>
+                        <ul class="nav navbar-nav">
+                            <!--  <li>
+                                <a href="#"><i class="glyphicon glyphicon-home"></i> Home</a>
+                              </li>
+                              <li>
+                                <a href="#postModal" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Post</a>
+                              </li>-->
+                            <li>
+                                <a ng-if="!mCtrl.isLogged" ui-sref="index"><span class="badge">TripLogger</span></a>
+                            </li>
+							<li ng-if="mCtrl.isLogged" ng-cloak>
+                                <a ui-sref="app.addtrip"><span class="badge">Dodaj Wycieczke</span></a>
+                            </li>
+                            <li ng-if="mCtrl.isLogged" ng-cloak>
+                                <a ui-sref="app.trip"><span class="badge">Wycieczka</span></a>
+                            </li>
+                            <li ng-if="!mCtrl.isLogged">
+                                <a ui-sref="signup"><span class="badge">Rejestracja</span></a>
+                            </li>
+                            <li>
+                                <a ui-sref="app.test"><span class="badge">AppTest</span></a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li ng-if="mCtrl.isLogged" ng-cloak>
+                                <a ui-sref="app.profile"><span class="badge">Mój profil</span></a>
+                            </li>
+                            <li>
+                                <a ui-sref="login" ng-if="!mCtrl.isLogged"><span class="badge">Zaloguj</span></a>
+                                <!--<a ui-sref="login"><span class="badge">Zaloguj</span></a>-->
+                                <a ui-sref="index" ng-if="mCtrl.isLogged" ng-click="mCtrl.logout()" ng-cloak><span class="badge">Wyloguj</span></a>
+                                <!--<a ui-sref="index" ng-if="mCtrl.isLogged" ng-click="mCtrl.logout()" ng-cloak><span class="badge">Wyloguj</span></a>-->
+                            </li>
+
+                            <li>
+                                <!-- do testowania tokenow -->
+                                <a href="" ng-click="vm.getUsers()"><span class="badge">Users</span></a>
+
+                            </li>
+                        </ul>
+
+
+                        <!-- <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i></a>
+                           <ul class="dropdown-menu">
+                             <li><a href="">More</a></li>
+                             <li><a href="">More</a></li>
+                             <li><a href="">More</a></li>
+                             <li><a href="">More</a></li>
+                             <li><a href="">More</a></li>
+                           </ul>
+                         </li> -->
+                        </ul>
+                    </nav>
+                </div>
+                <!-- /top nav -->
+
+                <div class="padding">
+                    <div class="full col-sm-9">
+
+                        <!-- content -->
+                        <div class="row" ui-view>
+
+                            <!-- main column -->
+                            <div ui-view>
+
+<<<<<<< HEAD
+
+                                </div>
+                            <div>
+=======
+                                
+                            </div>
+>>>>>>> 24b37865892e5e044ec368ec27afecba5c03a41d
+
+                            <!-- main col left -->
+                            <!-- <div class="col-sm-5">
+                                  <div class="well">
+                                       <form class="form-horizontal" role="form">
+                                        <h4>Co nowego u Ciebie słychać?</h4>
+                                         <div class="form-group" style="padding:14px;">
+                                          <textarea class="form-control" placeholder="Zaktualizuj swój status"></textarea>
+                                        </div>
+                                        <button class="btn btn-primary pull-right" type="button">Dodaj post</button><ul class="list-inline"><li><!--<a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+                                      </form>
+                                  </div>
+                              </div>
+                              <!-- main col right
+                              <div class="col-sm-7">
+                                    <div class="well">
+                                       <form class="form">
+                                        <h4>Rejestracja</h4>
+                                        <div class="input-group text-center">
+                                        <input type="text" class="form-control input-lg" placeholder="Enter your email address">
+                                          <span class="input-group-btn"><button class="btn btn-lg btn-primary" type="button">OK</button></span>
+                                        </div>
+                                      </form>
+                                    </div>
+                           </div>-
+                           <!--/row-->
+                           
+                            <div class="row" id="footer">
+                                <div class="col-sm-6">
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>
+                                        <a ui-sref="index" class="pull-right"></a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <h4 class="text-center">
+                                <a ui-sref="index" target="ext">©Copyright 2015 By TripLogger Team</a>
+                            </h4>
+
+                            <hr>
+
+                          </div><!-- /col-9 -->
+                      </div><!-- /row -->
+                </div><!-- /padding -->
+            </div>
+            <!-- /main -->
+
+          </div>
+    </div>
+
+
+    <!--post modal-->
+    <div id="postModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    Update Status
+                </div>
+                <div class="modal-body">
+                    <form class="form center-block">
+                        <div class="form-group">
+                            <textarea class="form-control input-lg" autofocus="" placeholder="What do you want to share?"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div>
+                        <button class="btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true">Post</button>
+                        <ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- script references -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script type="text/javascript" src="./bower_components/requirejs/require.js" data-main="./js/main.js"></script>
+</div>
+
+</body>
+</html>

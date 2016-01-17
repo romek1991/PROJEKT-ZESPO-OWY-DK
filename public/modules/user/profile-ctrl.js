@@ -33,9 +33,8 @@ define(['./../module'], function (controllers) {
                 });
             },
 
-            updateProfile: function(id, login, email, firstName, lastName, token) {
-                return $http.put(baseUrl + '/user', {
-                    'id': id,
+            updateProfile: function(login, email, firstName, lastName, token) {
+                return $http.put(baseUrl + '??', {
                     'login': login,
                     'email': email,
                     'firstName': firstName,

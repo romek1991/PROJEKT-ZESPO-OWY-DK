@@ -19,6 +19,7 @@
     "angular-md5": "~0.1.10",
 	"bootstrap-datepicker" : "latest"
   },
+
   "ignore": [
     "**/.*",
     "node_modules",
