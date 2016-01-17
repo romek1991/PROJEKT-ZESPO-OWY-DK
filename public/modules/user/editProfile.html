@@ -13,6 +13,10 @@
                         <center>
                             <form class="form">
                                 <div class="input-group text-center">
+								
+									<div ng-if="vm.userDataUpdateFailed" style="width:100%;margin-top:20px;" class="alert alert-danger" role="alert">
+										Aktualizacja danych nie powiodła się!
+                                    </div>
 
                                     <div class="form-group">
                                         <label class="label-description">Nazwa użytkownika:</label>
@@ -42,7 +46,7 @@
                                         <label class="label-description">Imie:</label>
                                         <input class="input-description" type="text" name="name" id="name"
                                                class="form-control" placeholder="Imię"
-                                               ng-model="vm.firstName" required=""><br>>
+                                               ng-model="vm.firstName" required=""><br>
                                     </div>
 
                                     <div class="form-group">
@@ -54,7 +58,7 @@
 
                                 </div>
                                 <div class="form-actions">
-                                    <button type="submit" class="btn btn-primary" ng-click="vm.updateProfile()">Uaktualnij
+                                    <button class="btn btn-primary" ng-click="vm.updateProfile()">Uaktualnij
                                     </button>
                                 </div>
                             </form>

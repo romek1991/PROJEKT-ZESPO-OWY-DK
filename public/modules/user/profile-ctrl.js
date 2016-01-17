@@ -71,7 +71,6 @@ define(['./../module'], function (controllers) {
             var loginToDisplay = $stateParams.login;
 
 
-
             vm.removeTrip = function(tripId){
                 $http.delete(baseUrl + "/trip/" + tripId).success(function(data){
                 }).error(function(data, status){
@@ -88,9 +87,11 @@ define(['./../module'], function (controllers) {
             }
 
             ProfileService.getProfile(loginToDisplay, token).success(function(data){
+				vm.userDataUpdateSuccess = $stateParams.userDataUpdateSuccess;
                 vm.displayName = data.user.firstName + ' ' + data.user.lastName;
                 vm.login = data.user.login;
                 vm.joinDate = data.user.joinDate;
+				vm.userId = data.user._id;
             }).error(function(status, data){
                 vm.userNotFound = true;
             });
@@ -107,9 +108,6 @@ define(['./../module'], function (controllers) {
                 alert(status + ': ' + data.message);
             });
             
-            
-
-
             vm.removeUser = function(){
                 jQuery('#removeUser').on('hidden.bs.modal', function () {
                     $http.delete(baseUrl + /user/ + loginToDisplay).success(function(data){

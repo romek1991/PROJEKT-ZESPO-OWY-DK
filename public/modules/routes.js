@@ -9,11 +9,14 @@ define(['app'], function (app) {
                     requireLogin: false
                 }
             })
-            .state('login',{
+            .state('login', {
                 url:'/login',
                 templateUrl: 'modules/user/login.html',
                 controller: 'LoginController',
                 controllerAs: 'vm',
+				params: {
+                    successfulSignup: null
+                },
                 data: {
                     requireLogin: false
                 }
@@ -44,7 +47,10 @@ define(['app'], function (app) {
                 url: '/profile/:login',
                 templateUrl: 'modules/user/profile.html',
                 controller: 'ProfileController',
-                controllerAs: 'vm'
+                controllerAs: 'vm',
+				params: {
+                    userDataUpdateSuccess: false
+                }
             })
             .state('app.editprofile', {
                 url: '/editProfile',

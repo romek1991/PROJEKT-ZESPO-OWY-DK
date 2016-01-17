@@ -8,12 +8,6 @@ define(['./../module'], function (controllers) {
   
   controllers.factory('TripService', function($http) {
 
-    $('#sandbox-container .input-daterange').datepicker({
-      format: "yyyy/mm/dd",
-      todayBtn: true,
-      todayHighlight: true
-    });
-
     var baseUrl = "http://localhost:3000";
     return {
       getComments: function(tripId, token) {

@@ -113,8 +113,8 @@ define(['./../module'], function (controllers) {
 
 
     controllers.controller('LoginController', ['$location', '$window', 'UserService', 'AuthenticationService',
-        '$cookies', '$state', '$http',
-        function LoginCtrl($location, $window, UserService, AuthenticationService, $cookies, $state, $http){
+        '$cookies', '$state', '$http', 'md5',
+        function LoginCtrl($location, $window, UserService, AuthenticationService, $cookies, $state, $http, md5){
 
             var vm = this;
             //alert("login controller");
@@ -122,7 +122,9 @@ define(['./../module'], function (controllers) {
             vm.logIn = function logIn(username, password) {
                 //alert("costam");
                 if (username !== undefined && password !== undefined) {
-                    UserService.logIn(username, password).success(function(data) {
+					var hash = md5.createHash(password);
+					console.log('hash:' + hash);
+                    UserService.logIn(username, hash).success(function(data) {
                         AuthenticationService.setUser(data.user);
                         AuthenticationService.setLoggedInFlag(true);
                         $cookies.put('token', data.token);

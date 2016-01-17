@@ -12,7 +12,13 @@
   </div>
 </div>
 <div ng-if="!vm.userNotFound">
+
+  
+  
   <div class="column col-sm-12 col-lg-12">
+  
+	<div style="width:100%;margin-top:20px;" class="alert alert-success" role="alert"
+	ng-if="vm.userDataUpdateSuccess">Dane zostały zmienione poprawnie.</div>
     <div class="panel panel-default">
       <div class="panel-body">
         <img ng-src="/img/avatars/{{vm.login}}" class="pull-right" width="200" height="200"/>

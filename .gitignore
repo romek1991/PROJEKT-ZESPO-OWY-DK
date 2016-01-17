@@ -1,5 +1,6 @@
 node_modules/*
 bower_components/
+/.idea/*
 /.idea
 /app.js.orig
 /mongod.lock
