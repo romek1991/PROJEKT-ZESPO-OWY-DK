@@ -17,15 +17,22 @@ define(['./../module'], function (controllers) {
             vm.lastName = user.lastName;
 
             vm.updateProfile = function() {
+				if (vm.firstName && vm.lastName)
                 ProfileService.updateProfile(user.id, vm.login, vm.email, vm.firstName, vm.lastName, token).
                 success(function(){
                         user.email = vm.email;
                         user.firstName = vm.firstName;
                         user.lastName = vm.lastName;
                    AuthenticationService.setUser(user);
-                });
+				   
+				   $state.go('app.profile', {
+						userDataUpdateSuccess: true
+					});
+                }).error(function(data) {
+					vm.userDataUpdateFailed = true;
+				});
                 //$state.go($state.current, {}, {reload: true});
-                $state.go('app.profile');
+                
             };
             
             vm.resetAvatar = function() {
