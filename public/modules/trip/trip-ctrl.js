@@ -82,8 +82,8 @@ define(['./../module'], function (controllers) {
     }
   });
 
-  controllers.controller('TripController', ['$location', '$window', '$stateParams', 'TripService', 'AuthenticationService', '$cookies', '$state', 'Upload',
-    function TripCtrl($location, $window, $stateParams, TripService, AuthenticationService, $cookies, $state, Upload) {
+  controllers.controller('TripController', ['$location', '$window', '$stateParams', 'TripService', 'AuthenticationService', '$cookies', '$state', 'Upload', '$timeout',
+    function TripCtrl($location, $window, $stateParams, TripService, AuthenticationService, $cookies, $state, Upload, $timeout) {
       var vm = this;
       console.log("trip controller");
       
@@ -97,12 +97,14 @@ define(['./../module'], function (controllers) {
       vm.user = user;
 
       vm.photos = [];
+      vm.photosToBeUploaded = [];
 
       //vm.pictures = null;
 
       vm.addTrip = function(name, description, publicAccess)  {
         if(name !== undefined && description !== undefined ){
           TripService.addTrip(name, description, publicAccess, token).success(function(data){
+            vm.uploadPictures(data.tripId);
             $state.go('app.trip', {
               tripId: data.tripId
             });
@@ -141,6 +143,7 @@ define(['./../module'], function (controllers) {
 
 
         TripService.getPhotos(tripId, token).success(function(data){
+/*
           var promises = data.photos;
 
           promises.forEach(function(element, index, array) {
@@ -152,6 +155,8 @@ define(['./../module'], function (controllers) {
               });
             });
           });
+*/
+          vm.photos = data.photos;
 
         }).error(function(data){
           $state.go('app.error', {
@@ -188,11 +193,12 @@ define(['./../module'], function (controllers) {
         console.log("UPDATE");
         TripService.updateTrip(tripId, vm.tripName, vm.tripDescription, vm.publicAccess, false, token) //todo: jak wdrozymy publiczne/prywatne to parametr publicAccess wycuagnac do UI
           .success(function(data) {
+              vm.uploadPictures(vm.tripIdent)
               $state.go('app.start')
         }).error(function(status, data){
           alert("Bład aktualizacji " + status +" data " + data);
         });
-      }
+      };
 
 
 
@@ -208,9 +214,12 @@ define(['./../module'], function (controllers) {
         console.log(files);
         console.log(vm.tripIdent);
 
+          //vm.pictures=files;    //zrobilem to tak na razie - dodalem ten panel na UI i moja metoda ma tego timeouta itp
+                                // - jak cos zdecydujemy to odkomentujemy. W kazdym razie potrzebowalem metody z parametrem tripId
+          vm.uploadPictures(vm.tripIdent);
 
 
-        Upload.upload({
+        /*Upload.upload({
           url: 'http://localhost:3000/photo',
           arrayKey: '',
           data: {tripId: vm.tripIdent, token: vm.token, photos: files},
@@ -222,21 +231,36 @@ define(['./../module'], function (controllers) {
         }, function (evt) {
           var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
           console.log('progress: ' + progressPercentage + '% ');
-        });
+        });*/
+      };
 
+      vm.uploadPictures = function (tripId) {
+        if (vm.photosToBeUploaded && vm.photosToBeUploaded.length) {
+          Upload.upload({
+              url: 'http://localhost:3000/photo',
+              arrayKey: '',
+              data: {
+                tripId: tripId, token: vm.token, photos: vm.photosToBeUploaded
+              },
+              method: 'POST'
+          }).then(function (response) {
+            $timeout(function () {
+              vm.result = response.data;
+            });
+          }, function (response) {
+            if (response.status > 0) {
+              vm.errorMsg = response.status + ': ' + response.data;
+            }
+          }, function (evt) {
+            vm.progress =
+                Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+          });
+        }
+      };
 
-
-
+        vm.removeFromPhotosList = function (index) {
+            vm.photosToBeUploaded.splice(index, 1);
       }
-
-
-
-
-
-
-
-
-
 
     }
     
