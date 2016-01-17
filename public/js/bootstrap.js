@@ -15,6 +15,7 @@ define([
 
             $rootScope.$on('$stateChangeStart', function (event, toState, toParams) {
                 var requireLogin = toState.data.requireLogin;
+                $rootScope.$$childTail.mCtrl.searchString = ""
                 //alert("state changed");
                 console.log("require : " + requireLogin);
                 console.log('toState :');
