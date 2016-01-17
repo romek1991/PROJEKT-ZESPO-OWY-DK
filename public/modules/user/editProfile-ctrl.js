@@ -24,26 +24,23 @@ define(['./../module'], function (controllers) {
                         user.firstName = vm.firstName;
                         user.lastName = vm.lastName;
                    AuthenticationService.setUser(user);
-				   
+
+                    var cookieUser = JSON.parse($cookies.get('user'));
+
+                    cookieUser.firstName = vm.firstName;
+                    cookieUser.lastName = vm.lastName;
+
+                    $cookies.put('user', JSON.stringify(cookieUser));
+                    $rootScope.$$childTail.$$childTail.mCtrl.getUser();
+
 				   $state.go('app.profile', {
 						userDataUpdateSuccess: true
 					});
                 }).error(function(data) {
 					vm.userDataUpdateFailed = true;
 				});
+
                 //$state.go($state.current, {}, {reload: true});
-                
-
-                        /*var cookieUser = JSON.parse($cookies.get('user'));
-
-                        cookieUser.firstName = vm.firstName;
-                        cookieUser.lastName = vm.lastName;
-
-                        $cookies.put('user', JSON.stringify(cookieUser));
-                        $rootScope.$$childTail.$$childTail.mCtrl.getUser();*/
-                });
-
-                $state.go('app.profile');
             };
             
             vm.resetAvatar = function() {
