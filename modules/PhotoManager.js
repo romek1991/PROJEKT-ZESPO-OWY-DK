@@ -99,6 +99,8 @@ exports.addPhotos = function(req, res) {
           console.log('req.files:');
           console.log(req.files);
           
+          var photoNumber = 1;
+          
           for (i in req.files) {
             var file = req.files[i];
             
@@ -106,7 +108,7 @@ exports.addPhotos = function(req, res) {
             console.log(file);
           
             var newPhoto = new Photo({
-              name: file.filename,
+              name: 'Zdjęcie ' + photoNumber++,
               filename: file.filename,
               trip: trip
             });

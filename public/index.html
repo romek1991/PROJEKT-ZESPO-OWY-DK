@@ -186,7 +186,7 @@
                                 <div class="column col-sm-12 col-lg-12" >
                                     <div class="panel panel-primary">
                                     <div class="panel-heading">
-                                        <h3 class="panel-title">Wyniki dla "{{mCtrl.searchString}}"</h3>
+                                        <h3 class="panel-title">Wyniki dla <strong>"{{mCtrl.searchString}}"</strong></h3>
                                     </div>
                                     <div class="panel-body">
                                         <div class="row">
@@ -227,13 +227,13 @@
                                                     <div class="media" ng-repeat="foundTrip in mCtrl.foundTrips">
                                                       <div class="media-left pull-left">
                                                         <a ui-sref="app.trip({tripId: foundTrip._id})">
-                                                          <img class="media-object" src="/img/bigben.jpg" width="48" height="48">
+                                                          <img class="media-object" ng-src="/photo/tripHeader/{{foundTrip._id}}" style="max-width:100px; max-height:px;">
                                                         </a>
                                                       </div>
                                                       <div class="media-body">
                                                         <a ui-sref="app.trip({tripId: foundTrip._id})">
                                                           <h4 class="media-heading"><strong>{{foundTrip.name}}</strong></h4>
-                                                          <em>{{foundTrip.createdDate}}</em>
+                                                          <em>{{foundTrip.createdDate | date:'yyyy.MM.dd, HH:mm:ss'}}</em>
                                                           <p>{{foundTrip.author.firstName}} {{foundTrip.author.lastName}}</p>
                                                         </a>
                                                       </div>
