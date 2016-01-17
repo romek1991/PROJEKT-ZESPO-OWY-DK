@@ -24,6 +24,14 @@ define(['./../module'], function (controllers) {
                     }
                 });
             },
+            
+            getUserPhotosHeaders: function(login, token) {
+                return $http.get(baseUrl + '/photo/user/' + login, {
+                    headers: {
+                        'x-access-token': token
+                    }
+                });
+            },
 
             updateProfile: function(login, email, firstName, lastName, token) {
                 return $http.put(baseUrl + '??', {
@@ -90,6 +98,14 @@ define(['./../module'], function (controllers) {
             }).error(function(status, data){
                 alert(status + ': ' + data.message);
             });
+            
+            ProfileService.getUserPhotosHeaders(loginToDisplay, token).success(function(data) {
+                vm.userPhotosHeaders = data.userPhotos
+            }).error(function(status, data){
+                alert(status + ': ' + data.message);
+            });
+            
+            
 
 
             vm.removeUser = function(){

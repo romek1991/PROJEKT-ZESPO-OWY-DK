@@ -14,6 +14,14 @@ define(['./../module'], function (controllers) {
                         'x-access-token': token
                     }
                 });
+            },
+            
+            getNewestPhotos: function(token) {
+                return $http.get(baseUrl + '/photo/latest', {
+                    headers: {
+                        'x-access-token': token
+                    }
+                });
             }
         }
     });
@@ -31,6 +39,12 @@ define(['./../module'], function (controllers) {
           
             StartService.getNewestTripsHeaders(token).success(function(data) {
                 vm.newestTripsHeaders = data.trips;
+            }).error(function(status, data){
+                alert(status + ': ' + data.message);
+            });
+            
+            StartService.getNewestPhotos(token).success(function(data) {
+                vm.newestPhotos = data.newestPhotos;
             }).error(function(status, data){
                 alert(status + ': ' + data.message);
             });

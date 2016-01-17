@@ -7,6 +7,7 @@ var fs = require('fs');
 
 var Photo = require('../models/photo');
 var Trip = require('../models/trip');
+var User = require('../models/user');
 //var Comment = require('../models/comment');
 
 //var UserManager = require('../modules/UserManager');
@@ -210,6 +211,66 @@ exports.getPhotoFile = function(req, res) {
       }
     });
   }
+}
+
+exports.getLatestPhotos = function(req, res) {
+  Photo
+    .find({}, 'name filename createdDate trip')
+    .populate('trip', 'name publicAccess author')
+    .sort('-createdDate')
+    .exec(function(err, newestPhotos) {
+      User
+        .populate(newestPhotos, {
+          path: 'trip.author',
+          select: 'firstName lastName login'
+        }, function(err, newestPhotos2){
+          var visiblePhotos = [];
+          for(i in newestPhotos2) {
+            var photo = newestPhotos2[i];
+            if(photo.trip.publicAccess) {
+              visiblePhotos.push(photo);
+            }
+          }
+          
+          var photosToReturn = visiblePhotos.slice(0,9);
+          
+          res.json({
+            newestPhotos: photosToReturn
+          });
+        });
+      
+    });
+}
+
+exports.getUserPhotosHeaders = function(req, res) {
+  console.log('req.params.login' + req.params.login);
+  Photo
+    .find({}, 'name filename createdDate trip')
+    .populate('trip', 'name publicAccess author')
+    .sort('-createdDate')
+    .exec(function(err, allPhotos) {
+      User
+        .populate(allPhotos, {
+          path: 'trip.author',
+          select: 'firstName lastName login'
+        }, function(err, allPhotos2){
+          var userPhotos = [];
+          for(var i in allPhotos2) {
+            var photo = allPhotos2[i]
+            if(photo.trip.author.login === req.params.login) {
+              console.log('req.user: ' + req.user);
+              console.log('photo.trip: ' + photo.trip);
+              if(req.user.admin || photo.trip.publicAccess || (photo.trip.author.login == req.user.login)) {
+                userPhotos.push(photo);
+              }
+            }
+          }
+          res.json({
+            userPhotos: userPhotos
+          });
+        });
+      
+    });
 }
 
 exports.defaultAvatar = function(login) {

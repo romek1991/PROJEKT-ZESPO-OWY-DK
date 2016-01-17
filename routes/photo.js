@@ -120,6 +120,28 @@ router.get('/tripThumbnail/:tripId', function (req, res, next) {
 });
 
 /*
+  GET /photo/latestPhotos
+  Get thumbnail photo for particular trip
+    tripId:   trip id
+*/
+router.get('/latest', function (req, res, next) {
+  SecurityManager.verifyToken(req, res, function() {
+    PhotoManager.getLatestPhotos(req, res);
+  });
+});
+
+/*
+  GET /photo/user/:login
+  Get photo headers for particular trip
+    login:   login of the user
+*/
+router.get('/user/:login', function (req, res, next) {
+  SecurityManager.verifyToken(req, res, function() {
+    PhotoManager.getUserPhotosHeaders(req, res);
+  });
+});
+
+/*
   GET /photo/:filename
   Get photo with given name
     filename:   photo name

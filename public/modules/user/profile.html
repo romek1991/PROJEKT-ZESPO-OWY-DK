@@ -50,11 +50,26 @@
   <div class="column col-sm-12 col-lg-6">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Zdjęcia</h3>
+        <h3 class="panel-title">{{ (vm.login == mCtrl.getUser().login) ? 'Moje zdjęcia' : 'Zdjęcia'}} ({{vm.userPhotosHeaders.length}})</h3>
       </div>
       <div class="panel-body">
-        <p>Tutaj mogą być np. zdjęcia.</p>
-        <p>Na kolejny sprint</p>
+        <div ng-repeat="photo in vm.userPhotosHeaders" class="well">
+        
+          <div class="media">
+            <div class="media-left">
+              <img class="pull-left" ng-src="/photo/{{photo.filename}}" style="max-width: 150px; height: 100px;"/>
+            </div>
+            <div class="media-body">
+              <img class="pull-right" width="40" height="40" src="/img/closed_lock.png" ng-show="!photo.trip.publicAccess"/>
+              <h4 class="media-heading"><strong>{{photo.name}}</strong></h4>
+              <p><strong>{{photo.trip.name}}</strong></p>
+              <p>{{photo.trip.author.firstName + ' ' + photo.trip.author.lastName}}, {{photo.createdDate | date:'yyyy.MM.dd, HH:mm:ss'}}</p>
+              
+              
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
     <div class="panel panel-default" ng-if="vm.canEditProfile">
