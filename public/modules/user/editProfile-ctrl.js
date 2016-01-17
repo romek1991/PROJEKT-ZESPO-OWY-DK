@@ -1,8 +1,8 @@
 define(['./../module'], function (controllers) {
     'use strict';
     controllers.controller('ProfileEditController', ['ProfileService', 'AuthenticationService',
-        'UserService', '$cookies', '$http', '$state', 'Upload',
-        function ProfileCtrl(ProfileService, AuthenticationService, UserService, $cookies, $http, $state, Upload) {
+        'UserService', '$cookies', '$http', '$state', 'Upload', "$rootScope",
+        function ProfileCtrl(ProfileService, AuthenticationService, UserService, $cookies, $http, $state, Upload, $rootScope) {
             console.log('editProfile controller');
             
             var vm = this;
@@ -23,8 +23,16 @@ define(['./../module'], function (controllers) {
                         user.firstName = vm.firstName;
                         user.lastName = vm.lastName;
                    AuthenticationService.setUser(user);
+
+                        var cookieUser = JSON.parse($cookies.get('user'));
+
+                        cookieUser.firstName = vm.firstName;
+                        cookieUser.lastName = vm.lastName;
+
+                        $cookies.put('user', JSON.stringify(cookieUser));
+                        $rootScope.$$childTail.$$childTail.mCtrl.getUser();
                 });
-                //$state.go($state.current, {}, {reload: true});
+
                 $state.go('app.profile');
             };
             

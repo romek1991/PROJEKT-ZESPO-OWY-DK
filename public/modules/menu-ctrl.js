@@ -37,7 +37,16 @@ define(['./module'], function (controllers) {
         mCtrl.foundUsers = null;
         mCtrl.foundTrips = null;
 
-        mCtrl.getUser = function(){return JSON.parse($cookies.get('user'));}
+        mCtrl.firstName = "";
+        mCtrl.lastName = "";
+
+
+        mCtrl.getUser = function(){
+            var user = JSON.parse($cookies.get('user'));
+            mCtrl.firstName = user.firstName;
+            mCtrl.lastName = user.lastName;
+            return user;
+        };
 
         if(!(typeof(token) === 'undefined')){
             AuthenticationService.setLoggedInFlag(true);

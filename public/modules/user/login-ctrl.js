@@ -135,7 +135,7 @@ define(['./../module'], function (controllers) {
                         console.log(status + ': ' + data.message);
                     });
                 }
-            }
+            };
 
 /*
             vm.removeTrip = function(id){
