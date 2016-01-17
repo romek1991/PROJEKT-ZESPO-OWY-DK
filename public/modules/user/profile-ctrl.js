@@ -90,6 +90,7 @@ define(['./../module'], function (controllers) {
             ProfileService.getProfile(loginToDisplay, token).success(function(data){
                 vm.displayName = data.user.firstName + ' ' + data.user.lastName;
                 vm.login = data.user.login;
+                vm.joinDate = data.user.joinDate;
             }).error(function(status, data){
                 vm.userNotFound = true;
             });

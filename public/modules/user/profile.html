@@ -16,7 +16,10 @@
     <div class="panel panel-default">
       <div class="panel-body">
         <img ng-src="/img/avatars/{{vm.login}}" class="pull-right" width="200" height="200"/>
-        <h2>{{vm.displayName}}</h2> <h3>{{vm.login}}</h3>
+        <h2>{{vm.displayName}}</h2>
+        <h3>{{vm.login}}</h3>
+        <br/>
+        <p>Na TripLoggerze od {{vm.joinDate | date:'yyyy.MM.dd'}}</p>
       </div>
     </div>
   </div>
@@ -48,6 +51,38 @@
   </div>
   
   <div class="column col-sm-12 col-lg-6">
+  
+    <div class="panel panel-default" ng-if="vm.canEditProfile">
+      <div class="panel-heading">
+        <h3 class="panel-title">Opcje profilu</h3>
+      </div>
+      <div class="panel-body">
+        <center>
+          <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#removeUser">Usuń profil</button>
+          <button type="submit" class="btn btn-warning" ui-sref="app.editprofile">Edytuj Profil</button>
+        </center>
+        <div id="removeUser" class="modal fade">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Usuwanie profilu</h4>
+              </div>
+              <div class="modal-body">
+                <p>Czy na pewno chcesz usunąć profil?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.removeUser()">Usun</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">{{ (vm.login == mCtrl.getUser().login) ? 'Moje zdjęcia' : 'Zdjęcia'}} ({{vm.userPhotosHeaders.length}})</h3>
@@ -72,35 +107,7 @@
         </div>
       </div>
     </div>
-    <div class="panel panel-default" ng-if="vm.canEditProfile">
-      <div class="panel-heading">
-        <h3 class="panel-title">Edytuj profil</h3>
-      </div>
-      <div class="panel-body">
-        <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#removeUser">Usuń profil</button>
-        <button type="submit" class="btn btn-primary" ui-sref="app.editprofile">Edytuj Profil</button>
-
-        <div id="removeUser" class="modal fade">
-          <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Usuwanie profilu</h4>
-              </div>
-              <div class="modal-body">
-                <p>Czy na pewno chcesz usunąć profil?</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.removeUser()">Usun</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    
 
 
   </div>
