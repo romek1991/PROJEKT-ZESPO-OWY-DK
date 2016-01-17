@@ -11,7 +11,9 @@ require.config({
         'jquery': '../bower_components/jquery/dist/jquery',
         'lightbox': '../bower_components/lightbox2/dist/js/lightbox',
         'angular-md5': '../bower_components/angular-md5/angular-md5',
-        'bootstrap-datepicker': '../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker'
+        'bootstrap-datepicker': '../bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker',
+        'bootstrap-minified': '../js/bootstrap.min',
+        'scripts': '../js/scripts'
 
     },
     shim: {
@@ -42,6 +44,12 @@ require.config({
         },
         'angular-md5': {
             deps: ['angular']
+        },
+        'scripts': {
+            deps: ['jquery']
+        },
+        'bootstrap-minified':{
+            deps:['jquery']
         }
 
     },
