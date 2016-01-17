@@ -11,7 +11,7 @@ var UserManager = require('../modules/UserManager');
 function checkAccessForModification(req, trip, next) {
   console.log('req.user: ' + req.user);
   console.log('trip.author: ' + trip.author);
-  if (  req.user.admin || req.user._id.equals(trip.author)  )  {
+  if (  req.user.admin || req.user._id.equals(trip.author._id)  )  {
     console.log('check access true');
     next(true);
   } else {
@@ -22,7 +22,7 @@ function checkAccessForModification(req, trip, next) {
 function checkAccessForRead(req, trip, next) {
   console.log('req.user: ' + req.user);
   console.log('trip.author: ' + trip.author);
-  if ( trip.publicAccess || req.user._id.equals(trip.author) || req.user.admin )  {
+  if ( trip.publicAccess || req.user._id.equals(trip.author._id) || req.user.admin )  {
     console.log('check access true');
     next(true);
   } else {
