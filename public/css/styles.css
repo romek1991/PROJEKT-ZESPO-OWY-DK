@@ -108,6 +108,12 @@ hr {
     top: 7px;
 }
 
+.avatar {
+    max-width: 140px;
+    max-height: 140px;
+    float: none;
+}
+
 #main {
    background-color:#e9eaed;
    padding-left:0;

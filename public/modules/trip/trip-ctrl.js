@@ -237,7 +237,7 @@ define(['./../module'], function (controllers) {
 
           //vm.pictures=files;    //zrobilem to tak na razie - dodalem ten panel na UI i moja metoda ma tego timeouta itp
                                 // - jak cos zdecydujemy to odkomentujemy. W kazdym razie potrzebowalem metody z parametrem tripId
-          vm.uploadPictures(vm.tripIdent);
+          //vm.uploadPictures(vm.tripIdent);
 
 
         /*Upload.upload({

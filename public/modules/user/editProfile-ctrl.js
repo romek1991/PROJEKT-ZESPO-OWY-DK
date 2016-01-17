@@ -18,17 +18,17 @@ define(['./../module'], function (controllers) {
 
             vm.updateProfile = function() {
               ProfileService.updateProfile(vm.login, vm.email, vm.firstName, vm.lastName);
-            }
+            };
             
             vm.resetAvatar = function() {
               ProfileService.resetAvatar(vm.login, token);
               $state.go('app.profile');
-            }
+            };
 
 
 
 
-            vm.upload = function() {
+            vm.uploadAvatar = function() {
                 console.log("test:");
                 console.log(vm.file);
                 console.log(vm.tripIdent);
