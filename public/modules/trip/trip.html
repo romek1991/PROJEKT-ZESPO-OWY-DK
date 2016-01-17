@@ -32,10 +32,21 @@
 <div class="column col-sm-12 col-lg-8" >
   
   <div class="well">
-    <img class="pull-right" ng-src="{{vm.publicAccess ? '/img/opened_lock.png' : '/img/closed_lock.png'}}"/>
+    <button class="btn btn-warning pull-right" ng-show="vm.tripIsEditable" ui-sref="app.edittrip({tripId: vm.tripIdent})">Edytuj wycieczkę</button>
+    <img class="pull-right" src="/img/closed_lock.png" ng-show="!vm.publicAccess"/>
     <h2>{{vm.tripName}}</h2>
-    <p>{{tripHeader.fromDate ? 'od: ' + tripHeader.fromDate : '' }}</p>
-    <p>{{tripHeader.toDate ? 'do: ' + tripHeader.toDate : ''}}</p>
+    <h3>{{(vm.startDate ? 'od ' + (vm.startDate | date:'yyyy.MM.dd') : '') + (vm.endDate ? ' do ' + (vm.endDate | date:'yyyy.MM.dd') : '')}}</h3>
+  </div>
+  
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Opis</h3>
+    </div>
+          
+    <div class="panel-body">
+        <p>{{vm.tripDescription}}</p>
+    </div>
   </div>
   
   <div class="panel panel-default">
@@ -57,10 +68,9 @@
 	<div class="image-set">
 	</a>
 	<label ng-repeat="photo in vm.photos">
-		<!--<a ng-href="/photo/{{photo.filename}}" class="example-image-link" data-lightbox="example-set" data-title="My caption">-->
-		<!--<img class="thumb" ng-src="{{photo}}" alt="test"/></a>-->
-		<img class="thumb" ng-src="/photo/{{photo.filename}}" alt="test"/>
-	</label>
+		<a ng-href="/photo/{{photo.filename}}" class="example-image-link" data-lightbox="example-set" data-title="Nazwa zdjęcia: {{photo.name}},<br /> Dodano: {{photo.createdDate}}">
+		<img class="thumb" ng-src="/photo/{{photo.filename}}" alt="test"/></a>
+	</label>	
 	</div>
 	</div>
 	  
@@ -74,14 +84,19 @@
       </div> -->
     </div>
   </div>
-  
+
+</div>
+  <div class="column col-sm-12 col-lg-4">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h3 class="panel-title">Opis</h3>
+      <h3 class="panel-title">Autor</h3>
     </div>
-          
     <div class="panel-body">
-        <p>{{vm.tripDescription}}</p>
+      <a ui-sref="app.profile({login: vm.tripAuthor.login})">
+        <img class="pull-left" width="70" height="70" ng-src="/img/avatars/{{vm.tripAuthor.login}}"/>
+        <h4><strong>{{vm.tripAuthor.firstName + ' ' + vm.tripAuthor.lastName}}</strong></h4>
+      </a>
+      <p>{{vm.createdDate | date:'yyyy.MM.dd, HH:mm:ss'}}</p>
     </div>
   </div>
   <button class=".btn-link" ng-show="vm.tripIsEditable" ui-sref="app.edittrip({tripId: vm.tripIdent})">Edytuj</button>
@@ -100,7 +115,7 @@
         </div>
         <div class="media-body">
           <h4 class="media-heading"><strong>{{comment.author.firstName}} {{comment.author.lastName}}</strong></h4>
-          <em>{{comment.time}}</em>
+          <em>{{comment.time | date:'yyyy.MM.dd, HH:mm:ss'}}</em>
           <p>{{comment.text}}</p>
         </div>
       </div>

@@ -1,17 +1,25 @@
 <div class="column col-sm-12 col-lg-12">
   <div class="panel panel-default">
     <div class="panel-heading">
+	<center>
       <h3 class="panel-title">Logowanie</h3>
+	</center>
     </div>
     <div class="panel-body">
       <center>
         <form class="form">
           <div class="input-group text-center">
             <div class="form-group">
-              <input type="text" name="username" id="username" class="form-control" placeholder="Login" ng-model="username" required="">
+              <div class="alert-danger" ng-show="!vm.credsOk">Nieprawidłowe dane</div>
+            </div>
+            <div class="alert alert-success" role="alert" ng-show="vm.successfulSignup">Rejestracja powiodła się!</div>
+            <div class="form-group">
+			  <label class="label-description">Nazwa użytkownika:</label>
+              <input class="input-description" type="text" name="username" id="username" class="form-control" placeholder="Login" ng-model="username" required=""><br></br>
             </div>
             <div class="form-group">
-              <input type="password" name="password" id="password" class="form-control" placeholder="Hasło" ng-model="password" required="">
+			  <label class="label-description">Hasło:</label>
+              <input class="input-description" type="password" name="password" id="password" class="form-control" placeholder="Hasło" ng-model="password" required=""><br></br>
             </div>
             <div class="form-group">
               <p class="alert-danger" ng-show="!vm.credsOk">Nieprawidłowe dane</p>

@@ -9,23 +9,32 @@
           <div class="input-group text-center">
 
               <div class="form-group">
-                  <input type="text" name="username" id="username" class="form-control" placeholder="Login" ng-model="vm.login" required="">
+			      <label class="label-description">Nazwa użytkownika:</label>
+                  <input class="input-description" type="text" name="username" id="username" class="form-control" placeholder="mojlogin1275" ng-model="vm.login" required=""><br></br>
+			      
+				 <div style="width:100%;margin-top:20px;" class="alert alert-info" role="alert">Uwaga! Login nie może zostać zmieniony po rejestracji.</div>
+			 </div>
+
+				  <!--<div style="width:100%;" class="alert alert-info" role="alert">Uwaga! Login nie może zostać zmieniony po rejestracji.</div>-->
+			  
+              <div class="form-group">
+			      <label class="label-description">Hasło:</label>
+                  <input class="input-description" type="password" name="password" id="password" class="form-control" placeholder="mojehaslojestsuper" ng-model="vm.password" required=""><br></br>
               </div>
 
               <div class="form-group">
-                  <input type="text" name="password" id="password" class="form-control" placeholder="Hasło" ng-model="vm.password" required="">
+			      <label class="label-description">Email:</label>
+                  <input class="input-description" type="text" name="email" id="email" class="form-control" placeholder="jan.nowak@triplogger.pl" ng-model="vm.email" required=""><br></br>
               </div>
 
               <div class="form-group">
-                  <input type="text" name="email" id="email" class="form-control" placeholder="Email" ng-model="vm.email" required="">
+			      <label class="label-description">Imie:</label>
+                  <input class="input-description" type="text" name="name" id="name" class="form-control" placeholder="Jan" ng-model="vm.firstName" required=""><br></br>
               </div>
 
               <div class="form-group">
-                  <input type="text" name="name" id="name" class="form-control" placeholder="Imię" ng-model="vm.firstName" required="">
-              </div>
-
-              <div class="form-group">
-                  <input type="text" name="surname" id="surname" class="form-control" placeholder="Nazwisko" ng-model="vm.lastName" required="">
+				  <label class="label-description">Nazwisko:</label>
+                  <input class="input-description" type="text" name="surname" id="surname" class="form-control" placeholder="Kowalski" ng-model="vm.lastName" required=""><br></br>
               </div>
 
           </div>

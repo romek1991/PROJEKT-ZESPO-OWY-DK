@@ -7,6 +7,13 @@ define(['./../module'], function (controllers) {
   
   
   controllers.factory('TripService', function($http) {
+
+    $('#sandbox-container .input-daterange').datepicker({
+      format: "yyyy/mm/dd",
+      todayBtn: true,
+      todayHighlight: true
+    });
+
     var baseUrl = "http://localhost:3000";
     return {
       getComments: function(tripId, token) {
@@ -35,12 +42,18 @@ define(['./../module'], function (controllers) {
         });
       },
       
-      addTrip: function(name, description, publicAccess, token) {
-        console.log(name + ' ' + description + ' ' + token);
+      addTrip: function(name, description, startDate, endDate, publicAccess, token) {
+		  
+		console.log('startDate: ' + startDate);
+		console.log('endDate: ' + endDate);
+
+        console.log(name + ' ' + description + ' ' + token );
         return $http.post(baseUrl + '/trip', {
           'name': name,
           'description': description,
-          'publicAccess': publicAccess,  //todo : pozniej do parametru
+          'publicAccess': publicAccess,  //todo : pozniej do parametru,
+          'startDate': startDate,
+          'endDate': endDate,
           headers: {
             'x-access-token': token
           }
@@ -101,9 +114,12 @@ define(['./../module'], function (controllers) {
 
       //vm.pictures = null;
 
-      vm.addTrip = function(name, description, publicAccess)  {
-        if(name !== undefined && description !== undefined ){
-          TripService.addTrip(name, description, publicAccess, token).success(function(data){
+
+      vm.addTrip = function(name, description, startDate, endDate, publicAccess, token)  {
+		  var startDate = $("#startDate").val();
+		  var endDate = $("#endDate").val();
+        if(name !== undefined && description !== undefined && startDate !== undefined && endDate !== undefined){
+          TripService.addTrip(name, description, startDate, endDate, publicAccess, token).success(function(data){
             vm.uploadPictures(data.tripId);
             $state.go('app.trip', {
               tripId: data.tripId
@@ -126,7 +142,12 @@ define(['./../module'], function (controllers) {
           vm.tripDescription = data.trip.description;
           vm.tripIdent = tripId;
           vm.publicAccess = data.trip.publicAccess;
-          if(data.trip.author === user.id) {
+          vm.startDate = data.trip.startDate;
+          vm.endDate = data.trip.endDate;
+          vm.createdDate = data.trip.createdDate;
+          vm.tripAuthor = data.trip.author;
+          
+          if(data.trip.author._id === user.id) {
             vm.tripIsEditable = true;
           }
           else{
@@ -191,7 +212,7 @@ define(['./../module'], function (controllers) {
 
       vm.updateTrip = function(){
         console.log("UPDATE");
-        TripService.updateTrip(tripId, vm.tripName, vm.tripDescription, vm.publicAccess, false, token) //todo: jak wdrozymy publiczne/prywatne to parametr publicAccess wycuagnac do UI
+        TripService.updateTrip(tripId, vm.tripName, vm.tripDescription, vm.publicAccess, token) //todo: jak wdrozymy publiczne/prywatne to parametr publicAccess wycuagnac do UI
           .success(function(data) {
               vm.uploadPictures(vm.tripIdent)
               $state.go('app.start')

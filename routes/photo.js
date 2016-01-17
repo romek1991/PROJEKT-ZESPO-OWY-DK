@@ -111,6 +111,15 @@ router.get('/trip/:tripId', function (req, res, next) {
 });
 
 /*
+  GET /photo/tripThumbnail/:tripId
+  Get thumbnail photo for particular trip
+    tripId:   trip id
+*/
+router.get('/tripThumbnail/:tripId', function (req, res, next) {
+  PhotoManager.getThumbnailForTrip(req, res);
+});
+
+/*
   GET /photo/:filename
   Get photo with given name
     filename:   photo name

@@ -99,6 +99,8 @@ exports.addPhotos = function(req, res) {
           console.log('req.files:');
           console.log(req.files);
           
+          var photoNumber = 1;
+          
           for (i in req.files) {
             var file = req.files[i];
             
@@ -106,7 +108,7 @@ exports.addPhotos = function(req, res) {
             console.log(file);
           
             var newPhoto = new Photo({
-              name: file.filename,
+              name: 'Zdjęcie ' + photoNumber++,
               filename: file.filename,
               trip: trip
             });
@@ -149,6 +151,42 @@ exports.getPhotosForTrip = function(req, res) {
               res.send(500).json({message: "Error while getting photos from DB!"});
             } else {
               res.status(200).json({photos: photos});
+            }
+          });
+          
+        }
+      }
+    });
+    
+  }
+}
+
+exports.getThumbnailForTrip = function(req, res) {
+  
+  if (!req.tripId) {
+    res.status(500).json({message: "No tripId provided in URL!"});
+  } else {
+  
+    Trip.findById(req.tripId, function(err, trip) {
+      if (err) {
+        console.error("[PhotoManager] ERROR: " + err);
+        res.status(500).json({message: "Error!"});
+      } else {
+        if (!trip) {
+          res.status(404).json({message: "trip doesn't exist!"});
+        } else {
+          
+          Photo.find({trip: trip}, 'filename').limit(1).exec(function(err, thumbnail){
+            if (err) {
+              res.send(500).json({message: "Error while getting thumbnail from DB!"});
+            } else {
+              console.log('thumbnail: ');
+              console.log(thumbnail);
+              if (thumbnail[0]) {
+                res.sendFile(req.app.get('rootDir') + '/uploads/photos/' + thumbnail[0].filename);
+              } else {
+                res.sendFile(req.app.get('rootDir') + '/tripThumbnail.png');
+              }
             }
           });
           

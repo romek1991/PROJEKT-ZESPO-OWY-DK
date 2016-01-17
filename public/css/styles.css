@@ -151,6 +151,19 @@ hr {
   text-shadow:0 0 1px;
   border-radius:2px;
 }
+
+.label-description{
+	text-align: justify;
+	float:left;
+	width:200px;
+	margin-right:5px;
+}
+
+.input-description{
+	float:left;
+	width: auto;
+	display: block;
+}
 #sidebar-footer {
   background-color:#444;
   position:absolute;

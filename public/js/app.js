@@ -8,7 +8,9 @@ define([
     //'./services/index'
     'ngFileUpload',
     'ui.bootstrap',
-    'lightbox'
+    'lightbox',
+    'angular-md5',
+    'bootstrap-datepicker'
 ], function (ng) {
     'use strict';
 
@@ -20,7 +22,8 @@ define([
         //'app.directives',
         'ui.router',
         'ngFileUpload',
-        'ui.bootstrap'
+        'ui.bootstrap',
+        'angular-md5'
     ])
 
 });

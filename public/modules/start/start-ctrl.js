@@ -30,7 +30,7 @@ define(['./../module'], function (controllers) {
             vm.user = user;
           
             StartService.getNewestTripsHeaders(token).success(function(data) {
-                vm.newestTripsHeaders = data.trips
+                vm.newestTripsHeaders = data.trips;
             }).error(function(status, data){
                 alert(status + ': ' + data.message);
             });
