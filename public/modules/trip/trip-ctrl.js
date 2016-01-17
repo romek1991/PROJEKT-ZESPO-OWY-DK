@@ -184,7 +184,7 @@ define(['./../module'], function (controllers) {
 
       vm.updateTrip = function(){
         console.log("UPDATE");
-        TripService.updateTrip(tripId, vm.tripName, vm.tripDescription, vm.publicAccess, false, token) //todo: jak wdrozymy publiczne/prywatne to parametr publicAccess wycuagnac do UI
+        TripService.updateTrip(tripId, vm.tripName, vm.tripDescription, vm.publicAccess, token) //todo: jak wdrozymy publiczne/prywatne to parametr publicAccess wycuagnac do UI
           .success(function(data) {
               $state.go('app.start')
         }).error(function(status, data){
