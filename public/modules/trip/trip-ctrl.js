@@ -8,7 +8,6 @@ define(['./../module'], function (controllers) {
   
   controllers.factory('TripService', function($http) {
 
-
     var baseUrl = "http://localhost:3000";
     return {
       getComments: function(tripId, token) {
