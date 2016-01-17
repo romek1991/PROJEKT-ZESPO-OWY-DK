@@ -8,7 +8,7 @@ define(['./../module'], function (controllers) {
   
   controllers.factory('TripService', function($http) {
 
-    $('#sandbox-container .input-daterange').datepicker({
+    $('.input-daterange').datepicker({
       format: "yyyy/mm/dd",
       todayBtn: true,
       todayHighlight: true
