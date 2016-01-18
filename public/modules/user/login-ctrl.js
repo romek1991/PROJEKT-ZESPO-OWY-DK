@@ -120,7 +120,6 @@ define(['./../module'], function (controllers) {
             //alert("login controller");
             vm.credsOk = true;
             vm.logIn = function logIn(username, password) {
-                //alert("costam");
                 if (username !== undefined && password !== undefined) {
                     UserService.logIn(username, password).success(function(data) {
                         AuthenticationService.setUser(data.user);

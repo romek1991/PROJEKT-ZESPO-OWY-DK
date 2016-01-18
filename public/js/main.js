@@ -34,7 +34,8 @@ require.config({
             exports: 'angular'
         },*/
         angular: {
-            exports : 'angular'
+            exports : 'angular',
+            deps: ['jquery']
         },
         ngFileUpload: {
             deps: ['angular']

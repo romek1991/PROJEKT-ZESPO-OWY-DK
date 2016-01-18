@@ -32,7 +32,10 @@
 <div class="column col-sm-12 col-lg-8" >
   
   <div class="well">
+
+    <button class="btn btn-danger pull-right" ng-show="vm.tripIsEditable" data-toggle="modal" data-target="#removeTrip" ng-show="vm.tripIsEditable">Usuń wycieczkę</button>
     <button class="btn btn-warning pull-right" ng-show="vm.tripIsEditable" ui-sref="app.edittrip({tripId: vm.tripIdent})">Edytuj wycieczkę</button>
+
     <img class="pull-right" src="/img/closed_lock.png" ng-show="!vm.publicAccess"/>
     <h2>{{vm.tripName}}</h2>
     <h3>{{(vm.startDate ? 'od ' + (vm.startDate | date:'yyyy.MM.dd') : '') + (vm.endDate ? ' do ' + (vm.endDate | date:'yyyy.MM.dd') : '')}}</h3>
@@ -138,5 +141,26 @@
  
 </div>
 </div>
+
+<div id="removeTrip" class="modal fade">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Usuwanie wycieczki</h4>
+      </div>
+      <div class="modal-body">
+        <p>Czy na pewno chcesz usunąć wycieczkę?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.removeTrip()">Usun</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <script src="js/lightbox.js"></script>

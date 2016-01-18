@@ -10,6 +10,8 @@ define([
             $httpProvider.interceptors.push('TokenInterceptor');
         });
 
+
+
         app.run(['AuthenticationService','$rootScope', '$cookies', '$state',
             function (AuthenticationService, $rootScope, $cookies, $state) {
 

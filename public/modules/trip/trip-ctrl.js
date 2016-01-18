@@ -54,6 +54,9 @@ define(['./../module'], function (controllers) {
         });
       },
 
+
+
+
       updateTrip: function(id, name, description, publicAccess, token) {
         console.log(name + ' ' + description + ' ' + token);
         console.log("UPDATE");
@@ -68,7 +71,15 @@ define(['./../module'], function (controllers) {
           }
         });
       },
-      
+
+      removeTrip: function(tripId){
+        return $http.delete(baseUrl + '/trip/'+tripId,{
+
+        });
+
+
+      },
+
       getPhotos: function(tripId, token) {
         console.log("Get photos");
         return $http.get(baseUrl + '/photo/trip/' + tripId, {
@@ -92,8 +103,9 @@ define(['./../module'], function (controllers) {
   controllers.controller('TripController', ['$location', '$window', '$stateParams', 'TripService', 'AuthenticationService', '$cookies', '$state', 'Upload', '$timeout',
     function TripCtrl($location, $window, $stateParams, TripService, AuthenticationService, $cookies, $state, Upload, $timeout) {
       var vm = this;
-      console.log("trip controller");
-      
+
+
+
       var token = $cookies.get('token');
       vm.token = token;
       var tripId = $stateParams.tripId;
@@ -202,7 +214,24 @@ define(['./../module'], function (controllers) {
         }
       };
 
-      
+      vm.removeTrip = function(){
+        alert('usuwam wycieczke');
+        jQuery('#removeTrip').on('hidden.bs.modal', function() {
+          TripService.removeTrip(tripId).success(function () {
+                $state.go('index');
+              }
+          ).error(function () {
+                $state.go('app.error', {
+                  message: "Nie można usunąć wycieczki!"
+                });
+              });
+
+        });
+
+
+      }
+
+
 
       vm.updateTrip = function(){
         console.log("UPDATE");
