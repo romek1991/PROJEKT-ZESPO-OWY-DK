@@ -33,9 +33,10 @@
   
   <div class="well">
 
-    <button class="btn btn-danger pull-right" ng-show="vm.tripIsEditable" data-toggle="modal" data-target="#removeTrip" ng-show="vm.tripIsEditable">Usuń wycieczkę</button>
-    <button class="btn btn-warning pull-right" ng-show="vm.tripIsEditable" ui-sref="app.edittrip({tripId: vm.tripIdent})">Edytuj wycieczkę</button>
-
+    <div class="btn-toolbar pull-right">
+      <button class="btn btn-danger" ng-show="vm.tripIsEditable" data-toggle="modal" data-target="#removeTrip" ng-show="vm.tripIsEditable">Usuń wycieczkę</button>
+      <button class="btn btn-warning pull-right" ng-show="vm.tripIsEditable" ui-sref="app.edittrip({tripId: vm.tripIdent})">Edytuj wycieczkę</button>
+    </div>
     <img class="pull-right" src="/img/closed_lock.png" ng-show="!vm.publicAccess"/>
     <h2>{{vm.tripName}}</h2>
     <h3>{{(vm.startDate ? 'od ' + (vm.startDate | date:'yyyy.MM.dd') : '') + (vm.endDate ? ' do ' + (vm.endDate | date:'yyyy.MM.dd') : '')}}</h3>

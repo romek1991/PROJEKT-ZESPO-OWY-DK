@@ -66,6 +66,7 @@ define(['./../module'], function (controllers) {
                     console.log('Success ');
                     var currentUser = JSON.parse($cookies.get('user'));
                     currentUser.avatarName = currentUser.login + "?" + new Date().getTime();
+                    vm.avatarName = currentUser.avatarName;
                     $cookies.put('user', JSON.stringify(currentUser));
                     console.log(currentUser);
                     $state.go('app.profile', {
