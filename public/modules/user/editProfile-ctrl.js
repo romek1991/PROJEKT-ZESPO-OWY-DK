@@ -7,6 +7,8 @@ define(['./../module'], function (controllers) {
             
             var vm = this;
 
+
+
             var token = $cookies.get('token');
             vm.token = token;
             var user = AuthenticationService.getUser();
@@ -15,6 +17,7 @@ define(['./../module'], function (controllers) {
             vm.email = user.email;
             vm.firstName = user.firstName;
             vm.lastName = user.lastName;
+            vm.avatarName = user.avatarName;
 
             vm.updateProfile = function() {
 				if (vm.firstName && vm.lastName)
@@ -61,12 +64,22 @@ define(['./../module'], function (controllers) {
                     method: 'POST'
                 }).then(function (resp) {
                     console.log('Success ');
+                    var currentUser = JSON.parse($cookies.get('user'));
+                    currentUser.avatarName = currentUser.login + "?" + new Date().getTime();
+                    $cookies.put('user', JSON.stringify(currentUser));
+                    console.log(currentUser);
+                    $state.go('app.profile', {
+                        userDataUpdateSuccess: true
+                    });
                 }, function (resp) {
                     console.log('Error status: ' + resp.status);
+                    vm.userDataUpdateFailed = true;
                 }, function (evt) {
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                     console.log('progress: ' + progressPercentage + '% ');
                 });
+
+
             }
 
         }

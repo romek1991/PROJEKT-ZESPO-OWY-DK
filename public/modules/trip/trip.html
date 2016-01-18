@@ -96,7 +96,7 @@
     </div>
     <div class="panel-body">
       <a ui-sref="app.profile({login: vm.tripAuthor.login})">
-        <img class="pull-left" width="70" height="70" ng-src="/img/avatars/{{vm.tripAuthor.login}}"/>
+        <img class="pull-left" width="70" height="70" ng-src="/img/avatars/{{vm.tripAuthor.avatarName}}"/>
         <h4><strong>{{vm.tripAuthor.firstName + ' ' + vm.tripAuthor.lastName}}</strong></h4>
       </a>
       <p>{{vm.createdDate | date:'yyyy.MM.dd, HH:mm:ss'}}</p>
@@ -113,7 +113,7 @@
       <div class="media" ng-repeat="comment in vm.comments">
         <div class="media-left pull-left">
           <a href="#" ui-sref="app.profile">
-            <img class="media-object" ng-src="/img/avatars/{{comment.author.login}}" width="48" height="48">
+            <img class="media-object" ng-src="/img/avatars/{{comment.author.avatarName}}" width="48" height="48">
           </a>
         </div>
         <div class="media-body">
@@ -126,7 +126,7 @@
       <div class="media">
         <div class="media-left pull-left">
           <a href="#" ui-sref="app.profile">
-            <img class="media-object" ng-src="/img/avatars/{{vm.user.login}}" width="48" height="48">
+            <img class="media-object" ng-src="/img/avatars/{{vm.user.avatarName}}" width="48" height="48">
           </a>
         </div>
         <div class="media-body">

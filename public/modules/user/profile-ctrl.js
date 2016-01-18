@@ -63,11 +63,10 @@ define(['./../module'], function (controllers) {
         function ProfileCtrl($location, $window, $stateParams, ProfileService, AuthenticationService, UserService, $cookies, $http, $state, $scope) {
             var vm = this;
             var baseUrl = "http://localhost:3000";
-
             console.log("profile controller");
-            
             var token = $cookies.get('token');
             var user = AuthenticationService.getUser();
+
             var loginToDisplay = $stateParams.login;
 
 
@@ -90,6 +89,7 @@ define(['./../module'], function (controllers) {
 				vm.userDataUpdateSuccess = $stateParams.userDataUpdateSuccess;
                 vm.displayName = data.user.firstName + ' ' + data.user.lastName;
                 vm.login = data.user.login;
+                vm.avatarName = data.user.login+"?"+ new Date().getTime();
                 vm.joinDate = data.user.joinDate;
 				vm.userId = data.user._id;
             }).error(function(status, data){

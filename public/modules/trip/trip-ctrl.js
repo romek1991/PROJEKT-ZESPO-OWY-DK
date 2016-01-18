@@ -114,6 +114,7 @@ define(['./../module'], function (controllers) {
       vm.tripIsEditable = false;
       
       vm.user = user;
+      vm.user.avatarName = vm.user.login + "?" + new Date().getTime();
 
       vm.photos = [];
       vm.photosToBeUploaded = [];
@@ -152,7 +153,8 @@ define(['./../module'], function (controllers) {
           vm.endDate = data.trip.endDate;
           vm.createdDate = data.trip.createdDate;
           vm.tripAuthor = data.trip.author;
-          
+          vm.tripAuthor.avatarName = data.trip.author.login + "?" + new Date().getTime();
+
           if(data.trip.author._id === user.id) {
             vm.tripIsEditable = true;
           }
@@ -195,6 +197,10 @@ define(['./../module'], function (controllers) {
       var refreshComments = function() {
         TripService.getComments(tripId, token).success(function(data) {            
           vm.comments = data.comments;
+          var comment;
+          for (comment in vm.comments){
+            comment.author.avatarName = comment.author.login + "?" + new Date().getTime();
+          }
           console.log(vm.comments);
         }).error(function(status, data){
           console.log('error with comments: ' + status)
@@ -215,7 +221,6 @@ define(['./../module'], function (controllers) {
       };
 
       vm.removeTrip = function(){
-        alert('usuwam wycieczke');
         jQuery('#removeTrip').on('hidden.bs.modal', function() {
           TripService.removeTrip(tripId).success(function () {
                 $state.go('index');

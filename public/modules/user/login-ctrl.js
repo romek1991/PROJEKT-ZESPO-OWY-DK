@@ -124,11 +124,14 @@ define(['./../module'], function (controllers) {
 					var hash = md5.createHash(password);
 					console.log('hash:' + hash);
                     UserService.logIn(username, hash).success(function(data) {
-                        AuthenticationService.setUser(data.user);
+                        var currentUser = data.user;
+                        currentUser.avatarName = currentUser.login;
+                        $cookies.put('user', JSON.stringify(currentUser));
+                        console.log($cookies.get('user'));
+                        AuthenticationService.setUser(currentUser);
                         AuthenticationService.setLoggedInFlag(true);
                         $cookies.put('token', data.token);
-                        $cookies.put('user', JSON.stringify(data.user));
-                        console.log($cookies.get('user'));
+
                         $state.go('app.start');
                     }).error(function(data, status) {
                         vm.credsOk = false;
