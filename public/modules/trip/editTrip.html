@@ -3,7 +3,7 @@
 </div>
 
 <div class="well" >
-    <center>
+    
         <div class="row">
                 <!-- left column-->
             <form class="form">
@@ -64,44 +64,64 @@
                     </div>
                     <div class="panel-body">
 
-                    <!--    <label ng-repeat="photo in vm.photos">
-                            <a ng-href="/photo/{{photo.filename}}" class="example-image-link" data-lightbox="example-set" data-title="My caption">
-                                <img class="thumb" ng-src="/photo/{{photo.filename}}" alt="test"/></a>
-                        </label>-->
-
-                   <!--     <form name="form">
-                            <button type="submit" class="btn btn-primary" ngf-select ng-model="vm.files" ngf-multiple="true">Wybierz zdjęcia</button>
-                            <button type="submit" ng-click="vm.submit()">Wyślij</button>
-                        </form>-->
-
                         <form name="picturesForm">
-                            <fieldset>
+                            
+                                
+                                <div class="row">
+                                    <div class="panel panel-success">
+                                        <div class="panel-heading">
+                                          <h3 class="panel-title">Dodaj Zdjęcia</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                          <center>
+                                              <input type="file" ngf-select ngf-keep="true" ngf-multiple="true" ng-model="vm.photosToBeUploaded" name="file"
+                                               accept="image/*" ngf-max-size="5MB" ngf-fix-orientation="true"
+                                               ngf-resize="{width: 1366, height: 768, quality: .9, type: 'image/jpeg'}"
+                                               ngf-model-invalid="errorFiles">
+                                              <i ng-show="picturesForm.file.$error.maxSize">Plik za duży
+                                                {{errorFiles[0].size / 1000000|number:1}}MB: max 5M</i>
+                                              <p ng-repeat="pic in vm.photosToBeUploaded">
+                                                <img ngf-no-object-url="true" ngf-thumbnail="pic" class="thumb">
+                                                <!--<img ng-src="/photo/{{photo.filename}}" class="thumb" alt="test">-->
+                                                <!--<img class="thumb" ng-src="/photo/{{pic.filename}}" alt="test"/>-->
+                                                <button class="btn btn-sm btn-danger" ng-click="vm.removeFromPhotosList($index)" ng-show="pic">Usuń</button>
+                                               
+                                            </p>
+                                          </center>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                    
+                                
+                                  <div class="well" ng-repeat="pic in vm.photos">
+                                    <div class="media">
+                                      <div class="media-center">
+                                        <img class="pull-right" ng-src="/photo/{{pic.filename}}" style="max-width: 150px; max-height: 150px;"/>
+                                      </div>
+                                      <div class="media-body">
+                                        <label>Nazwa:</label>
+                                        <div style="max-width: 300px;">
+                                          <div class="input-group">
+                                            <input type="text" ng-model="pic.name" class="form-control" placeholder="Search for...">
+                                            <span class="input-group-btn">
+                                              <button class="btn btn-warning" type="button" ng-click="vm.updatePhoto(pic)">Zmień</button>
+                                            </span>
+                                          </div>
+                                          <br/>
+                                          <button class="btn btn-danger" ng-click="vm.deletePhoto(pic)">Usuń zdjęcie</button>
+                                        </div>
+                                        <br/>
+                                        <p>dodano: {{pic.createdDate | date:'yyyy.MM.dd, HH:mm:ss'}}</p>
+                                        
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+  
+                                
+
                                 <br>
-                                <legend>Dodaj Zdjęcia</legend>
-
-                                <input type="file" ngf-select ngf-keep="true" ngf-multiple="true" ng-model="vm.photosToBeUploaded" name="file"
-                                       accept="image/*" ngf-max-size="1MB"
-                                       ngf-model-invalid="errorFiles">
-                                <i ng-show="picturesForm.file.$error.maxSize">File too large
-                                    {{errorFiles[0].size / 1000000|number:1}}MB: max 1M</i>
-                                <li ng-repeat="pic in vm.photos">
-                                    <br>
-                                    <!--<img ngf-no-object-url="true" ngf-thumbnail="pic" class="thumb">-->
-                                    <!--<img ng-src="/photo/{{photo.filename}}" class="thumb" alt="test">-->
-                                    <img class="thumb" ng-src="/photo/{{pic.filename}}" alt="test"/>
-                                    <!--<button ng-click="vm.removeFromPhotosList($index)" ng-show="pic">Remove</button>-->
-                                </li>
-
-                                <li ng-repeat="pic in vm.photosToBeUploaded">
-                                    <br>
-                                    <img ngf-no-object-url="true" ngf-thumbnail="pic" class="thumb">
-                                    <!--<img ng-src="/photo/{{photo.filename}}" class="thumb" alt="test">-->
-                                    <!--<img class="thumb" ng-src="/photo/{{pic.filename}}" alt="test"/>-->
-                                    <button ng-click="vm.removeFromPhotosList($index)" ng-show="pic">Remove</button>
-                                </li>
-
-                                <br>
-                            </fieldset>
                         </form>
 
 
@@ -142,6 +162,5 @@
             </div>
 
         </form>
-    </center>
+    
 </div>
-

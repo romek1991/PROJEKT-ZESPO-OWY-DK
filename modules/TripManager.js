@@ -5,6 +5,9 @@
 
 var Trip = require('../models/trip');
 var Comment = require('../models/comment');
+var Photo = require('../models/photo');
+
+var fs = require('fs');
 
 var UserManager = require('../modules/UserManager');
 
@@ -123,14 +126,40 @@ exports.removeTrip = function(req, res){
     } else {
       checkAccessForModification(req, trip, function(access) {
         if (access) {
+          
+          
+          Photo.find({trip: trip}, function(err, tripPhotos) {
+            console.log("_________________TRIP PHOTOS:");
+            console.log(tripPhotos);
+            for(var i in tripPhotos) {
+              var filename = tripPhotos[i].filename;
+              console.log('filename: ' + filename);
+              fs.unlinkSync(req.app.get('rootDir') + '/uploads/photos/' + filename);
+            }
+            
+            Photo.find({trip: trip}).remove(function(){
+            
+              Comment.find({trip: trip}).remove(function(){
+                
+                Trip.findOneAndRemove({ _id: req.tripId }, function(err){
+                  res.json({
+                    message: "Trip removed successfully."
+                  });
+                });
 
-
-          Trip.findOneAndRemove({ _id: req.tripId }, function(err){
-            res.json({
-              message: "Trip removed successfully."
+              });
+              
+              
+              
             });
-
+            
           });
+          
+          
+          
+          
+
+          
         } else {
           res.status(403).json({
             message: "User has no access to this trip."

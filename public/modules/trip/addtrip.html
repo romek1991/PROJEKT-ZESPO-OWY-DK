@@ -74,10 +74,11 @@
 
                                         <input type="file" ngf-select ngf-keep="true" ngf-multiple="true"
                                                ng-model="vm.photosToBeUploaded" name="file"
-                                               accept="image/*" ngf-max-size="1MB"
+                                               accept="image/*" ngf-max-size="5MB" ngf-fix-orientation="true"
+                                               ngf-resize="{width: 1366, height: 768, quality: .9, type: 'image/jpeg'}"
                                                ngf-model-invalid="errorFiles">
-                                        <i ng-show="picturesForm.file.$error.maxSize">File too large
-                                            {{errorFiles[0].size / 1000000|number:1}}MB: max 1M</i>
+                                        <i ng-show="picturesForm.file.$error.maxSize">Plik za duży
+                                            {{errorFiles[0].size / 1000000|number:1}}MB: max 5M</i>
                                         <li ng-repeat="pic in vm.photosToBeUploaded">
                                             <br>
                                             <img ng-show="picturesForm.file.$valid" ngf-thumbnail="pic" class="thumb">

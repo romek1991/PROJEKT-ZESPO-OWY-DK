@@ -46,6 +46,32 @@ exports.getPhoto = function(req, res) {
   });
 }
 
+exports.editPhoto = function(req, res) {
+  console.log('[PhotoManager.editPhoto] photoId: ' + req.body.id + ', toName: ' + req.body.name);
+  Photo.findOneAndUpdate({_id: req.body.id}, {name: req.body.name}, {new: true}, function(err, photo){
+    if (err) {
+      res.status(500).send();
+    }
+    console.log('photo after update:');
+    console.log(photo);
+    res.status(200).send();
+  });
+}
+
+exports.deletePhoto = function(req, res) {
+  console.log('[PhotoManager.deletePhoto] photoId: ' + req.params.photoId);
+  Photo.findById(req.params.photoId, function(err, photo){
+    console.log('photo:');
+    console.log(photo);
+    console.log('removing photo with filename: ' + photo.filename);
+    fs.unlinkSync(req.app.get('rootDir') + '/uploads/photos/' + photo.filename);
+    
+    Photo.findById(req.params.photoId).remove(function(){
+      res.status(200).send();
+    });
+  });
+}
+
 exports.removePhoto = function(req, res){
   // TODO
   /* findTripById(req.tripId, function(trip) {
@@ -257,7 +283,7 @@ exports.getUserPhotosHeaders = function(req, res) {
           var userPhotos = [];
           for(var i in allPhotos2) {
             var photo = allPhotos2[i]
-            if(photo.trip.author.login === req.params.login) {
+            if(photo && photo.trip && photo.trip.author && photo.trip.author.login && photo.trip.author.login === req.params.login) {
               console.log('req.user: ' + req.user);
               console.log('photo.trip: ' + photo.trip);
               if(req.user.admin || photo.trip.publicAccess || (photo.trip.author.login == req.user.login)) {
