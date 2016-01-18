@@ -40,7 +40,7 @@
                     <br/>
                     <div class="text-center" ng-if="mCtrl.isLogged">
                       <img ng-src="/img/avatars/{{mCtrl.getUser().login}}" class="img-circle" width="100" height="100" ng-cloak>
-                      <h4 ng-cloak>{{mCtrl.getUser().firstName + ' ' + mCtrl.getUser().lastName}}</h4>
+                      <h4 ng-cloak>{{mCtrl.firstName + ' ' + mCtrl.lastName}}</h4>
                     </div>
                     <br/>
                     <br/>
@@ -225,7 +225,7 @@
                                                     <div class="media" ng-repeat="foundTrip in mCtrl.foundTrips">
                                                       <div class="media-left pull-left">
                                                         <a ui-sref="app.trip({tripId: foundTrip._id})">
-                                                          <img class="media-object" ng-src="/photo/tripHeader/{{foundTrip._id}}" style="max-width:100px; max-height:px;">
+                                                          <img class="media-object" ng-src="/photo/tripHeader/{{foundTrip._id}}" style="max-width:100px; max-height:150px;">
                                                         </a>
                                                       </div>
                                                       <div class="media-body">
