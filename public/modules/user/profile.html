@@ -20,7 +20,7 @@
 	ng-if="vm.userDataUpdateSuccess">Dane zostały zmienione poprawnie.</div>
     <div class="panel panel-default">
       <div class="panel-body">
-        <img ng-src="/img/avatars/{{vm.avatarName}}" class="pull-right" style="max-width:200px; max-height:200px;"/>
+        <img ng-src="/img/avatars/{{vm.avatarName}}" class="pull-right" style="width:200px; height:200px;"/>
         <h2>{{vm.displayName}}</h2>
         <h3>{{vm.login}}</h3>
         <br/>
@@ -97,13 +97,17 @@
         
           <div class="media">
             <div class="media-left">
-              <img class="pull-left" ng-src="/photo/{{photo.filename}}" style="max-width: 150px; max-height: 150px;"/>
+              <a ng-href="/photo/{{photo.filename}}" class="example-image-link" data-lightbox="example-set" data-title="<h3>{{photo.name}}</h3><br/> Wycieczka: {{photo.trip.name}}<br/> Autor: {{photo.trip.author.firstName + ' ' + photo.trip.author.lastName}} <br/>Dodano: {{photo.createdDate | date:'yyyy.MM.dd, hh:mm:ss'}}">
+                <img class="pull-right" ng-src="/photo/{{photo.filename}}" style="max-width: 150px; max-height: 150px;"/>
+              </a>
             </div>
             <div class="media-body">
               <img class="pull-right" width="40" height="40" src="/img/closed_lock.png" ng-show="!photo.trip.publicAccess"/>
               <h4 class="media-heading"><strong>{{photo.name}}</strong></h4>
-              <p><strong>{{photo.trip.name}}</strong></p>
-              <p>{{photo.trip.author.firstName + ' ' + photo.trip.author.lastName}}, {{photo.createdDate | date:'yyyy.MM.dd, HH:mm:ss'}}</p>
+              <a ui-sref="app.trip({tripId: photo.trip._id})">
+              <p>Wycieczka: <strong>{{photo.trip.name}}</strong></p>
+              </a>
+              <p>Dodano: {{photo.createdDate | date:'yyyy.MM.dd, HH:mm:ss'}}</p>
               
               
             </div>
@@ -116,8 +120,4 @@
 
 
   </div>
-  <script>
-
-  </script>
 </div>
-

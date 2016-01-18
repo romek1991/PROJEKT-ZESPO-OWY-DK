@@ -8,7 +8,7 @@
 
         <form class="form">
 
-            <form class="row">
+            <div class="row">
                 <!-- left column-->
                 <div class="col-sm-6">
                     <div class="panel panel-default">
@@ -51,7 +51,7 @@
                                 <span class="input-group-addon">do</span>
                                 <input id="endDate" type="text" class="input-sm form-control" name="endDate" ng-model="vm.parent.endDate"
                                       required=""/>
-                          </div>
+                            </div>
                         </div>
 
 
@@ -70,21 +70,23 @@
                       
                           <center>
                             <form name="picturesForm">
-                            
+                                
 
-                                        <input type="file" ngf-select ngf-keep="true" ngf-multiple="true"
-                                               ng-model="vm.photosToBeUploaded" name="file"
-                                               accept="image/*" ngf-max-size="5MB" ngf-fix-orientation="true"
-                                               ngf-resize="{width: 1366, height: 768, quality: .9, type: 'image/jpeg'}"
-                                               ngf-model-invalid="errorFiles">
-                                        <i ng-show="picturesForm.file.$error.maxSize">Plik za duży
-                                            {{errorFiles[0].size / 1000000|number:1}}MB: max 5M</i>
-                                        <li ng-repeat="pic in vm.photosToBeUploaded">
-                                            <br>
-                                            <img ng-show="picturesForm.file.$valid" ngf-thumbnail="pic" class="thumb">
-                                            <button ng-click="vm.removeFromPhotosList($index)" ng-show="pic">Remove
-                                            </button>
-                                        </li>
+                                <center>
+                                    <input type="file" ngf-select ngf-keep="true" ngf-multiple="true" ng-model="vm.photosToBeUploaded" name="file"
+                                     accept="image/*" ngf-max-size="5MB" ngf-fix-orientation="true"
+                                     ngf-resize="{width: 1366, height: 768, quality: .9, type: 'image/jpeg'}"
+                                     ngf-model-invalid="errorFiles"/>
+                                    <i ng-show="picturesForm.file.$error.maxSize">Plik za duży
+                                      {{errorFiles[0].size / 1000000|number:1}}MB: max 5M</i>
+                                    <p ng-repeat="pic in vm.photosToBeUploaded">
+                                      <img ngf-no-object-url="true" ngf-thumbnail="pic" class="thumb">
+                                      <!--<img ng-src="/photo/{{photo.filename}}" class="thumb" alt="test">-->
+                                      <!--<img class="thumb" ng-src="/photo/{{pic.filename}}" alt="test"/>-->
+                                      <button class="btn btn-sm btn-danger" ng-click="vm.removeFromPhotosList($index)" ng-show="pic">Usuń</button>
+                                     
+                                    </p>
+                                </center>
 
                             </form>
                           </center>
@@ -107,9 +109,11 @@
 
                 <div class="form-actions">
 
-                    <button type="submit" class="btn btn-primary"
+                  <center>
+                    <button class="btn btn-lg btn-primary" type="submit"
                             ng-click="vm.addTrip(name, description, publicAccess)">Dodaj podróż
                     </button>
+                  </center>
                   <span class="progress" ng-show="vm.progress >= 0">
                             <div ng-style="{ width:'{{vm.progress}}%'}" ng-bind="vm.progress + '%'">
                             </div>
@@ -118,7 +122,7 @@
                     <span class="err" ng-show="vm.errorMsg">{{errorMsg}}</span>
 
                 </div>
-            </form>
+            </div>
         </form>
 </div>
 

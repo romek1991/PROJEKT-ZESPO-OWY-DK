@@ -55,6 +55,13 @@
                                                class="form-control"
                                                placeholder="Nazwisko" ng-model="vm.lastName" required=""><br>
                                     </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="label-description">Hasło (jeśli zmieniasz):</label>
+                                        <input class="input-description" type="password" name="password" id="password"
+                                               class="form-control"
+                                               placeholder="Hasło" ng-model="vm.password"><br>
+                                    </div>
 
                                 </div>
                                 <div class="form-actions">
@@ -62,6 +69,8 @@
                                     </button>
                                 </div>
                             </form>
+                            
+                            <br/>
                         </center>
                     </div>
                 </div>
@@ -89,6 +98,9 @@
 
                         <form class="form" name="picturesForm">
                             <div class="input-group text-center">
+                                <div style="width:100%;margin-top:20px;" class="alert alert-info" role="alert">
+                                    Avatar powinien być kwadratowy.
+                                </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary" ngf-select ng-model="vm.file">
                                         Wybierz avatar

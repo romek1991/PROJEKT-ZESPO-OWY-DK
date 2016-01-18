@@ -71,10 +71,21 @@
 	<div class="image-row">
 	<div class="image-set">
 	</a>
-	<label ng-repeat="photo in vm.photos">
-		<a ng-href="/photo/{{photo.filename}}" class="example-image-link" data-lightbox="example-set" data-title="Nazwa zdjęcia: {{photo.name}},<br /> Dodano: {{photo.createdDate}}">
-		<img class="thumb" ng-src="/photo/{{photo.filename}}" alt="test"/></a>
-	</label>	
+  
+  <center>
+    <div class="column col-lg-3 col-md-6 col-sm-12" ng-repeat="photo in vm.photos">
+      <a ng-href="/photo/{{photo.filename}}" class="example-image-link" data-lightbox="example-set" data-title="<h3>{{photo.name}}</h3><br/>Dodano: {{photo.createdDate | date:'yyyy.MM.dd, hh:mm:ss'}}">
+        <div class="thumbnail">
+          <img style="max-width: auto; max-height:150px;"src="/photo/{{photo.filename}}">
+          <div class="caption">
+            <h4>{{photo.name}}</h4>
+            <p>{{photo.createdDate | date:'yyyy.MM.dd, hh:mm:ss'}}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </center>
+
 	</div>
 	</div>
 	  
@@ -114,7 +125,7 @@
       <div class="media" ng-repeat="comment in vm.comments">
         <div class="media-left pull-left">
           <a href="#" ui-sref="app.profile">
-            <img class="media-object" ng-src="/img/avatars/{{comment.author.avatarName}}" width="48" height="48">
+            <img class="media-object" ng-src="/img/avatars/{{comment.author.login}}" width="48" height="48">
           </a>
         </div>
         <div class="media-body">
@@ -161,7 +172,3 @@
     </div>
   </div>
 </div>
-
-
-
-<script src="js/lightbox.js"></script>

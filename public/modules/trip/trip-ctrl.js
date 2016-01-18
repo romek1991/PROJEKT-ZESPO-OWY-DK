@@ -95,6 +95,24 @@ define(['./../module'], function (controllers) {
             'x-access-token': token
           }
         });
+      },
+      
+      updatePhoto: function(pic, token) {
+        return $http.put(baseUrl + '/photo/', {
+          'id': pic._id,
+          'name': pic.name,
+          headers: {
+            'x-access-token': token
+          }
+        });
+      },
+      
+      deletePhoto: function(pic, token) {
+        return $http.delete(baseUrl + '/photo/'+pic._id,{
+          headers: {
+            'x-access-token': token
+          }
+        });
       }
       
     }
@@ -121,6 +139,26 @@ define(['./../module'], function (controllers) {
 
       //vm.pictures = null;
 
+      vm.updatePhoto = function(pic) {
+        TripService.updatePhoto(pic, token).success(function(data){
+          alert("Zmieniono nazwę zdjęcia.");
+        }).error(function(status, data) {
+          alert("Wystąpił błąd podczas zmiany nazwy zdjęcia!");
+        });
+      }
+      
+      vm.deletePhoto = function(pic) {
+        TripService.deletePhoto(pic, token).success(function(data){
+          for (var i in vm.photos) {
+            if (pic == vm.photos[i]) {
+              console.log('removing i: ' + i);
+              vm.photos.splice(i,1);
+            }
+          }
+        }).error(function(status, data) {
+          alert("Wystąpił błąd podczas zmiany nazwy zdjęcia!");
+        });
+      }
 
       vm.addTrip = function(name, description, startDate, endDate, publicAccess, token)  {
 		  var startDate = $("#startDate").val();
@@ -199,7 +237,7 @@ define(['./../module'], function (controllers) {
           vm.comments = data.comments;
           var comment;
           for (comment in vm.comments){
-            comment.author.avatarName = comment.author.login + "?" + new Date().getTime();
+            //comment.author.avatarName = comment.author.login + "?" + new Date().getTime();
           }
           console.log(vm.comments);
         }).error(function(status, data){

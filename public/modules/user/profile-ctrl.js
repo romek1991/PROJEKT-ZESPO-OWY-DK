@@ -33,13 +33,14 @@ define(['./../module'], function (controllers) {
                 });
             },
 
-            updateProfile: function(id, login, email, firstName, lastName, token) {
+            updateProfile: function(id, login, email, firstName, lastName, password, token) {
                 return $http.put(baseUrl + '/user', {
                     'id': id,
                     'login': login,
                     'email': email,
                     'firstName': firstName,
                     'lastName': lastName,
+                    'password': password,
                     headers: {
                         'x-access-token': token
                     }

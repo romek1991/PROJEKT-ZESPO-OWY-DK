@@ -42,10 +42,10 @@
                         
                             <div class="input-daterange input-group" id="datepicker">
                                 <span class="input-group-addon">od</span>
-                                <input id="startDate" type="text" class="input-sm form-control" name="startDate" ng-model="vm.parent.startDate"
+                                <input id="startDate" type="text" class="input-sm form-control" name="startDate" ng-value="vm.startDate | date:'yyyy/MM/dd'"
                                       required=""/>
                                 <span class="input-group-addon">do</span>
-                                <input id="endDate" type="text" class="input-sm form-control" name="endDate" ng-model="vm.parent.endDate"
+                                <input id="endDate" type="text" class="input-sm form-control" name="endDate" ng-value="vm.endDate | date:'yyyy/MM/dd'"
                                       required=""/>
                           </div>
                         </div>
@@ -74,7 +74,7 @@
                                         </div>
                                         <div class="panel-body">
                                           <center>
-                                              <input type="file" ngf-select ngf-keep="true" ngf-multiple="true" ng-model="vm.photosToBeUploaded" name="file"
+                                              <input class="btn-file" type="file" ngf-select ngf-keep="true" ngf-multiple="true" ng-model="vm.photosToBeUploaded" name="file"
                                                accept="image/*" ngf-max-size="5MB" ngf-fix-orientation="true"
                                                ngf-resize="{width: 1366, height: 768, quality: .9, type: 'image/jpeg'}"
                                                ngf-model-invalid="errorFiles">
@@ -156,11 +156,19 @@
             </div>
 
             <div class="form-actions">
-
-                <button type="submit" class="btn btn-primary" ng-click="vm.updateTrip()">Uaktualnij podróż</button>
-
+              <center>
+                <button type="submit" class="btn btn-lg btn-primary" ng-click="vm.updateTrip()">Uaktualnij podróż</button>
+              </center>
             </div>
 
         </form>
     
 </div>
+
+<script>
+    jQuery('.input-daterange').datepicker({
+        format: "yyyy/mm/dd",
+        todayBtn: false,
+        todayHighlight: true
+    });
+</script>

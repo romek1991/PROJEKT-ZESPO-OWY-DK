@@ -1,8 +1,8 @@
 define(['./../module'], function (controllers) {
     'use strict';
     controllers.controller('ProfileEditController', ['ProfileService', 'AuthenticationService',
-        'UserService', '$cookies', '$http', '$state', 'Upload', "$rootScope",
-        function ProfileCtrl(ProfileService, AuthenticationService, UserService, $cookies, $http, $state, Upload, $rootScope) {
+        'UserService', '$cookies', '$http', '$state', 'Upload', "$rootScope", 'md5',
+        function ProfileCtrl(ProfileService, AuthenticationService, UserService, $cookies, $http, $state, Upload, $rootScope, md5) {
             console.log('editProfile controller');
             
             var vm = this;
@@ -21,7 +21,8 @@ define(['./../module'], function (controllers) {
 
             vm.updateProfile = function() {
 				if (vm.firstName && vm.lastName)
-                ProfileService.updateProfile(user.id, vm.login, vm.email, vm.firstName, vm.lastName, token).
+                var hash = (!vm.password || vm.password=="") ? null : md5.createHash(vm.password);
+                ProfileService.updateProfile(user.id, vm.login, vm.email, vm.firstName, vm.lastName, hash, token).
                 success(function(){
                         user.email = vm.email;
                         user.firstName = vm.firstName;
@@ -39,8 +40,9 @@ define(['./../module'], function (controllers) {
 				   $state.go('app.profile', {
 						userDataUpdateSuccess: true
 					});
-                }).error(function(data) {
+                }).error(function(data, status) {
 					vm.userDataUpdateFailed = true;
+          alert(data);
 				});
 
                 //$state.go($state.current, {}, {reload: true});

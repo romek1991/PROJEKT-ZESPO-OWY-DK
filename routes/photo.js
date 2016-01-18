@@ -153,4 +153,29 @@ router.get('/:filename', function (req, res, next) {
   //});
 });
 
+/*
+  PUT /photo
+  Edit photo with given id
+    id:   photo id
+    name: new name
+*/
+router.put('/', function (req, res, next) {
+  // temporary public access to photos by filename
+  SecurityManager.verifyToken(req, res, function() {
+    PhotoManager.editPhoto(req, res);
+  });
+});
+
+/*
+  DELETE /photo
+  Delete photo with given id
+    id:   photo id
+*/
+router.delete('/:photoId', function (req, res, next) {
+  // temporary public access to photos by filename
+  SecurityManager.verifyToken(req, res, function() {
+    PhotoManager.deletePhoto(req, res);
+  });
+});
+
 module.exports = router;

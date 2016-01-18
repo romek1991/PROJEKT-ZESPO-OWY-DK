@@ -35,11 +35,14 @@
                     <li><a ui-sref="index" data-toggle="offcanvas" class="visible-xs text-center">Menu</a></li>
                 </ul>
 
-                <ul class="nav hidden-xs" id="lg-menu">
+                <center>
+                  <ul class="nav hidden-xs" id="lg-menu">
                     <br/>
                     <br/>
                     <div class="text-center" ng-if="mCtrl.isLogged">
-                      <img ng-src="/img/avatars/{{mCtrl.getUser().avatarName}}" class="img-circle" style="max-width:100px; max-height:100px;" ng-cloak>
+                      <img ng-src="/img/avatars/{{mCtrl.getUser().avatarName}}" class="img-circle" style="width:100px; height:100px;" ng-cloak>
+                      <br/>
+                      <br/>
                       <h4 ng-cloak>{{mCtrl.firstName + ' ' + mCtrl.lastName}}</h4>
                     </div>
                     <br/>
@@ -50,8 +53,14 @@
                     <li ng-if="mCtrl.isLogged">
                         <a ui-sref="app.start">Start</a>
                     </li>
+                    <li ng-if="mCtrl.isLogged">
+                        <a ui-sref="app.profile">Mój profil</a>
+                    </li>
                     <li ng-if="mCtrl.isLogged" ng-cloak>
-                        <a ui-sref="app.addtrip">Dodaj Wycieczkę</a>
+                        <a ui-sref="app.addtrip">Dodaj wycieczkę</a>
+                    </li>
+                    <li ng-if="mCtrl.isLogged" ng-cloak>
+                        <a href="" ng-click="mCtrl.logout()">Wyloguj</a>
                     </li>
                     <!--
                     <li ng-if="mCtrl.isLogged" ng-cloak>
@@ -61,13 +70,16 @@
                     <li ng-if="!mCtrl.isLogged">
                         <a ui-sref="signup">Rejestracja</a>
                     </li>
-                </ul>
+                    
+                  </ul>
+                </center>
+                <!--
                 <ul class="list-unstyled hidden-xs" id="sidebar-footer">
                     <li id="test">
                         <h3>O Nas</h3>
                     </li>
                 </ul>
-
+                -->
                 <!-- tiny only nav-->
                 <ul class="nav visible-xs" id="xs-menu">
                     <li ng-if="!mCtrl.isLogged">
@@ -76,8 +88,14 @@
                     <li ng-if="mCtrl.isLogged">
                         <a ui-sref="app.start">Start</a>
                     </li>
+                    <li ng-if="mCtrl.isLogged">
+                        <a ui-sref="app.profile">Mój profil</a>
+                    </li>
                     <li ng-if="mCtrl.isLogged" ng-cloak>
-                        <a ui-sref="app.addtrip">Dodaj Wycieczkę</a>
+                        <a ui-sref="app.addtrip">Dodaj wycieczkę</a>
+                    </li>
+                    <li ng-if="mCtrl.isLogged" ng-cloak>
+                        <a href="" ng-click="mCtrl.logout()">Wyloguj</a>
                     </li>
                     <!--
                     <li ng-if="mCtrl.isLogged" ng-cloak>
