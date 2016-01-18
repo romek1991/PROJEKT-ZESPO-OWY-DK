@@ -29,6 +29,7 @@ define(['./../module'], function (controllers) {
     controllers.controller('StartController', ['$location', '$window', '$stateParams', 'StartService', 'AuthenticationService', '$cookies', '$state',
         function StartCtrl($location, $window, $stateParams, StartService, AuthenticationService, $cookies, $state) {
             var vm = this;
+
             console.log("start controller");
             
             var token = $cookies.get('token');
@@ -38,7 +39,13 @@ define(['./../module'], function (controllers) {
             vm.user = user;
           
             StartService.getNewestTripsHeaders(token).success(function(data) {
+
+                for(var i = 0; i < data.trips.length; i++){
+                    data.trips[i].author.avatarName = data.trips[i].author.login + "?" + new Date().getTime();
+                }
+
                 vm.newestTripsHeaders = data.trips;
+
             }).error(function(status, data){
                 alert(status + ': ' + data.message);
             });

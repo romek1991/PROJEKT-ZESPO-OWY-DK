@@ -66,7 +66,15 @@ define(['./module'], function (controllers) {
             
             if (mCtrl.isLogged) {
                 SearchService.searchUsers(mCtrl.searchString, token).success(function(data){
+
+
+                    console.log(data);
+                    for (var i = 0; i < data.length; i++){
+                        data[i].avatarName = data[i].login + "?" + new Date().getTime();
+                    }
+
                     mCtrl.foundUsers = data;
+
                 });
                 
                 SearchService.searchTrips(mCtrl.searchString, token).success(function(data){
