@@ -11,8 +11,6 @@ bower_components/
 /local.ns
 /public/npm-debug.log
 /public/index.html.orig
-/data
-data/*
 StartMongoDB.bat
 /public/modules/trip/trip-ctrl.js.orig
 /public/modules/trip/trip.html.orig
