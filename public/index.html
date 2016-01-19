@@ -40,9 +40,18 @@
                     <br/>
                     <br/>
                     <div class="text-center" ng-if="mCtrl.isLogged">
-                      <img ng-src="/img/avatars/{{mCtrl.getUser().avatarName}}" class="img-circle" style="width:100px; height:100px;" ng-cloak>
-                      <br/>
-                      <br/>
+
+                    <div class="div-avatar">
+
+                        <img ng-src="/img/avatars/{{mCtrl.getUser().avatarName}}" ng-cloak>
+
+                    </div>
+
+
+
+
+
+
                       <h4 ng-cloak>{{mCtrl.firstName + ' ' + mCtrl.lastName}}</h4>
                     </div>
                     <br/>
