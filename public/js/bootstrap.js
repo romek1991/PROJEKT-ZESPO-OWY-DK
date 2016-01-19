@@ -6,11 +6,13 @@ define([
 ], function (require, ng, app) {
     'use strict';
     require(['domReady!'], function (document) {
+
+
+
+
         app.config(function ($httpProvider) {
             $httpProvider.interceptors.push('TokenInterceptor');
         });
-
-
 
         app.run(['AuthenticationService','$rootScope', '$cookies', '$state',
             function (AuthenticationService, $rootScope, $cookies, $state) {
@@ -33,5 +35,11 @@ define([
         }]);
 
         ng.bootstrap(document, ['app']);
+        console.log('ready');
+
+
+
+
+
     });
 });

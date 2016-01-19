@@ -9,6 +9,8 @@ define(['./../module'], function (controllers) {
 
 
 
+
+
             var token = $cookies.get('token');
             vm.token = token;
             var user = AuthenticationService.getUser();
@@ -18,6 +20,7 @@ define(['./../module'], function (controllers) {
             vm.firstName = user.firstName;
             vm.lastName = user.lastName;
             vm.avatarName = user.avatarName;
+
 
             vm.updateProfile = function() {
 				if (vm.firstName && vm.lastName)
@@ -67,6 +70,7 @@ define(['./../module'], function (controllers) {
                     var currentUser = JSON.parse($cookies.get('user'));
                     currentUser.avatarName = currentUser.login + "?" + new Date().getTime();
                     vm.avatarName = currentUser.avatarName;
+                    AuthenticationService.setUser(currentUser);
                     $cookies.put('user', JSON.stringify(currentUser));
                     console.log(currentUser);
                     $state.go('app.profile', {

@@ -1,6 +1,9 @@
 define(['./module'], function (controllers) {
     'use strict';
-    
+
+
+
+
     controllers.factory('SearchService', function($http) {
         var baseUrl = "http://localhost:3000";
         return {

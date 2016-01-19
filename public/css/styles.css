@@ -5,11 +5,41 @@
     display: none !important;
 }
 
+
 html, body {
    height: 100%;
    font-family:verdana,arial,sans-serif;
    color:#555555;
 }
+
+.div-avatar {
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin: 0px auto;
+    overflow:hidden;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    text-align: left;
+}
+
+
+.div-avatar > img{
+
+    position:relative;
+    /*left: 50%;*/
+    /*top: 50%;*/
+    /*-webkit-transform: translate(-50%, -50%);*/
+    /*-moz-transform: translate(-50%, -50%);*/
+    /*-ms-transform: translate(-50%, -50%);*/
+    /*transform: translate(-50%, -50%);*/
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+}
+
 
 .nav {
    font-family:Arial,sans-serif;
