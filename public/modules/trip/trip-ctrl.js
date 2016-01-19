@@ -137,7 +137,7 @@ define(['./../module'], function (controllers) {
       vm.photos = [];
       vm.photosToBeUploaded = [];
 
-      //vm.pictures = null;
+      vm.publicAccess = false;
 
       vm.updatePhoto = function(pic) {
         TripService.updatePhoto(pic, token).success(function(data){
@@ -160,7 +160,7 @@ define(['./../module'], function (controllers) {
         });
       }
 
-      vm.addTrip = function(name, description, startDate, endDate, publicAccess, token)  {
+      vm.addTrip = function(name, description, publicAccess)  {
 		  var startDate = $("#startDate").val();
 		  var endDate = $("#endDate").val();
         if(name !== undefined && description !== undefined && startDate !== undefined && endDate !== undefined){
@@ -261,7 +261,7 @@ define(['./../module'], function (controllers) {
       vm.removeTrip = function(){
         jQuery('#removeTrip').on('hidden.bs.modal', function() {
           TripService.removeTrip(tripId).success(function () {
-                $state.go('index');
+                $state.go('app.profile');
               }
           ).error(function () {
                 $state.go('app.error', {
@@ -280,8 +280,8 @@ define(['./../module'], function (controllers) {
         console.log("UPDATE");
         TripService.updateTrip(tripId, vm.tripName, vm.tripDescription, vm.publicAccess, token) //todo: jak wdrozymy publiczne/prywatne to parametr publicAccess wycuagnac do UI
           .success(function(data) {
-              vm.uploadPictures(vm.tripIdent)
-              $state.go('app.start')
+              vm.uploadPictures(vm.tripIdent);
+              $state.go('app.trip', {tripId: data.trip._id});
         }).error(function(status, data){
           alert("Bład aktualizacji " + status +" data " + data);
         });
