@@ -1,0 +1,174 @@
+<div class="column col-sm-12 col-lg-12" ng-if="vm.tripNotFound">
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <h3 class="panel-title"><strong>Błąd</strong></h3>
+    </div>
+          
+    <div class="panel-body">
+        <p>Nie znaleziono wycieczki.</p>
+    </div>
+
+
+    
+  </div>
+</div>
+
+<div class="column col-sm-12 col-lg-12" ng-if="vm.accessDenied">
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <h3 class="panel-title"><strong>Błąd</strong></h3>
+    </div>
+          
+    <div class="panel-body">
+        <p>Brak dostępu do wycieczki.</p>
+    </div>
+
+
+    
+  </div>
+</div>
+
+<div ng-if="!vm.tripNotFound && !vm.accessDenied">
+<div class="column col-sm-12 col-lg-8" >
+  
+  <div class="well">
+
+    <div class="btn-toolbar pull-right">
+      <button class="btn btn-danger" ng-show="vm.tripIsEditable" data-toggle="modal" data-target="#removeTrip" ng-show="vm.tripIsEditable">Usuń wycieczkę</button>
+      <button class="btn btn-warning pull-right" ng-show="vm.tripIsEditable" ui-sref="app.edittrip({tripId: vm.tripIdent})">Edytuj wycieczkę</button>
+    </div>
+    <img class="pull-right" src="/img/closed_lock.png" ng-show="!vm.publicAccess"/>
+    <h2>{{vm.tripName}}</h2>
+    <h3>{{(vm.startDate ? 'od ' + (vm.startDate | date:'yyyy.MM.dd') : '') + (vm.endDate ? ' do ' + (vm.endDate | date:'yyyy.MM.dd') : '')}}</h3>
+  </div>
+  
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Opis</h3>
+    </div>
+          
+    <div class="panel-body">
+        <p>{{vm.tripDescription}}</p>
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Zdjęcia {{vm.photos ? '(' + vm.photos.length + ')' : ''}}</h3>
+    </div>
+          
+    <div class="panel-body">
+	
+<!--	<div class="image-row">
+		<div class="image-set">
+		  <a class="example-image-link" href="images/image-3.jpg" data-lightbox="example-set" data-title="Click the right half of the image to move forward."><img class="example-image" src="images/thumb-3.jpg" alt="Golden Gate Bridge with San Francisco in distance"></a>
+		  <a class="example-image-link" href="images/image-4.jpg" data-lightbox="example-set" data-title="Or press the right arrow on your keyboard."><img class="example-image" src="images/thumb-4.jpg" alt="Forest with mountains behind"></a>
+		  <a class="example-image-link" href="images/image-5.jpg" data-lightbox="example-set" data-title="The next image in the set is preloaded as you&apos;re viewing."><img class="example-image" src="images/thumb-5.jpg" alt="Bicyclist looking out over hill at ocean"></a>
+		  <a class="example-image-link" href="images/image-6.jpg" data-lightbox="example-set" data-title="Click anywhere outside the image or the X to the right to close."><img class="example-image" src="images/thumb-6.jpg" alt="Small lighthouse at bottom with ocean behind"></a>
+		</div>
+	</div>-->
+	<div class="image-row">
+	<div class="image-set">
+	</a>
+  
+  <center>
+    <div class="column col-lg-3 col-md-6 col-sm-12" ng-repeat="photo in vm.photos">
+      <a ng-href="/photo/{{photo.filename}}" class="example-image-link" data-lightbox="example-set" data-title="<h3>{{photo.name}}</h3><br/>Dodano: {{photo.createdDate | date:'yyyy.MM.dd, hh:mm:ss'}}">
+        <div class="thumbnail">
+          <img style="max-width: auto; max-height:150px;"src="/photo/{{photo.filename}}">
+          <div class="caption">
+            <h4>{{photo.name}}</h4>
+            <p>{{photo.createdDate | date:'yyyy.MM.dd, hh:mm:ss'}}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </center>
+
+	</div>
+	</div>
+	  
+	  <!--
+      <div class="row">
+        <ul>
+        <li ng-repeat="photo in vm.photos"> 
+        <img ng-src="/photo/{{photo.filename}}" width="200"/>
+        Name: {{photo.name}}, Filename: {{photo.filename}}, Description: {{photo.description}}, Date: {{photo.createdDate}}</li>
+        </ul>
+      </div> -->
+    </div>
+  </div>
+
+</div>
+  <div class="column col-sm-12 col-lg-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Autor</h3>
+    </div>
+    <div class="panel-body">
+      <a ui-sref="app.profile({login: vm.tripAuthor.login})">
+        <img class="pull-left" width="70" height="70" ng-src="/img/avatars/{{vm.tripAuthor.avatarName}}"/>
+        <h4><strong>{{vm.tripAuthor.firstName + ' ' + vm.tripAuthor.lastName}}</strong></h4>
+      </a>
+      <p>{{vm.createdDate | date:'yyyy.MM.dd, HH:mm:ss'}}</p>
+    </div>
+  </div>
+  <!--<button class=".btn-link" ng-show="vm.tripIsEditable" ui-sref="app.edittrip({tripId: vm.tripIdent})">Edytuj</button>-->
+</div>
+  <div class="column col-sm-12 col-lg-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Komentarze {{vm.comments ? '(' + vm.comments.length + ')' : ''}}</h3>
+    </div>
+    <div class="panel-body">
+      <div class="media" ng-repeat="comment in vm.comments">
+        <div class="media-left pull-left">
+          <a href="#" ui-sref="app.profile">
+            <img class="media-object" ng-src="/img/avatars/{{comment.author.login}}" width="48" height="48">
+          </a>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading"><strong>{{comment.author.firstName}} {{comment.author.lastName}}</strong></h4>
+          <em>{{comment.time | date:'yyyy.MM.dd, HH:mm:ss'}}</em>
+          <p>{{comment.text}}</p>
+        </div>
+      </div>
+      
+      <div class="media">
+        <div class="media-left pull-left">
+          <a href="#" ui-sref="app.profile">
+            <img class="media-object" ng-src="/img/avatars/{{vm.user.avatarName}}" width="48" height="48">
+          </a>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading"><strong>{{vm.user.firstName + ' ' + vm.user.lastName}}</strong></h4>
+          <textarea class="form-control" placeholder="Your comment here..." ng-model="vm.newCommentText"></textarea>
+          <button class="btn btn-primary pull-right" ng-click="vm.addComment()">Dodaj komentarz</button>
+        </div>
+      </div>
+    </div>
+  </div>       
+
+ 
+</div>
+</div>
+
+<div id="removeTrip" class="modal fade">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Usuwanie wycieczki</h4>
+      </div>
+      <div class="modal-body">
+        <p>Czy na pewno chcesz usunąć wycieczkę?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.removeTrip()">Usun</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="column col-sm-12 col-lg-12">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <h3>Witaj, {{vm.user.firstName}}!</h3>
+      <p>Miło Cię znów zobaczyć na TripLoggerze! :)</p>
+    </div>
+  </div>
+</div>
+
+<div class="column col-sm-12 col-lg-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Nowe wycieczki</h3>
+    </div>
+    <div class="panel-body">
+      <div ng-repeat="tripHeader in vm.newestTripsHeaders" class="well">
+        
+        <div class="media">
+          <div class="media-left">
+            <a ui-sref="app.trip({tripId: tripHeader._id})">
+              <img class="pull-right" ng-src="/photo/tripThumbnail/{{tripHeader._id}}" style="max-width: 100px; max-height: 50px;"/>
+            </a>
+            <a ui-sref="app.profile({login: tripHeader.author.login})">
+              <img class="media-object pull-left" style="padding: 5px 10px 5px 5px;" ng-src="/img/avatars/{{tripHeader.author.avatarName}}" width="50" height="50">
+            </a>
+          </div>
+          <div class="media-body">
+            
+              <p><a ui-sref="app.profile({login: tripHeader.author.login})"><strong>{{tripHeader.author.firstName + ' ' + tripHeader.author.lastName}}</strong></a>, {{tripHeader.createdDate | date:'yyyy.MM.dd, HH:mm:ss'}}</p>
+            
+            <a ui-sref="app.trip({tripId: tripHeader._id})">
+              <h4 class="media-heading"><strong>{{tripHeader.name}}</strong></h4>
+            </a>
+            
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="column col-sm-12 col-lg-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Nowe zdjęcia</h3>
+    </div>
+    <div class="panel-body">
+      <div ng-repeat="photo in vm.newestPhotos" class="well">
+        
+        <div class="media">
+          <div class="media-left">
+            <a ui-sref="app.profile({login: photo.trip.author.login})">
+              <img class="media-object pull-left" style="padding: 5px 10px 5px 5px;" ng-src="/img/avatars/{{photo.trip.author.login}}" width="50" height="50">
+            </a>
+            <a ng-href="/photo/{{photo.filename}}" class="example-image-link" data-lightbox="example-set" data-title="<h3>{{photo.name}}</h3><br/> Wycieczka: {{photo.trip.name}}<br/> Autor: {{photo.trip.author.firstName + ' ' + photo.trip.author.lastName}} <br/>Dodano: {{photo.createdDate | date:'yyyy.MM.dd, hh:mm:ss'}}">
+              <img class="pull-right" ng-src="/photo/{{photo.filename}}" style="max-width: 150px; max-height: 150px;"/>
+            </a>
+          </div>
+          <div class="media-body">
+            <p><a ui-sref="app.profile({login: photo.trip.author.login})"><strong>{{photo.trip.author.firstName + ' ' + photo.trip.author.lastName}}</strong></a>, {{photo.createdDate | date:'yyyy.MM.dd, HH:mm:ss'}}</p>
+            <h4 class="media-heading"><strong>{{photo.name}}</strong></h4>
+            
+            <a ui-sref="app.trip({tripId: photo.trip._id})"><p>Wycieczka: <strong>{{photo.trip.name}}</strong></p></a>
+            
+            
+            
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,123 @@
+
+<div ng-if="vm.userNotFound">
+  <div class="panel panel-danger">
+    <div class="panel-heading">
+      <h3 class="panel-title">Błąd</h3>
+    </div>
+    <div class="panel-body">
+      <center>
+        <h3>Nie znaleziono użytkownika!</h3>
+      </center>
+    </div>
+  </div>
+</div>
+<div ng-if="!vm.userNotFound">
+
+  
+  <div class="column col-sm-12 col-lg-12">
+  
+	<div style="width:100%;margin-top:20px;" class="alert alert-success" role="alert"
+	ng-if="vm.userDataUpdateSuccess">Dane zostały zmienione poprawnie.</div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <img ng-src="/img/avatars/{{vm.avatarName}}" class="pull-right" style="width:200px; height:200px;"/>
+        <h2>{{vm.displayName}}</h2>
+        <h3>{{vm.login}}</h3>
+        <br/>
+        <p>Na TripLoggerze od {{vm.joinDate | date:'yyyy.MM.dd'}}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="column col-sm-12 col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{ (vm.login == mCtrl.getUser().login) ? 'Moje wycieczki' : 'Wycieczki'}} ({{vm.userTripsHeaders.length}})</h3>
+      </div>
+      <div class="panel-body">
+        <div ng-repeat="tripHeader in vm.userTripsHeaders" class="well">
+          <a ui-sref="app.trip({tripId: tripHeader._id})">
+            <div class="media">
+              <div class="media-left">
+
+                <img class="thumbnail pull-right" ng-src="/photo/tripThumbnail/{{tripHeader._id}}" style="max-width: 100px; max-height: 50px;"/>
+              </div>
+              <div class="media-body">
+                <img class="pull-right" width="40" height="40" src="/img/closed_lock.png" ng-show="!tripHeader.publicAccess"/>
+                <h4 class="media-heading"><strong>{{tripHeader.name}}</strong></h4>
+                <p ng-if="tripHeader.fromDate || tripHeader.toDate">{{tripHeader.fromDate ? 'od: ' + tripHeader.fromDate : '' }} {{tripHeader.toDate ? 'do: ' + tripHeader.toDate : ''}}</p>
+                <p>dodano: {{tripHeader.createdDate | date:'yyyy.MM.dd, HH:mm:ss'}}</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="column col-sm-12 col-lg-6">
+  
+    <div class="panel panel-default" ng-if="vm.canEditProfile">
+      <div class="panel-heading">
+        <h3 class="panel-title">Opcje profilu</h3>
+      </div>
+      <div class="panel-body">
+        <center>
+          <button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#removeUser">Usuń profil</button>
+          <button type="submit" class="btn btn-warning" ui-sref="app.editprofile">Edytuj Profil</button>
+        </center>
+        <div id="removeUser" class="modal fade">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Usuwanie profilu</h4>
+              </div>
+              <div class="modal-body">
+                <p>Czy na pewno chcesz usunąć profil?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Anuluj</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.removeUser()">Usun</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{ (vm.login == mCtrl.getUser().login) ? 'Moje zdjęcia' : 'Zdjęcia'}} ({{vm.userPhotosHeaders.length}})</h3>
+      </div>
+      <div class="panel-body">
+        <div ng-repeat="photo in vm.userPhotosHeaders" class="well">
+        
+          <div class="media">
+            <div class="media-left">
+              <a ng-href="/photo/{{photo.filename}}" class="example-image-link" data-lightbox="example-set" data-title="<h3>{{photo.name}}</h3><br/> Wycieczka: {{photo.trip.name}}<br/> Autor: {{photo.trip.author.firstName + ' ' + photo.trip.author.lastName}} <br/>Dodano: {{photo.createdDate | date:'yyyy.MM.dd, hh:mm:ss'}}">
+                <img class="pull-right" ng-src="/photo/{{photo.filename}}" style="max-width: 150px; max-height: 150px;"/>
+              </a>
+            </div>
+            <div class="media-body">
+              <img class="pull-right" width="40" height="40" src="/img/closed_lock.png" ng-show="!photo.trip.publicAccess"/>
+              <h4 class="media-heading"><strong>{{photo.name}}</strong></h4>
+              <a ui-sref="app.trip({tripId: photo.trip._id})">
+              <p>Wycieczka: <strong>{{photo.trip.name}}</strong></p>
+              </a>
+              <p>Dodano: {{photo.createdDate | date:'yyyy.MM.dd, HH:mm:ss'}}</p>
+              
+              
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    
+
+
+  </div>
+</div>

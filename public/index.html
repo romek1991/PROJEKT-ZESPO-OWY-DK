@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>TripLogger</title>
+    <meta name="generator" content="Bootply" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- script references -->
+
+    <script type="text/javascript" src="./bower_components/requirejs/require.js" data-main="./js/main.js"></script>
+
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="css/styles.css" rel="stylesheet">
+	<link href="bower_components/lightbox2/dist/css/lightbox.css" rel="stylesheet">
+    <link href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" rel="stylesheet">
+
+
+
+</head>
+<body ng-controller="MenuCtrl as mCtrl">
+<div class="wrapper">
+    <div class="box">
+        <div class="row row-offcanvas row-offcanvas-left">
+
+
+            <!-- sidebar -->
+            <div class="column col-sm-2 col-xs-1 sidebar-offcanvas" id="sidebar">
+
+                <ul class="nav">
+                    <li><a ui-sref="index" data-toggle="offcanvas" class="visible-xs text-center">Menu</a></li>
+                </ul>
+
+                <center>
+                  <ul class="nav hidden-xs" id="lg-menu">
+                    <br/>
+                    <br/>
+                    <div class="text-center" ng-if="mCtrl.isLogged">
+                      <img ng-src="/img/avatars/{{mCtrl.getUser().avatarName}}" class="img-circle" style="width:100px; height:100px;" ng-cloak>
+                      <br/>
+                      <br/>
+                      <h4 ng-cloak>{{mCtrl.firstName + ' ' + mCtrl.lastName}}</h4>
+                    </div>
+                    <br/>
+                    <br/>
+                    <li ng-if="!mCtrl.isLogged">
+                        <a ui-sref="index">TripLogger</a>
+                    </li>
+                    <li ng-if="mCtrl.isLogged">
+                        <a ui-sref="app.start">Start</a>
+                    </li>
+                    <li ng-if="mCtrl.isLogged">
+                        <a ui-sref="app.profile">Mój profil</a>
+                    </li>
+                    <li ng-if="mCtrl.isLogged" ng-cloak>
+                        <a ui-sref="app.addtrip">Dodaj wycieczkę</a>
+                    </li>
+                    <li ng-if="mCtrl.isLogged" ng-cloak>
+                        <a href="" ng-click="mCtrl.logout()">Wyloguj</a>
+                    </li>
+                    <!--
+                    <li ng-if="mCtrl.isLogged" ng-cloak>
+                        <a ui-sref="app.trip"><span class="badge">Wycieczka</span></a>
+                    </li>
+                    -->
+                    <li ng-if="!mCtrl.isLogged">
+                        <a ui-sref="signup">Rejestracja</a>
+                    </li>
+                    
+                  </ul>
+                </center>
+                <!--
+                <ul class="list-unstyled hidden-xs" id="sidebar-footer">
+                    <li id="test">
+                        <h3>O Nas</h3>
+                    </li>
+                </ul>
+                -->
+                <!-- tiny only nav-->
+                <ul class="nav visible-xs" id="xs-menu">
+                    <li ng-if="!mCtrl.isLogged">
+                        <a ui-sref="index">TripLogger</a>
+                    </li>
+                    <li ng-if="mCtrl.isLogged">
+                        <a ui-sref="app.start">Start</a>
+                    </li>
+                    <li ng-if="mCtrl.isLogged">
+                        <a ui-sref="app.profile">Mój profil</a>
+                    </li>
+                    <li ng-if="mCtrl.isLogged" ng-cloak>
+                        <a ui-sref="app.addtrip">Dodaj wycieczkę</a>
+                    </li>
+                    <li ng-if="mCtrl.isLogged" ng-cloak>
+                        <a href="" ng-click="mCtrl.logout()">Wyloguj</a>
+                    </li>
+                    <!--
+                    <li ng-if="mCtrl.isLogged" ng-cloak>
+                        <a ui-sref="app.trip"><span class="badge">Wycieczka</span></a>
+                    </li>
+                    -->
+                    <li ng-if="!mCtrl.isLogged">
+                        <a ui-sref="signup">Rejestracja</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- /sidebar -->
+
+            <!-- main right col -->
+            <div class="column col-sm-10 col-xs-11" id="main">
+
+                <!-- top nav -->
+                <div class="navbar navbar-blue navbar-static-top">
+                    <div class="navbar-header">
+                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle</span>
+
+                        </button>
+
+                        <a ui-sref="index" class="navbar-brand logo">TL</a>
+                    </div>
+                    <nav class="collapse navbar-collapse" role="navigation">
+                        <form class="navbar-form navbar-left">
+                            <div class="input-group input-group-sm" style="max-width:360px;">
+                                <input type="text" class="form-control" placeholder="Szukaj..." name="srch-term" id="srch-term" ng-model="mCtrl.searchString">
+                            </div>
+                        </form>
+                        <ul class="nav navbar-nav">
+                         <!-- <li>
+                                <a href="#"><i class="glyphicon glyphicon-home"></i> Home</a>
+                              </li>
+                              <li>
+                                <a href="#postModal" role="button" data-toggle="modal"><i class="glyphicon glyphicon-plus"></i> Post</a>
+                              </li> -->
+                            <li ng-if="!mCtrl.isLogged">
+                                <a ui-sref="index"><span class="badge">TripLogger</span></a>
+                            </li>
+                            <li ng-if="mCtrl.isLogged">
+                                <a ui-sref="app.start"><span class="badge">Start</span></a>
+                            </li>
+                            <li ng-if="mCtrl.isLogged" ng-cloak>
+                                <a ui-sref="app.addtrip"><span class="badge">Dodaj Wycieczkę</span></a>
+                            </li>
+                            <!--
+                            <li ng-if="mCtrl.isLogged" ng-cloak>
+                                <a ui-sref="app.trip"><span class="badge">Wycieczka</span></a>
+                            </li>
+                            -->
+                            <li ng-if="!mCtrl.isLogged">
+                                <a ui-sref="signup"><span class="badge">Rejestracja</span></a>
+                            </li>
+                            <!--
+                            <li>
+                                <a ui-sref="app.test"><span class="badge">AppTest</span></a>
+                            </li> -->
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li ng-if="mCtrl.isLogged" ng-cloak>
+                                <a ui-sref="app.profile"><span class="badge">Mój profil</span></a>
+                            </li>
+                            <li>
+                                <a ui-sref="login" ng-if="!mCtrl.isLogged"><span class="badge">Zaloguj</span></a>
+                                <!--<a ui-sref="login"><span class="badge">Zaloguj</span></a>-->
+                                <a ui-sref="index" ng-if="mCtrl.isLogged" ng-click="mCtrl.logout()" ng-cloak><span class="badge">Wyloguj</span></a>
+                                <!--<a ui-sref="index" ng-if="mCtrl.isLogged" ng-click="mCtrl.logout()" ng-cloak><span class="badge">Wyloguj</span></a>-->
+                            </li>
+                            <!-- do testowania tokenow
+                            <li>
+                               
+                                <a href="" ng-click="vm.getUsers()"><span class="badge">Users</span></a>
+
+                            </li>-->
+                        </ul>
+
+
+                        <!-- <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i></a>
+                           <ul class="dropdown-menu">
+                             <li><a href="">More</a></li>
+                             <li><a href="">More</a></li>
+                             <li><a href="">More</a></li>
+                             <li><a href="">More</a></li>
+                             <li><a href="">More</a></li>
+                           </ul>
+                         </li> -->
+                        </ul>
+                    </nav>
+                </div>
+                <!-- /top nav -->
+
+                <div class="padding">
+                    <div class="full col-sm-9">
+                    
+                        <!-- searchResults -->
+                        <div ng-if="!mCtrl.searchString == ''" class="row">
+                            
+                            <div>
+                                <div class="column col-sm-12 col-lg-12" >
+                                    <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title">Wyniki dla <strong>"{{mCtrl.searchString}}"</strong></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                        <div class="column col-sm-12 col-lg-6">
+                                        
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">Użytkownicy</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="media" ng-repeat="foundUser in mCtrl.foundUsers">
+                                                    
+                                                      <div class="media-left pull-left">
+                                                        <a ui-sref="app.profile({login: foundUser.login})">
+                                                          <img class="media-object" ng-src="/img/avatars/{{foundUser.avatarName}}" width="48" height="48">
+                                                        </a>
+                                                      </div>
+                                                      <div class="media-body">
+                                                        <a ui-sref="app.profile({login: foundUser.login})">
+                                                          <h4 class="media-heading"><strong>{{foundUser.firstName}} {{foundUser.lastName}}</strong></h4>
+                                                        </a>
+                                                      </div>
+                                                    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+                                        
+                                        <div class="column col-sm-12 col-lg-6">
+                                        
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">
+                                                    <h3 class="panel-title">Wycieczki</h3>
+                                                </div>
+                                                <div class="panel-body">
+                                                    
+                                                    <div class="media" ng-repeat="foundTrip in mCtrl.foundTrips">
+                                                      <div class="media-left pull-left">
+                                                        <a ui-sref="app.trip({tripId: foundTrip._id})">
+                                                          <img class="media-object" ng-src="/photo/tripHeader/{{foundTrip._id}}" style="max-width:100px; max-height:150px;">
+                                                        </a>
+                                                      </div>
+                                                      <div class="media-body">
+                                                        <a ui-sref="app.trip({tripId: foundTrip._id})">
+                                                          <h4 class="media-heading"><strong>{{foundTrip.name}}</strong></h4>
+                                                          <em>{{foundTrip.createdDate | date:'yyyy.MM.dd, HH:mm:ss'}}</em>
+                                                          <p>{{foundTrip.author.firstName}} {{foundTrip.author.lastName}}</p>
+                                                        </a>
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                        </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- content -->
+                        <div class="row" ui-view>
+
+                            <!-- main column -->
+                            <div ui-view>
+
+                                
+                            </div>
+
+                            <!-- main col left -->
+                            <!-- <div class="col-sm-5">
+                                  <div class="well">
+                                       <form class="form-horizontal" role="form">
+                                        <h4>Co nowego u Ciebie słychać?</h4>
+                                         <div class="form-group" style="padding:14px;">
+                                          <textarea class="form-control" placeholder="Zaktualizuj swój status"></textarea>
+                                        </div>
+                                        <button class="btn btn-primary pull-right" type="button">Dodaj post</button><ul class="list-inline"><li><!--<a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+                                      </form>
+                                  </div>
+                              </div>
+                              <!-- main col right
+                              <div class="col-sm-7">
+                                    <div class="well">
+                                       <form class="form">
+                                        <h4>Rejestracja</h4>
+                                        <div class="input-group text-center">
+                                        <input type="text" class="form-control input-lg" placeholder="Enter your email address">
+                                          <span class="input-group-btn"><button class="btn btn-lg btn-primary" type="button">OK</button></span>
+                                        </div>
+                                      </form>
+                                    </div>
+                           </div>-
+                           <!--/row-->
+                           
+                            <div class="row" id="footer">
+                                <div class="col-sm-6">
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <p>
+                                        <a ui-sref="index" class="pull-right"></a>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <h4 class="text-center">
+                                <a ui-sref="index" target="ext">©Copyright 2016 By TripLogger Team</a>
+                            </h4>
+
+                            <hr>
+
+                          </div><!-- /col-9 -->
+                      </div><!-- /row -->
+                </div><!-- /padding -->
+            </div>
+            <!-- /main -->
+
+          </div>
+    </div>
+
+
+    <!--post modal-->
+    <div id="postModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    Update Status
+                </div>
+                <div class="modal-body">
+                    <form class="form center-block">
+                        <div class="form-group">
+                            <textarea class="form-control input-lg" autofocus="" placeholder="What do you want to share?"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div>
+                        <button class="btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true">Post</button>
+                        <ul class="pull-left list-inline"><li><a href=""><i class="glyphicon glyphicon-upload"></i></a></li><li><a href=""><i class="glyphicon glyphicon-camera"></i></a></li><li><a href=""><i class="glyphicon glyphicon-map-marker"></i></a></li></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<script>
+
+
+
+</script>
+
+
+
+
+</body>
+</html>

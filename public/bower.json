@@ -1,0 +1,30 @@
+{
+  "name": "tripLoggerUI",
+  "version": "1.0.0",
+  "homepage": "https://github.com/romek1991/PROJEKT-ZESPOLOWY-DK",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "latest",
+    "angular-cookies": "latest",
+    "requirejs": "latest",
+    "requirejs-domready": "latest",
+    "angular-ui-router": "latest",
+    "angular-bootstrap": "latest",
+    "ng-file-upload": "latest",
+    "lightbox2": "latest",
+    "angular-md5": "~0.1.10",
+	"bootstrap-datepicker" : "latest"
+  },
+
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
