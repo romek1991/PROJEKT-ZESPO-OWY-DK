@@ -134,7 +134,7 @@
                     </div>
                     <nav class="collapse navbar-collapse" role="navigation">
                         <form class="navbar-form navbar-left">
-                            <div class="input-group input-group-sm" style="max-width:360px;">
+                            <div ng-if="mCtrl.isLogged" class="input-group input-group-sm" style="max-width:360px;">
                                 <input type="text" class="form-control" placeholder="Szukaj..." name="srch-term" id="srch-term" ng-model="mCtrl.searchString">
                             </div>
                         </form>
