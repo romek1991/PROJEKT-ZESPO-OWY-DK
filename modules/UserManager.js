@@ -7,6 +7,10 @@ var PhotoManager = require('../modules/PhotoManager');
 
 var User = require('../models/user');
 var Trip = require('../models/trip');
+var Photo = require('../models/photo');
+var Comment = require('../models/comment');
+
+var fs = require('fs');
 
 exports.signup = function(req, res) {
   if (!req.body.login || !req.body.password || !req.body.email || !req.body.firstName || !req.body.lastName) {
@@ -102,15 +106,30 @@ exports.removeUser = function(req, res){
         Trip.find({author: currentUserId}, 'id name createdDate startDate endDate publicAccess', function(err, userTrips) {
               console.log(userTrips);
               console.log("/////////////////////////");
-              userTrips.forEach(function(entry){
-                Trip.findOneAndRemove({ _id: entry._id }, function(err){
-                  console.log('Trip removed successfully.');
+              userTrips.forEach(function(trip){
+                 Photo.find({trip: trip}, function(err, tripPhotos) {
+                  console.log("_________________TRIP PHOTOS:");
+                  console.log(tripPhotos);
+                  for(var i in tripPhotos) {
+                    var filename = tripPhotos[i].filename;
+                    console.log('filename: ' + filename);
+                    fs.unlinkSync(req.app.get('rootDir') + '/uploads/photos/' + filename);
+                  }
+
+                  Photo.find({trip: trip}).remove(function(){
+
+                    Comment.find({trip: trip}).remove(function(){
+                      Trip.findOneAndRemove({ _id: trip._id }, function(err){
+
+                      });
+
+                    });
+                  });
                 });
 
               });
 
               User.findOneAndRemove({login: req.login}, function(err){
-                console.log('Trip removed successfully.');
                 console.log('Error message: ' + err);
 
               });

@@ -253,6 +253,10 @@ exports.getLatestPhotos = function(req, res) {
           var visiblePhotos = [];
           for(i in newestPhotos2) {
             var photo = newestPhotos2[i];
+            if(photo == null)
+            console.log("PHOTO is null");
+            if(photo.trip == null)
+            console.log("Photo.trip is null");
             if(photo.trip.publicAccess) {
               visiblePhotos.push(photo);
             }

@@ -27,7 +27,6 @@ router.get('/all', function(req, res, next) {
   });
 });
 
-;
 
 router.put('/', function(req, res, next){
   UserManager.updateUser(req, function(user) {
